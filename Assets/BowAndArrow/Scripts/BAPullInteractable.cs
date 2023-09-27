@@ -14,6 +14,8 @@ public class BAPullInteractable : XRBaseInteractable
     [SerializeField] private Transform endTransform;
     [SerializeField] private Transform notchTransform;
 
+    [SerializeField] private GameEventScriptableObject arrowReleasedGameEvent;
+
     public float CurrentPullAmount { get; private set; }
 
     private IXRSelectInteractor pullingInteractor;
@@ -35,6 +37,7 @@ public class BAPullInteractable : XRBaseInteractable
     public void OnSelectExit(SelectExitEventArgs args)
     {
         PullDidRelease?.Invoke(CurrentPullAmount);
+        arrowReleasedGameEvent.Raise();
 
         pullingInteractor = null;
         CurrentPullAmount = 0;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5255657427362666218}
   - component: {fileID: 6671356338257043633}
   - component: {fileID: 720617501968670702}
+  - component: {fileID: 3539703833580343115}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
@@ -103,6 +104,34 @@ CapsuleCollider:
   m_Height: 0.50522333
   m_Direction: 2
   m_Center: {x: 0, y: 0.000000007450581, z: 0.093961924}
+--- !u!114 &3539703833580343115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769337597633466025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c36c9827fe4c3e8334768cf538be6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dac37c4d1f51144efaaf79a9a7906559, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5255657427362666218}
+        m_TargetAssemblyTypeName: BowAndArrow.Scripts.BAArrowController, Assembly-CSharp
+        m_MethodName: OnArrowReleased
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1769337598482281027
 GameObject:
   m_ObjectHideFlags: 0

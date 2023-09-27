@@ -1956,6 +1956,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1142779216}
+    - targetCorrespondingSourceObject: {fileID: 3701202431252008202, guid: 34b05fbd162934f9da5443765e5e1f10,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1142779218}
+    - targetCorrespondingSourceObject: {fileID: 3701202431252008202, guid: 34b05fbd162934f9da5443765e5e1f10,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1142779217}
   m_SourcePrefab: {fileID: 100100000, guid: 34b05fbd162934f9da5443765e5e1f10, type: 3}
 --- !u!1 &1142779209 stripped
 GameObject:
@@ -2188,7 +2196,65 @@ MonoBehaviour:
     type: 3}
   spawnLocation: {fileID: 1401850971}
   bowGrabInteractable: {fileID: 1210236863}
+  shouldSpawnArrowGameEvent: {fileID: 11400000, guid: 32e3a8ace7d094f499dae53898aee340,
+    type: 2}
   arrowSpawnDelay: 0.1
+--- !u!114 &1142779217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142779209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c36c9827fe4c3e8334768cf538be6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 32e3a8ace7d094f499dae53898aee340, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1142779216}
+        m_TargetAssemblyTypeName: BowAndArrow.Scripts.BAArrowSpawner, Assembly-CSharp
+        m_MethodName: StartSpawnArrowWithDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1142779218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142779209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c36c9827fe4c3e8334768cf538be6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dac37c4d1f51144efaaf79a9a7906559, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1142779216}
+        m_TargetAssemblyTypeName: BowAndArrow.Scripts.BAArrowSpawner, Assembly-CSharp
+        m_MethodName: OnArrowReleased
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1210236860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2525,7 @@ MonoBehaviour:
   startTransform: {fileID: 437994121}
   endTransform: {fileID: 1027953475}
   notchTransform: {fileID: 1401850971}
+  arrowReleasedGameEvent: {fileID: 0}
 --- !u!65 &1210236864
 BoxCollider:
   m_ObjectHideFlags: 0

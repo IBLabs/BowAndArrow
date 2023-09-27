@@ -11,11 +11,18 @@ namespace BowAndArrow.Scripts
         [SerializeField] private Transform spawnLocation;
         [SerializeField] private XRBaseInteractable bowGrabInteractable;
 
+        [SerializeField] private GameEventScriptableObject shouldSpawnArrowGameEvent;
+
         [SerializeField] private float arrowSpawnDelay = .5f;
 
         private GameObject _currentArrow;
         private bool _isArrowNotched;
 
+        public void OnArrowReleased()
+        {
+            OnPullDidRelease(1f);
+        }
+        
         private void OnEnable()
         {
             BAPullInteractable.PullDidRelease += OnPullDidRelease;
@@ -30,13 +37,18 @@ namespace BowAndArrow.Scripts
         {
             if (bowGrabInteractable.isSelected && !_isArrowNotched)
             {
-                StartCoroutine(SpawnArrowWithDelay(arrowSpawnDelay));
+                shouldSpawnArrowGameEvent.Raise();
             }
         }
 
         private void OnPullDidRelease(float amount)
         {
             _isArrowNotched = false;
+        }
+
+        public void StartSpawnArrowWithDelay()
+        {
+            StartCoroutine(SpawnArrowWithDelay(arrowSpawnDelay));
         }
 
         private IEnumerator SpawnArrowWithDelay(float delay)

@@ -14,6 +14,11 @@ namespace BowAndArrow.Scripts
 
         private bool _isInAir;
 
+        public void OnArrowReleased()
+        {
+            OnPullDidRelease(1f);
+        }
+
         private void OnEnable()
         {
             BAPullInteractable.PullDidRelease += OnPullDidRelease;
