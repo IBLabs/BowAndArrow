@@ -886,6 +886,7 @@ GameObject:
   - component: {fileID: 135425159}
   - component: {fileID: 135425158}
   - component: {fileID: 135425157}
+  - component: {fileID: 135425162}
   m_Layer: 0
   m_Name: Ball 3
   m_TagString: Untagged
@@ -1006,6 +1007,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1336683510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &135425162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135425156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c6536c633b472a90b5273e87048ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 2
+  ExplodeForce: 100
 --- !u!1 &239167576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1135,54 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1661846269}
   m_SourcePrefab: {fileID: 100100000, guid: 172c31499922f470e83f66d4e0c0549e, type: 3}
+--- !u!1 &279512875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279512877}
+  - component: {fileID: 279512876}
+  m_Layer: 0
+  m_Name: Mesh Destroyer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &279512876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279512875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d2248dba74420186779499ac0e874a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyObjects:
+  - {fileID: 592705974}
+  - {fileID: 854220045}
+  - {fileID: 135425162}
+--- !u!4 &279512877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279512875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417748222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1450,7 @@ GameObject:
   - component: {fileID: 592705971}
   - component: {fileID: 592705970}
   - component: {fileID: 592705969}
+  - component: {fileID: 592705974}
   m_Layer: 0
   m_Name: Ball 1
   m_TagString: Untagged
@@ -1507,6 +1571,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1336683510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &592705974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592705968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c6536c633b472a90b5273e87048ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 2
+  ExplodeForce: 100
 --- !u!1 &854220039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1598,7 @@ GameObject:
   - component: {fileID: 854220042}
   - component: {fileID: 854220041}
   - component: {fileID: 854220040}
+  - component: {fileID: 854220045}
   m_Layer: 0
   m_Name: Ball 2
   m_TagString: Untagged
@@ -1640,6 +1719,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1336683510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854220045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854220039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c6536c633b472a90b5273e87048ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 2
+  ExplodeForce: 100
 --- !u!1 &856379597
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,3 +3627,4 @@ SceneRoots:
   - {fileID: 1142779208}
   - {fileID: 276874705}
   - {fileID: 239167577}
+  - {fileID: 279512877}
