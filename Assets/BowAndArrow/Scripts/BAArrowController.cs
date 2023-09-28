@@ -57,5 +57,11 @@ public class BAArrowController : MonoBehaviour
         transform.parent = other.transform;
         rb.isKinematic = true;
         rb.interpolation = RigidbodyInterpolation.None;
+        
+        MeshDestroy meshDestroy = other.gameObject.GetComponent<MeshDestroy>();
+        if (meshDestroy != null)
+        {
+            meshDestroy.DestroyMesh();
+        }
     }
 }
