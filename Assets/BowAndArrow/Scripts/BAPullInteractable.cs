@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Filtering;
 
 public class BAPullInteractable : XRBaseInteractable
 {
@@ -37,7 +34,7 @@ public class BAPullInteractable : XRBaseInteractable
     public void OnSelectExit(SelectExitEventArgs args)
     {
         PullDidRelease?.Invoke(CurrentPullAmount);
-        arrowReleasedGameEvent.Raise();
+        // arrowReleasedGameEvent.Raise();
 
         pullingInteractor = null;
         CurrentPullAmount = 0;
