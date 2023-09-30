@@ -50,16 +50,7 @@ public class BAArrowSpawner : MonoBehaviour
 
     public void StartSpawnArrowWithDelay()
     {
-        StartCoroutine(SpawnArrowWithDelay(arrowSpawnDelay));
-    }
-
-    private IEnumerator SpawnArrowWithDelay(float delay)
-    {
         _isArrowNotched = true;
-            
-        yield return new WaitForSeconds(delay);
-
         Instantiate(arrowPrefab, spawnTransform);
-
     }
 }

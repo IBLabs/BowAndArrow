@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BAArrowController : MonoBehaviour
 {
-    [SerializeField] private Transform tipTransform;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Collider arrowCollider;
         
     [SerializeField] private float speed;
 

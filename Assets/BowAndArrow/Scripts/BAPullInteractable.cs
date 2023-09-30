@@ -18,41 +18,43 @@ public class BAPullInteractable : XRBaseInteractable
     private IXRSelectInteractor pullingInteractor;
     private Vector3 initialNotchLocalPosition;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        initialNotchLocalPosition = notchTransform.localPosition;
-    }
+    // protected override void OnEnable()
+    // {
+    //     base.OnEnable();
+    //     initialNotchLocalPosition = notchTransform.localPosition;
+    // }
 
-    public void OnSelectEnter(SelectEnterEventArgs args)
-    {
-        Debug.Log("[TEST]: selected entered");
-        
-        pullingInteractor = args.interactorObject;
-    }
+    // public void OnSelectEnter(SelectEnterEventArgs args)
+    // {
+    //     Debug.Log("[TEST]: selected entered");
+    //     
+    //     pullingInteractor = args.interactorObject;
+    // }
 
     public void OnSelectExit(SelectExitEventArgs args)
     {
-        PullDidRelease?.Invoke(CurrentPullAmount);
+        PullDidRelease?.Invoke(1f);
+        
+        // PullDidRelease?.Invoke(CurrentPullAmount);
         // arrowReleasedGameEvent.Raise();
-
-        pullingInteractor = null;
-        CurrentPullAmount = 0;
-
-        UpdateBow();
+        //
+        // pullingInteractor = null;
+        // CurrentPullAmount = 0;
+        //
+        // UpdateBow();
     }
 
-    public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
-    {
-        base.ProcessInteractable(updatePhase);
-        
-        if (updatePhase != XRInteractionUpdateOrder.UpdatePhase.Dynamic) return;
-        if (!isSelected) return;
-
-        CurrentPullAmount = CalculatePullAmount(pullingInteractor.transform.position);
-        
-        UpdateBow();
-    }
+    // public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+    // {
+    //     base.ProcessInteractable(updatePhase);
+    //     
+    //     if (updatePhase != XRInteractionUpdateOrder.UpdatePhase.Dynamic) return;
+    //     if (!isSelected) return;
+    //
+    //     CurrentPullAmount = CalculatePullAmount(pullingInteractor.transform.position);
+    //     
+    //     UpdateBow();
+    // }
 
     private float CalculatePullAmount(Vector3 interactorPosition)
     {
