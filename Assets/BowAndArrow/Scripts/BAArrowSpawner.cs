@@ -14,9 +14,7 @@ public class BAArrowSpawner : MonoBehaviour
     [SerializeField] private XRBaseInteractable bowGrabInteractable;
 
     [SerializeField] private GameEventScriptableObject shouldSpawnArrowGameEvent;
-
-    [SerializeField] private float arrowSpawnDelay = .5f;
-
+    
     private GameObject _currentArrow;
     private bool _isArrowNotched;
 

@@ -6,7 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ArrowShooter : MonoBehaviour
 {
     [SerializeField] private BAArrowController arrowPrefab;
-    [SerializeField] private float shootForce = 100f;
 
     [SerializeField] private InputActionProperty someActionProperty;
 
