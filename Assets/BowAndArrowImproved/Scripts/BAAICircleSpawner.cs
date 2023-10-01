@@ -1,37 +1,54 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace BowAndArrowImproved.Scripts
 {
     public class BAAICircleSpawner : MonoBehaviour
     {
+        [SerializeField] private InputActionProperty triggerClick;
+        
         [SerializeField] private GameObject prefabToSpawn;
         [SerializeField] private float radius;
         [SerializeField] private bool relativePosition;
+        
+        [Range(0, 180)]
+        [SerializeField] private float angleRange = 45.0f;
 
         [SerializeField] private Transform targetTransform;
+
+        private void Start()
+        {
+            triggerClick.action.started += OnTriggerStarted;
+        }
+
+        private void OnTriggerStarted(InputAction.CallbackContext context)
+        {
+            SpawnOnCircleEdgeAndSetTarget();
+        }
 
         private GameObject SpawnOnCircleEdge()
         {
             if (prefabToSpawn == null)
             {
-                Debug.Log("[ERROR]: no prefab to instantiate");
+                Debug.LogError("No prefab assigned to spawn!");
                 return null;
             }
 
-            float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
-            float x = radius * Mathf.Cos(angle);
-            float z = radius * Mathf.Sin(angle);
+            // Generate a random angle within the defined range relative to the forward direction
+            float randomAngleWithinRange = Random.Range(-angleRange, angleRange);
+            float angleInRadians = randomAngleWithinRange * Mathf.Deg2Rad; // Convert to radians
 
-            Vector3 spawnPos = new Vector3(x, 0, z);
+            // Calculate the x and z position using the angle and the circle's radius
+            float x = radius * Mathf.Sin(angleInRadians);
+            float z = radius * Mathf.Cos(angleInRadians);
 
-            if (relativePosition)
-            {
-                spawnPos += transform.position;
-            }
+            // Create the position vector relative to the GameObject's forward direction
+            Vector3 spawnPosition = transform.position + (transform.forward * z + transform.right * x);
 
-            GameObject spawnedObj = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity, transform);
-
-            return spawnedObj;
+            // Instantiate the prefab at the calculated position
+            return Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
 
         public void SpawnOnCircleEdgeAndSetTarget()
