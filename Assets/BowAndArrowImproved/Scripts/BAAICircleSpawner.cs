@@ -54,11 +54,18 @@ namespace BowAndArrowImproved.Scripts
         public void SpawnOnCircleEdgeAndSetTarget()
         {
             GameObject spawnedObj = SpawnOnCircleEdge();
+            spawnedObj.transform.rotation = Quaternion.LookRotation(targetTransform.position - spawnedObj.transform.position);
 
             BAAISimpleMoveTowardsTarget spawnedObjMove = spawnedObj.GetComponent<BAAISimpleMoveTowardsTarget>();
             if (spawnedObjMove != null)
             {
                 spawnedObjMove.targetPosition = targetTransform.position;
+            }
+
+            BAAISetNavMeshAgentDestination setNavMeshDest = spawnedObj.GetComponent<BAAISetNavMeshAgentDestination>();
+            if (setNavMeshDest != null)
+            {
+                setNavMeshDest.target = targetTransform;
             }
         }
     }
