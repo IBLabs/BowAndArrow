@@ -10,7 +10,7 @@ public class BAAISetNavMeshAgentDestination : MonoBehaviour, BAAIINavMeshAgentHo
 
     [HideInInspector] public Transform target;
 
-    void Update()
+    void Start()
     {
         agent.destination = target.position;
     }
