@@ -1,33 +1,72 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace BowAndArrowImproved.Scripts
 {
     public class BAAICircleSpawner : MonoBehaviour
     {
+        [SerializeField] private InputActionProperty triggerClick;
+        
         [SerializeField] private GameObject prefabToSpawn;
         [SerializeField] private float radius;
         [SerializeField] private bool relativePosition;
+        
+        [Range(0, 180)]
+        [SerializeField] private float angleRange = 45.0f;
 
-        public void SpawnOnCircleEdge()
+        [SerializeField] private Transform targetTransform;
+
+        private void Start()
+        {
+            triggerClick.action.started += OnTriggerStarted;
+        }
+
+        private void OnTriggerStarted(InputAction.CallbackContext context)
+        {
+            SpawnOnCircleEdgeAndSetTarget();
+        }
+
+        private GameObject SpawnOnCircleEdge()
         {
             if (prefabToSpawn == null)
             {
-                Debug.Log("[ERROR]: no prefab to instantiate");
-                return;
+                Debug.LogError("No prefab assigned to spawn!");
+                return null;
             }
 
-            float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
-            float x = radius * Mathf.Cos(angle);
-            float y = radius * Mathf.Sin(angle);
+            // Generate a random angle within the defined range relative to the forward direction
+            float randomAngleWithinRange = Random.Range(-angleRange, angleRange);
+            float angleInRadians = randomAngleWithinRange * Mathf.Deg2Rad; // Convert to radians
 
-            Vector3 spawnPos = new Vector3(x, y, 0);
+            // Calculate the x and z position using the angle and the circle's radius
+            float x = radius * Mathf.Sin(angleInRadians);
+            float z = radius * Mathf.Cos(angleInRadians);
 
-            if (relativePosition)
+            // Create the position vector relative to the GameObject's forward direction
+            Vector3 spawnPosition = transform.position + (transform.forward * z + transform.right * x);
+
+            // Instantiate the prefab at the calculated position
+            return Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        }
+
+        public void SpawnOnCircleEdgeAndSetTarget()
+        {
+            GameObject spawnedObj = SpawnOnCircleEdge();
+            spawnedObj.transform.rotation = Quaternion.LookRotation(targetTransform.position - spawnedObj.transform.position);
+
+            BAAISimpleMoveTowardsTarget spawnedObjMove = spawnedObj.GetComponent<BAAISimpleMoveTowardsTarget>();
+            if (spawnedObjMove != null)
             {
-                spawnPos += transform.position;
+                spawnedObjMove.targetPosition = targetTransform.position;
             }
 
-            Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+            BAAISetNavMeshAgentDestination setNavMeshDest = spawnedObj.GetComponent<BAAISetNavMeshAgentDestination>();
+            if (setNavMeshDest != null)
+            {
+                setNavMeshDest.target = targetTransform;
+            }
         }
     }
 }

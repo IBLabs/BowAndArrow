@@ -15,13 +15,15 @@ public class BAAIBowStringController : MonoBehaviour
     [SerializeField] private Transform midPointVisualObject;
     [SerializeField] private Transform midPointParent;
     [SerializeField] private BAAIBowString bowString;
+    [SerializeField] private AudioSource audioSource;
 
     [SerializeField] private float stringLimit = .3f;
+    [SerializeField] private float stringSoundThreshold = 0.001f;
 
     private XRGrabInteractable _grabInteractable;
     private Transform _interactorTransform;
 
-    private float _strength;
+    private float _strength, _previousStrength;
 
     private void Awake()
     {
@@ -41,8 +43,15 @@ public class BAAIBowStringController : MonoBehaviour
             Vector3 midPointLocalPosition = midPointParent.InverseTransformPoint(midPointGrabObject.position);
             float midPointLocalPositionZAbs = Mathf.Abs(midPointLocalPosition.z);
 
+            _previousStrength = _strength;
+
             if (midPointLocalPosition.z < 0 && midPointLocalPositionZAbs < stringLimit)
             {
+                if (!audioSource.isPlaying && _strength <= 0.01f)
+                {
+                    audioSource.Play();
+                }
+                
                 _strength = RemapValue(midPointLocalPositionZAbs, 0f, stringLimit, 0f, 1f);
                 midPointVisualObject.localPosition = new Vector3(0f, 0f, midPointLocalPosition.z);
             }
@@ -50,14 +59,44 @@ public class BAAIBowStringController : MonoBehaviour
             {
                 _strength = 1f;
                 midPointVisualObject.localPosition = new Vector3(0f, 0f, -stringLimit);
+                
+                // we reaced limit, stop playing
+                audioSource.Pause();
             }
             else if (midPointLocalPosition.z >= 0)
             {
                 _strength = 0f;
                 midPointVisualObject.localPosition = Vector3.zero;
+
+                // reset audio source
+                audioSource.pitch = 1;
+                audioSource.Stop();
             }
             
             bowString.UpdateString(midPointGrabObject.transform.position);
+            
+            PlayStringSound();
+        }
+    }
+
+    private void PlayStringSound()
+    {
+        if (Mathf.Abs(_strength - _previousStrength) > stringSoundThreshold)
+        {
+            if (_strength < _previousStrength)
+            {
+                audioSource.pitch = -1;
+            }
+            else
+            {
+                audioSource.pitch = 1;
+            }
+            
+            audioSource.UnPause();
+        }
+        else
+        {
+            audioSource.Pause();
         }
     }
 
@@ -78,6 +117,9 @@ public class BAAIBowStringController : MonoBehaviour
         OnBowReleased?.Invoke(_strength);
         
         _strength = 0;
+        _previousStrength = 0;
+        audioSource.pitch = 1;
+        audioSource.Stop();
         
         _interactorTransform = null;
         

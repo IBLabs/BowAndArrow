@@ -14,6 +14,12 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         rb.isKinematic = true;
         myCollider.isTrigger = true;
 
