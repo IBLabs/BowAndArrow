@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Vector3 = System.Numerics.Vector3;
 
-public class BAAISetNavMeshAgentDestination : MonoBehaviour
+public class BAAISetNavMeshAgentDestination : MonoBehaviour, BAAIINavMeshAgentHolder
 {
     [SerializeField] private NavMeshAgent agent;
 
@@ -12,5 +13,10 @@ public class BAAISetNavMeshAgentDestination : MonoBehaviour
     void Update()
     {
         agent.destination = target.position;
+    }
+
+    public void SetTargetTransform(Transform target)
+    {
+        this.target = target;
     }
 }
