@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8942490084976797242}
   - component: {fileID: 5179329415778061150}
   - component: {fileID: 6068225554785357774}
+  - component: {fileID: 1417549546555777907}
   m_Layer: 10
   m_Name: Enemy Container (Dude)
   m_TagString: Enemy
@@ -83,6 +84,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
   - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
   - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
+  warCryClips:
+  - {fileID: 8300000, guid: 6f4421bbd2742f84a83610829465427b, type: 3}
+  - {fileID: 8300000, guid: 84329be3b3dcee347aa715c3a6ff7f40, type: 3}
 --- !u!114 &4201972979043455145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +164,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 5179329415778061150}
   target: {fileID: 0}
+--- !u!114 &1417549546555777907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340702076327022218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03bc8063c9e95401f9a8a38bc716750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Method: 2
+  m_Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &8099083875156824937
 PrefabInstance:
   m_ObjectHideFlags: 0

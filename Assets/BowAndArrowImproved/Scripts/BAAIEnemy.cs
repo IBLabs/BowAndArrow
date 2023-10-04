@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,17 @@ public class BAAIEnemy : MonoBehaviour,BAAIIDeathable
     public UnityEvent<GameObject> onDeath => _onDeath;
 
     [SerializeField] private List<AudioClip> breakClips;
+    [SerializeField] private List<AudioClip> warCryClips;
+
+    private void Start()
+    {
+        PlayWarCry();
+    }
+
+    private void PlayWarCry()
+    {
+        AudioSource.PlayClipAtPoint(warCryClips[Random.Range(0, warCryClips.Count)], transform.position);
+    }
 
     private void OnCollisionEnter(Collision other)
     {
