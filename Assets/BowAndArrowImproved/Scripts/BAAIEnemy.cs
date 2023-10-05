@@ -22,6 +22,18 @@ public class BAAIEnemy : MonoBehaviour,BAAIIDeathable
     private IDamageable target;
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
 
+    [SerializeField] private List<AudioClip> warCryClips;
+
+    private void OnEnable()
+    {
+        PlayWarCry();
+    }
+
+    private void PlayWarCry()
+    {
+        AudioSource.PlayClipAtPoint(warCryClips[Random.Range(0, warCryClips.Count)], transform.position);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         onDeath.Invoke(gameObject);
