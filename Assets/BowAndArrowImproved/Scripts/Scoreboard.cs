@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Scoreboard : MonoBehaviour
 {
      
-    public TMP_Text scoreText;
+    [SerializeField] private TMP_Text scoreText;
     private int _score = 0;
 
     public void IncreaseScore()

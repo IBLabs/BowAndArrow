@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class UpdateScoreOnDeath : MonoBehaviour
 {
-    private Scoreboard _scoreboard;
+    public Scoreboard Scoreboard;
     public void Start()
     {
-        _scoreboard = FindObjectOfType<Scoreboard>();
-        if (_scoreboard == null)
+        Scoreboard = FindObjectOfType<Scoreboard>();
+        if (Scoreboard == null)
         {
             throw new Exception("Couldn't find Scoreboard");
         }
@@ -15,6 +15,6 @@ public class UpdateScoreOnDeath : MonoBehaviour
 
     public void UpdateScoreboard()
     {
-        _scoreboard.IncreaseScore();
+        Scoreboard.IncreaseScore();
     }
 }
