@@ -21,7 +21,7 @@ public class BAAIDamageable : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
         OnTakeDamage.Invoke();

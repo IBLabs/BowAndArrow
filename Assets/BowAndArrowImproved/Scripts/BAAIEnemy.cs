@@ -50,12 +50,15 @@ public class BAAIEnemy : MonoBehaviour,BAAIIDeathable
         }
     }
 
-    public void StartAttacking(IDamageable target)
+    public void StartAttacking(IDamageable attackTarget)
     {
-        this.target = target;
+        target = attackTarget;
         agent.isStopped = true;
-        
-        animator.SetTrigger(AttackTrigger);
+
+        if (animator != null)
+        {
+            animator.SetTrigger(AttackTrigger);    
+        }
 
         InvokeRepeating(nameof(Attack), 0f, attackRate);
     }
@@ -64,7 +67,7 @@ public class BAAIEnemy : MonoBehaviour,BAAIIDeathable
     {
         CancelInvoke(nameof(Attack));
         target = null;
-        agent.isStopped = false; // Resume the NavMeshAgent
+        agent.isStopped = false;
     }
 
     private void Attack()
