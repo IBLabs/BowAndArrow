@@ -97,6 +97,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
   - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
   - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
+  attackRate: 1
+  attackDamage: 2
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   warCryClips:
   - {fileID: 8300000, guid: 6f4421bbd2742f84a83610829465427b, type: 3}
   - {fileID: 8300000, guid: 84329be3b3dcee347aa715c3a6ff7f40, type: 3}

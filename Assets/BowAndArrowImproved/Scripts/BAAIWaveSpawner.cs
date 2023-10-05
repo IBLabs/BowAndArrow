@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
     [SerializeField] private List<EnemyConfiguration> enemies = new List<EnemyConfiguration>();
     [SerializeField] private List<Transform> spawnLocations;
-    [SerializeField] private float waveDuration;
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
 
     private int _currentWave = 1;
@@ -42,7 +42,7 @@ public class BAAIWaveSpawner : MonoBehaviour
                 BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>(); 
                 if (navMeshComponent != null)
                 {
-                    navMeshComponent.SetTargetTransform(playerTransform);
+                    navMeshComponent.SetTargetTransform(targetTransform);
                 }
                 
                 _enemiesToSpawn.RemoveAt(0);
