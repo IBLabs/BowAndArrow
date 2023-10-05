@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -20,7 +18,8 @@ public class Ballon : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("hitttttt");
+        //add to onPop Extra functionality
+        onPop.Invoke(gameObject);
         gameObject.SetActive(false);
         
         AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);

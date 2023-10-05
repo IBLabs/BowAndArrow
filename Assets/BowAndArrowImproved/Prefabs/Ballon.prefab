@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2581946195024298104}
   - component: {fileID: 3318483746525618954}
   - component: {fileID: 3211712499975738858}
+  - component: {fileID: 2081918398217085580}
   m_Layer: 0
   m_Name: Ballon
   m_TagString: Untagged
@@ -128,5 +129,29 @@ MonoBehaviour:
   onPop:
     m_PersistentCalls:
       m_Calls: []
-  popClips: []
+  popClips:
+  - {fileID: 8300000, guid: d4b4564ad8ca7254c9d41efb905858eb, type: 3}
   rb: {fileID: 3318483746525618954}
+--- !u!136 &2081918398217085580
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224335037902254792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
