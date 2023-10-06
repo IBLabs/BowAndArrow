@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5179329415778061150}
   - component: {fileID: 6068225554785357774}
   - component: {fileID: 1417549546555777907}
+  - component: {fileID: 5619817672630175683}
   m_Layer: 10
   m_Name: Enemy Container (Dude)
   m_TagString: Enemy
@@ -80,10 +81,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5619817672630175683}
+        m_TargetAssemblyTypeName: UpdateScoreOnDeath, Assembly-CSharp
+        m_MethodName: UpdateScoreboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   breakClips:
   - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
   - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
   - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
+  attackRate: 1
+  attackDamage: 2
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   warCryClips:
   - {fileID: 8300000, guid: 6f4421bbd2742f84a83610829465427b, type: 3}
   - {fileID: 8300000, guid: 84329be3b3dcee347aa715c3a6ff7f40, type: 3}
@@ -183,6 +200,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5619817672630175683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340702076327022218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f450535de00742bdbfb4da681b1160c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8099083875156824937
 PrefabInstance:
   m_ObjectHideFlags: 0
