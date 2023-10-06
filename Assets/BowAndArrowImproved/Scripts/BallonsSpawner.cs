@@ -8,13 +8,12 @@ public class BallonsSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private Ballon ballonPrefab;
-    [SerializeField]private int numOfBallons;
+    [SerializeField] private int numOfBallons;
     
     private List<Ballon> _spawnedBallons = new List<Ballon>();
 
     private float _spawnTimer;
-
-
+    
     private void Update()
     {
         GenerateBallons();
