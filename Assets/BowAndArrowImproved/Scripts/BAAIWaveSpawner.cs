@@ -18,8 +18,28 @@ public class BAAIWaveSpawner : MonoBehaviour
     private float _spawnTimer;
     
     private float _waveTimer;
+    
+    private void OnEnable()
+    {
+        Subscribe();
+    }
 
-    private void Start()
+    private void OnDisable()
+    {
+        Unsubscribe();   
+    }
+    
+    private void Subscribe()
+    {
+        GameManager.WaveDidStart += OnWaveDidStart;
+    }
+
+    private void Unsubscribe()
+    {
+        GameManager.WaveDidStart -= OnWaveDidStart;
+    }
+    
+    private void OnWaveDidStart()
     {
         GenerateWave();
     }
@@ -67,7 +87,7 @@ public class BAAIWaveSpawner : MonoBehaviour
         if (_spawnedEnemies.Count == 0)
         {
             _currentWave++;
-            GenerateWave();
+            GameManager.Instance.EndWave();
         }
     }
 

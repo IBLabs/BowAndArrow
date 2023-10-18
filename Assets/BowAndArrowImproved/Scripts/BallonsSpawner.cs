@@ -14,6 +14,36 @@ public class BallonsSpawner : MonoBehaviour
 
     private float _spawnTimer;
     
+    private void OnEnable()
+    {
+        Subscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();   
+    }
+    
+    private void Subscribe()
+    {
+        GameManager.WaveDidStart += OnWaveDidStart;
+        GameManager.WaveDidEnd += OnWaveDidEnd;
+    }
+
+    private void Unsubscribe()
+    {
+        GameManager.WaveDidStart -= OnWaveDidStart;
+        GameManager.WaveDidEnd -= OnWaveDidEnd;
+    }
+    
+    private void OnWaveDidEnd()
+    {
+        throw new NotImplementedException();
+    }
+    
+    private void OnWaveDidStart()
+    {
+    }
     private void Update()
     {
         GenerateBallons();
