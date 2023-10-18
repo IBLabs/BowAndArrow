@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
-    public GameManagerState currentState { get; private set; } = GameManagerState.PreWave;
+    public GameManagerState CurrentState { get; private set; } = GameManagerState.PreWave;
     public static Action WaveDidStart;
     public static Action WaveDidEnd;
 
@@ -71,19 +71,19 @@ public class GameManager : MonoBehaviour
     private bool ChangeState(GameManagerState newState)
     {
         bool didChange = false;
-        switch (currentState)
+        switch (CurrentState)
         {
             case GameManagerState.PreWave:
                 if (newState != GameManagerState.Wave &&
                     newState != GameManagerState.Win) break;
-                currentState = newState;
+                CurrentState = newState;
                 didChange = true;
                 break;
             
             case GameManagerState.Wave:
                 if (newState != GameManagerState.PreWave &&
                     newState != GameManagerState.Lose) break;
-                currentState = newState;
+                CurrentState = newState;
                 didChange = true;
                 break;
         }
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     
     private void OnStateChange()
     {
-        switch (currentState)
+        switch (CurrentState)
         {
             case GameManagerState.PreWave:
                 ShowPreWaveBalloon();

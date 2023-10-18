@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BallonsSpawner : MonoBehaviour
@@ -8,7 +8,9 @@ public class BallonsSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private Ballon ballonPrefab;
-    [SerializeField] private int numOfBallons;
+    [FormerlySerializedAs("numOfBallons")] [SerializeField] private int baseNumOfBallons;
+    private int _curWaveNumOfBallons;
+    private int _currentWave = 0;
     
     private List<Ballon> _spawnedBallons = new List<Ballon>();
 
@@ -38,11 +40,26 @@ public class BallonsSpawner : MonoBehaviour
     
     private void OnWaveDidEnd()
     {
-        throw new NotImplementedException();
+        DestroyBallons();
     }
-    
+
+    private void DestroyBallons()
+    {
+        foreach (Ballon ballon in _spawnedBallons)
+        {
+            Destroy(ballon.gameObject);
+        }
+    }
+
     private void OnWaveDidStart()
     {
+        GenerateWave();
+    }
+
+    private void GenerateWave()
+    {
+        _currentWave++;
+        _curWaveNumOfBallons = baseNumOfBallons * _currentWave;
     }
     private void Update()
     {
@@ -51,7 +68,7 @@ public class BallonsSpawner : MonoBehaviour
 
     private void GenerateBallons()
     {
-        if (numOfBallons <= 0) return;
+        if (_curWaveNumOfBallons <= 0) return;
         
         if (_spawnTimer <= 0)
         {
@@ -59,7 +76,7 @@ public class BallonsSpawner : MonoBehaviour
             Ballon newBallon = Instantiate(ballonPrefab, spawnLocation.position, Quaternion.identity);
             _spawnedBallons.Add(newBallon);
 
-            numOfBallons--;
+            _curWaveNumOfBallons--;
     
             _spawnTimer = spawnInterval.Evaluate(Random.value);
         }
