@@ -3,27 +3,19 @@ using UnityEngine.Events;
 
 public class WaveStartHandler : MonoBehaviour
 {
-    [SerializeField] private UnityEvent startWave;
-    [SerializeField] private PreWaveBallon shotToStartObject;
-
-    private void Awake()
-    {
-        shotToStartObject.onPop.AddListener(OnShotToStartObjectPopped);
-    }
-
-    private void OnDisable()
-    {
-        shotToStartObject.onPop.RemoveListener(OnShotToStartObjectPopped);
-    }
+    [SerializeField] private Ballon balloonPrefab;
+    
+    public UnityEvent startWave;
 
     public void ShowShotToStartObject()
     {
-        shotToStartObject.gameObject.SetActive(true);
+        Ballon newBalloon = Instantiate(balloonPrefab);
+        newBalloon.isBalloonFrozen = true;
+        newBalloon.onDeath.AddListener(OnShotToStartObjectPopped);
     }
 
-    public void OnShotToStartObjectPopped()
+    public void OnShotToStartObjectPopped(GameObject died)
     {
-        shotToStartObject.gameObject.SetActive(false);
         startWave?.Invoke();
     }
 }

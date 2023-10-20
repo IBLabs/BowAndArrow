@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
@@ -10,6 +11,8 @@ public class BAAIWaveSpawner : MonoBehaviour
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
 
+    public UnityEvent waveFinished;
+
     private int _currentWave = 1;
     private List<GameObject> _enemiesToSpawn = new List<GameObject>();
     private List<GameObject> _spawnedEnemies = new List<GameObject>();
@@ -17,11 +20,6 @@ public class BAAIWaveSpawner : MonoBehaviour
     private float _spawnTimer;
     
     private float _waveTimer;
-    
-    public void OnWaveDidStart()
-    {
-        GenerateWave();
-    }
 
     private void Update()
     {
@@ -66,11 +64,12 @@ public class BAAIWaveSpawner : MonoBehaviour
         if (_spawnedEnemies.Count == 0)
         {
             _currentWave++;
-            GameManager.instance.EndWave();
+
+            waveFinished.Invoke();
         }
     }
 
-    private void GenerateWave()
+    public void Generate()
     {
         GenerateEnemies(_currentWave * 10);
     }
