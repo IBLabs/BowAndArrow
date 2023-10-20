@@ -8,7 +8,7 @@ public class BallonsSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private Ballon ballonPrefab;
-    [FormerlySerializedAs("numOfBallons")] [SerializeField] private int baseNumOfBallons;
+    [SerializeField] private int baseNumOfBallons;
     private int _curWaveNumOfBallons;
     private int _currentWave = 0;
     
