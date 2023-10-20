@@ -15,47 +15,29 @@ public class BallonsSpawner : MonoBehaviour
     private List<Ballon> _spawnedBallons = new List<Ballon>();
 
     private float _spawnTimer;
-    
-    private void OnEnable()
-    {
-        Subscribe();
-    }
 
-    private void OnDisable()
-    {
-        Unsubscribe();   
-    }
-    
-    private void Subscribe()
-    {
-        GameManager.WaveDidStart += OnWaveDidStart;
-        GameManager.WaveDidEnd += OnWaveDidEnd;
-    }
-
-    private void Unsubscribe()
-    {
-        GameManager.WaveDidStart -= OnWaveDidStart;
-        GameManager.WaveDidEnd -= OnWaveDidEnd;
-    }
-    
-    private void OnWaveDidEnd()
+    public void OnWaveDidEnd()
     {
         DestroyBallons();
     }
-
-    private void DestroyBallons()
-    {
-        foreach (Ballon ballon in _spawnedBallons)
-        {
-            Destroy(ballon.gameObject);
-        }
-    }
-
-    private void OnWaveDidStart()
+    
+    public void OnWaveDidStart()
     {
         GenerateWave();
     }
 
+    private void DestroyBallons()
+    {
+        _curWaveNumOfBallons = 0;
+     
+        foreach (Ballon ballon in _spawnedBallons)
+        {
+            Destroy(ballon.gameObject);
+        }
+        
+        _spawnedBallons.Clear();
+    }
+    
     private void GenerateWave()
     {
         _currentWave++;

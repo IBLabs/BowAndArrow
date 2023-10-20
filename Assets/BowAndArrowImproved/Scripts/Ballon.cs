@@ -18,6 +18,9 @@ public class Ballon : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        // int arrowLayer = LayerMask.NameToLayer("Arrow");
+        // if (other.gameObject.layer != arrowLayer) return;
+        
         //add to onPop Extra functionality
         onPop.Invoke(gameObject);
         gameObject.SetActive(false);

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
@@ -19,27 +18,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     
     private float _waveTimer;
     
-    private void OnEnable()
-    {
-        Subscribe();
-    }
-
-    private void OnDisable()
-    {
-        Unsubscribe();   
-    }
-    
-    private void Subscribe()
-    {
-        GameManager.WaveDidStart += OnWaveDidStart;
-    }
-
-    private void Unsubscribe()
-    {
-        GameManager.WaveDidStart -= OnWaveDidStart;
-    }
-    
-    private void OnWaveDidStart()
+    public void OnWaveDidStart()
     {
         GenerateWave();
     }
@@ -79,15 +58,17 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     public void OnEnemyDeath(GameObject enemyGameObject)
     {
+        Debug.Log("before death" + _spawnedEnemies.Count);
         if (!_spawnedEnemies.Remove(enemyGameObject))
         {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
         }
+        Debug.Log("after death" + _spawnedEnemies.Count);
         
         if (_spawnedEnemies.Count == 0)
         {
             _currentWave++;
-            GameManager.Instance.EndWave();
+            GameManager.instance.EndWave();
         }
     }
 

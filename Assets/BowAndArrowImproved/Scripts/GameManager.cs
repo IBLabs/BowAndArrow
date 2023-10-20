@@ -1,88 +1,52 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager Instance;
-    public GameManagerState CurrentState { get; private set; } = GameManagerState.PreWave;
-    public static Action WaveDidStart;
-    public static Action WaveDidEnd;
-
-    [SerializeField] private PreWaveBallon preWaveBallon; 
+    public static GameManager instance;
+    public State CurrentState { get; private set; } = State.PreWave;
+    public UnityEvent waveDidStart;
+    public UnityEvent waveDidEnd;
     
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    private void Start()
-    {
-        // Initialize the game, show the PreWaveBallon.
-        ShowPreWaveBalloon();
-    }
-    
+
     public void StartWave()
     {
-        WaveDidStart?.Invoke();
-        ChangeState(GameManagerState.Wave);
+        waveDidStart?.Invoke();
+        ChangeState(State.Wave);
     }
     public void EndWave()
     {
-        WaveDidEnd?.Invoke();
-        ChangeState(GameManagerState.PreWave);
+        waveDidEnd?.Invoke();
+        ChangeState(State.PreWave);
     }
 
-    private void ShowPreWaveBalloon()
-    {
-        preWaveBallon.Show();
-    }
-    
-    private void OnEnable()
-    {
-        Subscribe();
-    }
-
-    private void OnDisable()
-    {
-        Unsubscribe();   
-    }
-    
-    private void Subscribe()
-    {
-        // BAAIWaveSpawner.WaveDidEnd += OnWaveDidEnd;
-    }
-
-    public void OnWaveDidEnd()
-    {
-        ChangeState(GameManagerState.PreWave);
-    }
-
-    private void Unsubscribe()
-    {
-    }
-
-    private bool ChangeState(GameManagerState newState)
+    private bool ChangeState(State newState)
     {
         bool didChange = false;
         switch (CurrentState)
         {
-            case GameManagerState.PreWave:
-                if (newState != GameManagerState.Wave &&
-                    newState != GameManagerState.Win) break;
+            case State.PreWave:
+                if (newState != State.Wave &&
+                    newState != State.Win) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
             
-            case GameManagerState.Wave:
-                if (newState != GameManagerState.PreWave &&
-                    newState != GameManagerState.Lose) break;
+            case State.Wave:
+                if (newState != State.PreWave &&
+                    newState != State.Lose) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
@@ -97,19 +61,18 @@ public class GameManager : MonoBehaviour
     {
         switch (CurrentState)
         {
-            case GameManagerState.PreWave:
-                ShowPreWaveBalloon();
+            case State.PreWave:
                 break;
-            case GameManagerState.Wave:
+            case State.Wave:
                 break;
-            case GameManagerState.Win:
+            case State.Win:
                 break;
-            case GameManagerState.Lose:
+            case State.Lose:
                 break;
         }
     }
     
-    public enum GameManagerState 
+    public enum State 
     {
         PreWave,
         Wave,

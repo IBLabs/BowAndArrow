@@ -486,7 +486,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fbf7bb59c13e244841e401d029639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preWaveBallon: {fileID: 1747304456}
+  waveDidStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 158145453}
+        m_TargetAssemblyTypeName: BAAIWaveSpawner, Assembly-CSharp
+        m_MethodName: OnWaveDidStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1023150002}
+        m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
+        m_MethodName: OnWaveDidStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  waveDidEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1747304456}
+        m_TargetAssemblyTypeName: WaveStartHandler, Assembly-CSharp
+        m_MethodName: OnWaveDidEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1023150002}
+        m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
+        m_MethodName: OnWaveDidEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &333292039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2444,7 @@ MonoBehaviour:
     m_ConstantMax: 5
   ballonPrefab: {fileID: 3211712499975738858, guid: dc600714664b7b34b9832a3610aa5348,
     type: 3}
-  numOfBallons: 15
+  baseNumOfBallons: 15
 --- !u!4 &1023150003
 Transform:
   m_ObjectHideFlags: 0
@@ -4003,7 +4056,7 @@ GameObject:
   - component: {fileID: 1747304456}
   - component: {fileID: 1747304461}
   m_Layer: 0
-  m_Name: PreWaveBallon
+  m_Name: WaveStartHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
