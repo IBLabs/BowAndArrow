@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -9,6 +10,7 @@ public class BallonsSpawner : MonoBehaviour
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private Ballon ballonPrefab;
     [SerializeField] private int baseNumOfBallons;
+    
     private int _curWaveNumOfBallons;
     private int _currentWave = 0;
     
@@ -18,7 +20,7 @@ public class BallonsSpawner : MonoBehaviour
 
     public void DestroyBallons()
     {
-        _curWaveNumOfBallons = 0;
+        StopCoroutine(nameof(GenerateCoroutine));
      
         foreach (Ballon ballon in _spawnedBallons)
         {
@@ -28,33 +30,26 @@ public class BallonsSpawner : MonoBehaviour
         _spawnedBallons.Clear();
     }
     
-    public void GenerateWave()
+    public void Generate()
     {
         _currentWave++;
-        _curWaveNumOfBallons = baseNumOfBallons * _currentWave;
-    }
-    private void Update()
-    {
-        GenerateBallons();
+
+        int balloonCount = baseNumOfBallons * _currentWave; 
+
+        StartCoroutine(GenerateCoroutine(balloonCount));
     }
 
-    private void GenerateBallons()
+    private IEnumerator GenerateCoroutine(int balloonCount)
     {
-        if (_curWaveNumOfBallons <= 0) return;
-        
-        if (_spawnTimer <= 0)
+        for (int i = 0; i < balloonCount; i++)
         {
+            float waitTime = spawnInterval.Evaluate(Random.value);
+            
+            yield return new WaitForSeconds(waitTime);
+            
             Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
             Ballon newBallon = Instantiate(ballonPrefab, spawnLocation.position, Quaternion.identity);
             _spawnedBallons.Add(newBallon);
-
-            _curWaveNumOfBallons--;
-    
-            _spawnTimer = spawnInterval.Evaluate(Random.value);
-        }
-        else
-        {
-            _spawnTimer -= Time.deltaTime;
         }
     }
 }

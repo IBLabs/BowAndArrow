@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class BAAIEnemy : MonoBehaviour,BAAIIDeathable
+public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 {
     [SerializeField] private UnityEvent<GameObject> _onDeath;
     [SerializeField] private List<AudioClip> breakClips;

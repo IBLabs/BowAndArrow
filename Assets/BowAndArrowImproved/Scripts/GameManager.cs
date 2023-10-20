@@ -3,12 +3,14 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
     public State CurrentState { get; private set; } = State.PreWave;
+    
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
     
+    public UnityEvent<State> stateChanged;
+
     private void Awake()
     {
         if (instance == null)
@@ -52,22 +54,9 @@ public class GameManager : MonoBehaviour
                 break;
         }
         
-        if (didChange) OnStateChange();
+        if (didChange) stateChanged.Invoke(CurrentState);
     }
-    
-    //Future method for state change functionality expansion
-    private void OnStateChange()
-    {
-        switch (CurrentState)
-        {
-            case State.PreWave:
-                break;
-            case State.Wave:
-                break;
-        }
-    }
-    
-    //Win and Lose are states we may use in the future
+
     public enum State 
     {
         PreWave,
