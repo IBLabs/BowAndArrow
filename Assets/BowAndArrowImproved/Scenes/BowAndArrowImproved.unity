@@ -503,7 +503,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1023150002}
         m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
-        m_MethodName: OnWaveDidStart
+        m_MethodName: GenerateWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -516,9 +516,9 @@ MonoBehaviour:
   waveDidEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1747304456}
+      - m_Target: {fileID: 1419570479}
         m_TargetAssemblyTypeName: WaveStartHandler, Assembly-CSharp
-        m_MethodName: OnWaveDidEnd
+        m_MethodName: Show
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -530,7 +530,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1023150002}
         m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
-        m_MethodName: OnWaveDidEnd
+        m_MethodName: DestroyBallons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3732,6 +3732,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 158145454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1419570478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1419570480}
+  - component: {fileID: 1419570479}
+  m_Layer: 0
+  m_Name: WaveStartHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1419570479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419570478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2995c25d76750b44aa86bdfdd8d214b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWave:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306818893}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  shotToStartObject: {fileID: 1747304462}
+--- !u!4 &1419570480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419570478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1747304460}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450991504
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,29 +4114,15 @@ GameObject:
   - component: {fileID: 1747304459}
   - component: {fileID: 1747304458}
   - component: {fileID: 1747304457}
-  - component: {fileID: 1747304456}
   - component: {fileID: 1747304461}
+  - component: {fileID: 1747304462}
   m_Layer: 0
-  m_Name: WaveStartHandler
+  m_Name: PreWaveBallon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1747304456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747304455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2995c25d76750b44aa86bdfdd8d214b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popClips:
-  - {fileID: 8300000, guid: d4b4564ad8ca7254c9d41efb905858eb, type: 3}
 --- !u!135 &1747304457
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4155,12 +4202,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747304455}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 18.92, y: 14.03, z: 15.34}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1419570480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1747304461
 Rigidbody:
@@ -4189,6 +4236,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1747304462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747304455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54072f8a62cc47a198a8b17e0818c7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1419570479}
+        m_TargetAssemblyTypeName: WaveStartHandler, Assembly-CSharp
+        m_MethodName: OnShotToStartObjectPop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  popClips:
+  - {fileID: 8300000, guid: d4b4564ad8ca7254c9d41efb905858eb, type: 3}
 --- !u!1 &1988138061
 GameObject:
   m_ObjectHideFlags: 0
@@ -49527,4 +49603,4 @@ SceneRoots:
   - {fileID: 543450653108165717}
   - {fileID: 427143538}
   - {fileID: 306818892}
-  - {fileID: 1747304460}
+  - {fileID: 1419570480}

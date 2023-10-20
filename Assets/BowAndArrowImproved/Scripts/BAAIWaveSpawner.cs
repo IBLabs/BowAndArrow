@@ -58,12 +58,10 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     public void OnEnemyDeath(GameObject enemyGameObject)
     {
-        Debug.Log("before death" + _spawnedEnemies.Count);
         if (!_spawnedEnemies.Remove(enemyGameObject))
         {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
         }
-        Debug.Log("after death" + _spawnedEnemies.Count);
         
         if (_spawnedEnemies.Count == 0)
         {

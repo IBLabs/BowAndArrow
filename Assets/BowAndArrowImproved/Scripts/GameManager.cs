@@ -23,40 +23,39 @@ public class GameManager : MonoBehaviour
 
     public void StartWave()
     {
-        waveDidStart?.Invoke();
         ChangeState(State.Wave);
+        waveDidStart?.Invoke();
     }
+    
     public void EndWave()
     {
-        waveDidEnd?.Invoke();
         ChangeState(State.PreWave);
+        waveDidEnd?.Invoke();
     }
 
-    private bool ChangeState(State newState)
+    private void ChangeState(State newState)
     {
         bool didChange = false;
+        
         switch (CurrentState)
         {
             case State.PreWave:
-                if (newState != State.Wave &&
-                    newState != State.Win) break;
+                if (newState != State.Wave) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
             
             case State.Wave:
-                if (newState != State.PreWave &&
-                    newState != State.Lose) break;
+                if (newState != State.PreWave) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
         }
         
         if (didChange) OnStateChange();
-        
-        return didChange;
     }
     
+    //Future method for state change functionality expansion
     private void OnStateChange()
     {
         switch (CurrentState)
@@ -65,13 +64,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.Wave:
                 break;
-            case State.Win:
-                break;
-            case State.Lose:
-                break;
         }
     }
     
+    //Win and Lose are states we may use in the future
     public enum State 
     {
         PreWave,

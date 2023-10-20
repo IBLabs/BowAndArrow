@@ -16,17 +16,7 @@ public class BallonsSpawner : MonoBehaviour
 
     private float _spawnTimer;
 
-    public void OnWaveDidEnd()
-    {
-        DestroyBallons();
-    }
-    
-    public void OnWaveDidStart()
-    {
-        GenerateWave();
-    }
-
-    private void DestroyBallons()
+    public void DestroyBallons()
     {
         _curWaveNumOfBallons = 0;
      
@@ -38,7 +28,7 @@ public class BallonsSpawner : MonoBehaviour
         _spawnedBallons.Clear();
     }
     
-    private void GenerateWave()
+    public void GenerateWave()
     {
         _currentWave++;
         _curWaveNumOfBallons = baseNumOfBallons * _currentWave;

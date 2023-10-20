@@ -1,21 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
-public class Ballon : MonoBehaviour
+public class PreWaveBallon : MonoBehaviour
 {
-    [SerializeField] private float buoyancyForce = 10f;
-    [SerializeField] private UnityEvent onPop;
+    public UnityEvent onPop;
     [SerializeField] private List<AudioClip> popClips;
-    [SerializeField] private Rigidbody rb;
-
-    void FixedUpdate()
-    {
-        Vector3 buoyancyDirection = Vector3.up * buoyancyForce;
-        rb.AddForce(buoyancyDirection, ForceMode.Force);
-    }
-
+    
     private void OnCollisionEnter(Collision other)
     {
         //add to onPop Extra functionality

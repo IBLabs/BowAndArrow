@@ -1,20 +1,29 @@
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Events;
 
 public class WaveStartHandler : MonoBehaviour
 {
-    [SerializeField] private List<AudioClip> popClips;
+    [SerializeField] private UnityEvent startWave;
+    [SerializeField] private PreWaveBallon shotToStartObject;
 
-    public void OnWaveDidEnd()
+    private void Awake()
     {
-        gameObject.SetActive(true);
+        shotToStartObject.onPop.AddListener(OnShotToStartObjectPopped);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnDisable()
     {
-        gameObject.SetActive(false);
-        AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
-        GameManager.instance.StartWave();       
+        shotToStartObject.onPop.RemoveListener(OnShotToStartObjectPopped);
+    }
+
+    public void ShowShotToStartObject()
+    {
+        shotToStartObject.gameObject.SetActive(true);
+    }
+
+    public void OnShotToStartObjectPopped()
+    {
+        shotToStartObject.gameObject.SetActive(false);
+        startWave?.Invoke();
     }
 }
