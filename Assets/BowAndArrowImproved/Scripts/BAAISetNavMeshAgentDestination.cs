@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Vector3 = System.Numerics.Vector3;
 
 public class BAAISetNavMeshAgentDestination : MonoBehaviour, BAAIINavMeshAgentHolder
 {
