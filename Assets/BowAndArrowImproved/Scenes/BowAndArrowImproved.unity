@@ -371,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 6262939900322646051, guid: e7cca4fd7ea0bcf40b77357164d48421,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.45
+      value: 20.78
       objectReference: {fileID: 0}
     - target: {fileID: 6262939900322646051, guid: e7cca4fd7ea0bcf40b77357164d48421,
         type: 3}
@@ -396,12 +396,12 @@ PrefabInstance:
     - target: {fileID: 6262939900322646051, guid: e7cca4fd7ea0bcf40b77357164d48421,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.46899414
+      value: 14.32
       objectReference: {fileID: 0}
     - target: {fileID: 6262939900322646051, guid: e7cca4fd7ea0bcf40b77357164d48421,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.16803
+      value: 6.17
       objectReference: {fileID: 0}
     - target: {fileID: 6262939900322646051, guid: e7cca4fd7ea0bcf40b77357164d48421,
         type: 3}
@@ -1360,7 +1360,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1392,7 +1392,7 @@ Transform:
   m_GameObject: {fileID: 718967882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 13.5, y: 1.43, z: 25.979992}
+  m_LocalPosition: {x: 16.5, y: 2.11, z: 27.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3812,7 +3812,7 @@ Transform:
   m_GameObject: {fileID: 1348004043}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.27, y: 3.1, z: 15.54}
+  m_LocalPosition: {x: 29.92, y: 3.23, z: 19.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3904,7 +3904,7 @@ Transform:
   m_GameObject: {fileID: 1450991504}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.45, y: 3.35, z: 13.78}
+  m_LocalPosition: {x: 33.04, y: 3.48, z: 11.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37356,6 +37356,7 @@ GameObject:
   - component: {fileID: 4532436880351179161}
   - component: {fileID: 2289254795905131571}
   - component: {fileID: 6774638515723626453}
+  - component: {fileID: 6774638515723626454}
   m_Layer: 0
   m_Name: HexagonTile.191
   m_TagString: Untagged
@@ -37384,6 +37385,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9479998, y: 9.991738, z: 1.7320509}
   m_Center: {x: 0, y: -4.995869, z: -0.000000059604645}
+--- !u!114 &6774638515723626454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774638515723626452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &6774911590917828825
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,10 @@ public class BAAISpawnParticleSystemOnDeath : MonoBehaviour
 
     public void SpawnParticleSystem()
     {
-        Instantiate(particleSystemPrefab, transform.position + Vector3.up * .5f, Quaternion.LookRotation(transform.forward * -1));
+        Instantiate(
+            particleSystemPrefab, 
+            transform.position + Vector3.up * 1f,
+            Quaternion.identity
+        );
     }
 }
