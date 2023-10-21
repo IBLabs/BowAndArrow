@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,8 @@ using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
-    [SerializeField] private List<EnemyConfiguration> enemies = new List<EnemyConfiguration>();
+    [SerializeField] private int enemyToken = 10;
+    [SerializeField] private List<EnemyConfiguration> enemies = new();
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
@@ -14,45 +16,8 @@ public class BAAIWaveSpawner : MonoBehaviour
     public UnityEvent waveFinished;
 
     private int _currentWave = 1;
-    private List<GameObject> _enemiesToSpawn = new List<GameObject>();
-    private List<GameObject> _spawnedEnemies = new List<GameObject>();
-
-    private float _spawnTimer;
-    
-    private float _waveTimer;
-
-    private void Update()
-    {
-        if (_spawnTimer <= 0)
-        {
-            if (_enemiesToSpawn.Count > 0)
-            {
-                Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
-                GameObject newEnemy = Instantiate(_enemiesToSpawn[0], spawnLocation.position, Quaternion.identity);
-
-                BAAIIDeathable enemyComponent = newEnemy.GetComponent<BAAIIDeathable>(); 
-                if (enemyComponent != null)
-                {
-                    enemyComponent.onDeath.AddListener(OnEnemyDeath);
-                }
-                
-                BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>(); 
-                if (navMeshComponent != null)
-                {
-                    navMeshComponent.SetTargetTransform(targetTransform);
-                }
-                
-                _enemiesToSpawn.RemoveAt(0);
-                _spawnedEnemies.Add(newEnemy);
-
-                _spawnTimer = spawnInterval.Evaluate(Random.value);
-            }
-        }
-        else
-        {
-            _spawnTimer -= Time.deltaTime;
-        }
-    }
+    private int _enemiesToKill = 0;
+    private List<GameObject> _spawnedEnemies = new();
 
     public void OnEnemyDeath(GameObject enemyGameObject)
     {
@@ -60,21 +25,24 @@ public class BAAIWaveSpawner : MonoBehaviour
         {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
         }
+
+        _enemiesToKill -= 1;
         
-        if (_spawnedEnemies.Count == 0)
+        if (_enemiesToKill <= 0)
         {
             _currentWave++;
-
             waveFinished.Invoke();
         }
     }
 
     public void Generate()
     {
-        GenerateEnemies(_currentWave * 10);
+        List<GameObject> enemiesToSpawn = GenerateEnemies(_currentWave * enemyToken);
+        _enemiesToKill = enemiesToSpawn.Count;
+        StartCoroutine(SpawnEnemiesCoroutine(enemiesToSpawn));
     }
 
-    private void GenerateEnemies(int waveValue)
+    private List<GameObject> GenerateEnemies(int waveValue)
     {
         List<GameObject> generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
@@ -88,9 +56,34 @@ public class BAAIWaveSpawner : MonoBehaviour
                 waveValue -= randomEnemyCost;
             }
         }
-        
-        _enemiesToSpawn.Clear();
-        _enemiesToSpawn = generatedEnemies;
+
+        return generatedEnemies;
+    }
+    
+    private IEnumerator SpawnEnemiesCoroutine(List<GameObject> enemiesToSpawn)
+    {
+        foreach (GameObject enemyToSpawn in enemiesToSpawn)
+        {
+            float waitTime = spawnInterval.Evaluate(Random.value);
+            yield return new WaitForSeconds(waitTime);
+
+            Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
+            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity);
+
+            BAAIIDeathable enemyComponent = newEnemy.GetComponent<BAAIIDeathable>(); 
+            if (enemyComponent != null)
+            {
+                enemyComponent.onDeath.AddListener(OnEnemyDeath);
+            }
+                
+            BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>(); 
+            if (navMeshComponent != null)
+            {
+                navMeshComponent.SetTargetTransform(targetTransform);
+            }
+                
+            _spawnedEnemies.Add(newEnemy);
+        }
     }
 
     [Serializable]
