@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +24,6 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private Rigidbody rb;
 
     [SerializeField] private UnityEvent<GameObject> _onDeath;
-
     public UnityEvent<GameObject> onDeath => _onDeath;
 
     void FixedUpdate()
@@ -34,12 +34,27 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         rb.AddForce(buoyancyDirection, ForceMode.Force);
     }
 
+    public void Die(float delay)
+    {
+        StartCoroutine(DieCoroutine(delay));
+    }
+
+    private IEnumerator DieCoroutine(float delay)
+    {
+        if (delay > 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        
+        gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
+        _onDeath?.Invoke(this.gameObject);
+        
+        Destroy(gameObject, 1f);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
-        gameObject.SetActive(false);
-
-        AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
-
-        _onDeath?.Invoke(this.gameObject);
+        Die(0);
     }
 }

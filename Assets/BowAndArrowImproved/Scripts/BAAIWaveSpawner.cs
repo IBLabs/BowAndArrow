@@ -68,7 +68,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
             Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
-            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
 
             BAAIIDeathable enemyComponent = newEnemy.GetComponent<BAAIIDeathable>(); 
             if (enemyComponent != null)

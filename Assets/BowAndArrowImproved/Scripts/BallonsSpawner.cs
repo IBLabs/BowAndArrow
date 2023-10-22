@@ -17,14 +17,15 @@ public class BallonsSpawner : MonoBehaviour
     private List<Ballon> _spawnedBallons = new List<Ballon>();
 
     private float _spawnTimer;
+    private IEnumerator _activeGenerateCoroutine;
 
     public void DestroyBallons()
     {
-        StopCoroutine(nameof(GenerateCoroutine));
+        StopCoroutine(_activeGenerateCoroutine);
      
-        foreach (Ballon ballon in _spawnedBallons)
+        foreach (Ballon balloon in _spawnedBallons)
         {
-            Destroy(ballon.gameObject);
+            balloon.Die(Random.value);
         }
         
         _spawnedBallons.Clear();
@@ -34,9 +35,11 @@ public class BallonsSpawner : MonoBehaviour
     {
         _currentWave++;
 
-        int balloonCount = baseNumOfBallons * _currentWave; 
+        int balloonCount = baseNumOfBallons * _currentWave;
 
-        StartCoroutine(GenerateCoroutine(balloonCount));
+
+        _activeGenerateCoroutine = GenerateCoroutine(balloonCount);
+        StartCoroutine(_activeGenerateCoroutine);
     }
 
     private IEnumerator GenerateCoroutine(int balloonCount)
@@ -48,7 +51,7 @@ public class BallonsSpawner : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             
             Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
-            Ballon newBallon = Instantiate(ballonPrefab, spawnLocation.position, Quaternion.identity);
+            Ballon newBallon = Instantiate(ballonPrefab, spawnLocation.position, Quaternion.identity, transform);
             _spawnedBallons.Add(newBallon);
         }
     }

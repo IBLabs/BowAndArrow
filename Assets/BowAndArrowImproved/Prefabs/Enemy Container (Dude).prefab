@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystemPrefab: {fileID: 5866775785455082453, guid: dc14c2af953644d43845b801600b990d,
     type: 3}
+  offset: {x: 0, y: 1, z: 0}
 --- !u!54 &8942490084976797242
 Rigidbody:
   m_ObjectHideFlags: 0

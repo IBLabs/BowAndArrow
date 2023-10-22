@@ -6,11 +6,13 @@ public class BAAISpawnParticleSystemOnDeath : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particleSystemPrefab;
 
+    [SerializeField] private Vector3 offset;
+
     public void SpawnParticleSystem()
     {
         Instantiate(
             particleSystemPrefab, 
-            transform.position + Vector3.up * 1f,
+            transform.position + offset,
             Quaternion.identity
         );
     }
