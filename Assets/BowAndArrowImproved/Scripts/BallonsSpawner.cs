@@ -14,7 +14,7 @@ public class BallonsSpawner : MonoBehaviour
     private int _curWaveNumOfBallons;
     private int _currentWave = 0;
     
-    private List<Ballon> _spawnedBallons = new List<Ballon>();
+    private List<GameObject> _spawnedBallons = new();
 
     private float _spawnTimer;
     private IEnumerator _activeGenerateCoroutine;
@@ -23,12 +23,14 @@ public class BallonsSpawner : MonoBehaviour
     {
         StopCoroutine(_activeGenerateCoroutine);
      
-        foreach (Ballon balloon in _spawnedBallons)
+        foreach (GameObject balloonGameObject in _spawnedBallons)
         {
-            balloon.Die(Random.value);
+            Ballon targetBalloon = balloonGameObject.GetComponent<Ballon>();
+            if (targetBalloon != null)
+            {
+                targetBalloon.Die(Random.value);
+            }
         }
-        
-        _spawnedBallons.Clear();
     }
     
     public void Generate()
@@ -36,7 +38,6 @@ public class BallonsSpawner : MonoBehaviour
         _currentWave++;
 
         int balloonCount = baseNumOfBallons * _currentWave;
-
 
         _activeGenerateCoroutine = GenerateCoroutine(balloonCount);
         StartCoroutine(_activeGenerateCoroutine);
@@ -52,7 +53,17 @@ public class BallonsSpawner : MonoBehaviour
             
             Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
             Ballon newBallon = Instantiate(ballonPrefab, spawnLocation.position, Quaternion.identity, transform);
-            _spawnedBallons.Add(newBallon);
+            _spawnedBallons.Add(newBallon.gameObject);
+
+            newBallon.onDeath.AddListener(OnBalloonPop);
+        }
+    }
+
+    private void OnBalloonPop(GameObject destroyedBalloon)
+    {
+        if (!_spawnedBallons.Remove(destroyedBalloon))
+        {
+            Debug.Log("ERROR: failed to remove destroyed balloon from list");
         }
     }
 }

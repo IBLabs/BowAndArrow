@@ -70,19 +70,19 @@ public class BAAIWaveSpawner : MonoBehaviour
             Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
             GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
 
-            BAAIIDeathable enemyComponent = newEnemy.GetComponent<BAAIIDeathable>(); 
-            if (enemyComponent != null)
+            _spawnedEnemies.Add(newEnemy);
+
+            BAAIIDeathable deathable = newEnemy.GetComponent<BAAIIDeathable>();
+            if (deathable != null)
             {
-                enemyComponent.onDeath.AddListener(OnEnemyDeath);
+                deathable.onDeath.AddListener(OnEnemyDeath);
             }
-                
-            BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>(); 
+
+            BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>();
             if (navMeshComponent != null)
             {
                 navMeshComponent.SetTargetTransform(targetTransform);
             }
-                
-            _spawnedEnemies.Add(newEnemy);
         }
     }
 

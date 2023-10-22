@@ -36,10 +36,11 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        onDeath.Invoke(gameObject);
         gameObject.SetActive(false);
         
         AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
+        
+        onDeath.Invoke(gameObject);
     }
 
     private void Awake()
