@@ -241,6 +241,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnedObject: {fileID: 8900627974286688653, guid: 2999fae2d0f544eb4a2f16a1934c0025,
     type: 3}
+  explosionPower:
+    m_Mode: 3
+    m_CurveMultiplier: 0
+    m_CurveMin:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_CurveMax:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ConstantMin: 0.3
+    m_ConstantMax: 2
+  spinPower:
+    m_Mode: 3
+    m_CurveMultiplier: 0
+    m_CurveMin:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_CurveMax:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ConstantMin: 1
+    m_ConstantMax: 10
 --- !u!1001 &8099083875156824937
 PrefabInstance:
   m_ObjectHideFlags: 0

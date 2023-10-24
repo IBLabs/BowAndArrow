@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnObjectOnDeath : MonoBehaviour
 {
     [SerializeField] private GameObject spawnedObject;
+
+    [SerializeField] private ParticleSystem.MinMaxCurve explosionPower;
+    [SerializeField] private ParticleSystem.MinMaxCurve spinPower;
 
     public void OnDeath(GameObject diedObject)
     {
@@ -13,9 +17,10 @@ public class SpawnObjectOnDeath : MonoBehaviour
         Rigidbody deathObjectRb = deathObject.GetComponent<Rigidbody>();
         if (deathObjectRb != null)
         {
-            deathObjectRb.AddForce((transform.up + (transform.forward * -1)) * Random.Range(1f, 3f), ForceMode.Impulse);
-            deathObjectRb.AddTorque((deathObjectRb.transform.up).normalized * 10f * (Random.Range(0, 2) * 2 - 1));
-            deathObjectRb.AddTorque((deathObjectRb.transform.forward).normalized * 10f * (Random.Range(0, 2) * 2 - 1));
+            int randDirection = (Random.Range(0, 2) * 2 - 1);
+            deathObjectRb.AddForce((transform.up + (transform.forward * -1)) * explosionPower.Evaluate(Random.value), ForceMode.Impulse);
+            deathObjectRb.AddTorque((deathObjectRb.transform.up).normalized * spinPower.Evaluate(Random.value) * randDirection);
+            deathObjectRb.AddTorque((deathObjectRb.transform.forward).normalized * spinPower.Evaluate(Random.value) * randDirection);
         }
         
         Destroy(deathObject, 1f);
