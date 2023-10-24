@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BAAIStickingArrowToSurface : MonoBehaviour
@@ -14,7 +10,9 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Balloon"))
+        if (other.gameObject.CompareTag("Enemy") 
+        || other.gameObject.CompareTag("Balloon")
+        || other.gameObject.CompareTag("TeleportAnchor"))
         {
             Destroy(gameObject);
             return;
@@ -24,6 +22,7 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
         myCollider.isTrigger = true;
 
         GameObject stickingArrow = Instantiate(stickingArrowPrefab);
+        
         stickingArrow.transform.position = transform.position;
         stickingArrow.transform.forward = transform.forward;
 
