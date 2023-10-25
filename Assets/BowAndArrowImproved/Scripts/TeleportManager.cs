@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TeleportManager : MonoBehaviour
 {
@@ -8,33 +9,33 @@ public class TeleportManager : MonoBehaviour
     [SerializeField] private List<GameObject> portalsList;
     [SerializeField] private GameObject curPortal;
 
-    [SerializeField] private float portalsSpawnTimer = 10.0f;
-    [SerializeField] private float portalsSpawnCircleTimer = 10.0f;
+    [SerializeField] private float offTime = 15.0f;
+    [SerializeField] private float onTime = 10.0f;
 
-    private Coroutine _portalsSpawnCoroutine;
+    private Coroutine _togglePortalsCoroutine;
     
     private void OnEnable()
     {
-        _portalsSpawnCoroutine = StartCoroutine(PortalsSpawnCoroutine());
+        _togglePortalsCoroutine = StartCoroutine(TogglePortalsCoroutine());
     }
 
     private void OnDisable()
     {
-        if (_portalsSpawnCoroutine != null)
+        if (_togglePortalsCoroutine != null)
         {
-            StopCoroutine(_portalsSpawnCoroutine);
+            StopCoroutine(_togglePortalsCoroutine);
         }
 
         DisablePortals();
     }
 
-    private IEnumerator PortalsSpawnCoroutine()
+    private IEnumerator TogglePortalsCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(portalsSpawnTimer);
+            yield return new WaitForSeconds(offTime);
             EnablePortals();
-            yield return new WaitForSeconds(portalsSpawnCircleTimer);
+            yield return new WaitForSeconds(onTime);
             DisablePortals();
         }
     }
