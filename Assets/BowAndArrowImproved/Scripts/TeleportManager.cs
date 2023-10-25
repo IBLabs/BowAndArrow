@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class TeleportManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerContainer;
     [SerializeField] private List<GameObject> anchorsList;
+    [SerializeField] private List<Transform> towersCoordinatesList;
     [SerializeField] private float anchorsSpawnTimer = 10.0f;
     [SerializeField] private float anchorsSpawnCircleTimer = 10.0f;
 
@@ -55,14 +57,19 @@ public class TeleportManager : MonoBehaviour
     
     public void Teleport(GameObject teleportAnchor)
     {
-        playerContainer.transform.position = teleportAnchor.transform.position;
+        Transform coordinates = teleportAnchor.transform.Find("Coordinates");
+        if (coordinates == null) return;
+ 
+        playerContainer.transform.position = coordinates.position;
     }
     
     private void OnCollisionEnter(Collision other)
     {
+        Collider myCollider = other.GetContact(0).thisCollider;
+        
         if (other.gameObject.CompareTag("Arrow"))
         {
-            Teleport(other.gameObject);
+            Teleport(myCollider.gameObject);
         }
     }
 }
