@@ -7,7 +7,7 @@ TagManager:
   - Enemy
   - Balloon
   - Arrow
-  - TeleportAnchor
+  - Portal
   layers:
   - Default
   - TransparentFX

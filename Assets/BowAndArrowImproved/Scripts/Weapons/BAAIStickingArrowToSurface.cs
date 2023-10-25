@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BAAIStickingArrowToSurface : MonoBehaviour
@@ -16,7 +12,7 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy") 
             || other.gameObject.CompareTag("Balloon")
-            || other.gameObject.CompareTag("TeleportAnchor"))
+            || other.gameObject.CompareTag("Portal"))
         {
             Destroy(gameObject);
             return;

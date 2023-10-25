@@ -1,68 +1,83 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class TeleportManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerContainer;
-    [SerializeField] private List<GameObject> anchorsList;
-    [SerializeField] private List<Transform> towersCoordinatesList;
-    [SerializeField] private float anchorsSpawnTimer = 10.0f;
-    [SerializeField] private float anchorsSpawnCircleTimer = 10.0f;
+    [SerializeField] private List<GameObject> portalsList;
+    [SerializeField] private GameObject curPortal;
 
-    private Coroutine _teleportCoroutine;
+    [SerializeField] private float portalsSpawnTimer = 10.0f;
+    [SerializeField] private float portalsSpawnCircleTimer = 10.0f;
+
+    private Coroutine _portalsSpawnCoroutine;
     
     private void OnEnable()
     {
-        _teleportCoroutine = StartCoroutine(AnchorSpawnCoroutine());
+        _portalsSpawnCoroutine = StartCoroutine(PortalsSpawnCoroutine());
     }
 
     private void OnDisable()
     {
-        if (_teleportCoroutine != null)
+        if (_portalsSpawnCoroutine != null)
         {
-            StopCoroutine(_teleportCoroutine);
+            StopCoroutine(_portalsSpawnCoroutine);
         }
 
-        DisableAnchors();
+        DisablePortals();
     }
 
-    private IEnumerator AnchorSpawnCoroutine()
+    private IEnumerator PortalsSpawnCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(anchorsSpawnTimer);
-            EnableAnchors();
-            yield return new WaitForSeconds(anchorsSpawnCircleTimer);
-            DisableAnchors();
+            yield return new WaitForSeconds(portalsSpawnTimer);
+            EnablePortals();
+            yield return new WaitForSeconds(portalsSpawnCircleTimer);
+            DisablePortals();
         }
     }
 
-    private void EnableAnchors()
+    private void EnablePortals()
     {
-        foreach (GameObject anchor in anchorsList)
+        foreach (GameObject portal in portalsList)
         {
-            anchor.SetActive(true);
+            if (portal != curPortal)
+            {
+                portal.SetActive(true);
+            }
         }
     }
 
-    private void DisableAnchors()
+    private void DisablePortals()
     {
-        foreach (GameObject anchor in anchorsList)
+        foreach (GameObject portal in portalsList)
         {
-            anchor.SetActive(false);
+            portal.SetActive(false);
         }
     }
     
-    public void Teleport(GameObject teleportAnchor)
+    private void Teleport(GameObject portal)
     {
-        Transform coordinates = teleportAnchor.transform.Find("Coordinates");
+        Transform coordinates = portal.transform.Find("Coordinates");
         if (coordinates == null) return;
- 
+
         playerContainer.transform.position = coordinates.position;
+        playerContainer.transform.rotation = Quaternion.LookRotation(coordinates.forward);
+        
+        DisablePortalAtPlayerLocation(portal);
     }
-    
+
+    private void DisablePortalAtPlayerLocation(GameObject portal)
+    {
+        GameObject prevPortal = curPortal;
+        curPortal = portal;
+        
+        curPortal.SetActive(false);
+        prevPortal.SetActive(true);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         Collider myCollider = other.GetContact(0).thisCollider;
