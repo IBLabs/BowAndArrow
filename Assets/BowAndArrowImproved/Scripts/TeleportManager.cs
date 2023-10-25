@@ -60,11 +60,8 @@ public class TeleportManager : MonoBehaviour
     
     private void Teleport(GameObject portal)
     {
-        Transform coordinates = portal.transform.Find("Coordinates");
-        if (coordinates == null) return;
-
-        playerContainer.transform.position = coordinates.position;
-        playerContainer.transform.rotation = Quaternion.LookRotation(coordinates.forward);
+        playerContainer.transform.position = portal.transform.position;
+        playerContainer.transform.rotation = Quaternion.LookRotation(portal.transform.forward);
         
         DisablePortalAtPlayerLocation(portal);
     }
