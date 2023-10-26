@@ -8,6 +8,7 @@ TagManager:
   - Balloon
   - Arrow
   - Portal
+  - ObjectRespawner
   layers:
   - Default
   - TransparentFX

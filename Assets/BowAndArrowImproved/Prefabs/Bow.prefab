@@ -963,6 +963,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1259056501584667200}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb6090c5bc01a4558935cae0acc5ecac,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3195947552100842451}
   m_SourcePrefab: {fileID: 100100000, guid: eb6090c5bc01a4558935cae0acc5ecac, type: 3}
 --- !u!4 &8197034845033810545 stripped
 Transform:
@@ -1223,7 +1227,9 @@ MonoBehaviour:
   midPointVisualObject: {fileID: 6564715163807830655}
   midPointParent: {fileID: 4017735238732801721}
   bowString: {fileID: 5327700127660061911}
+  audioSource: {fileID: 0}
   stringLimit: 0.3
+  stringSoundThreshold: 0.001
 --- !u!114 &1259056501584667200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,4 +1246,17 @@ MonoBehaviour:
     type: 3}
   arrowSpawnPoint: {fileID: 1063794076763686715}
   midPointVisual: {fileID: 6979224061989871493}
+  bowReleaseAudioSource: {fileID: 0}
   arrowMaxSpeed: 10
+--- !u!114 &3195947552100842451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829983748520743115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5dfadccac774efb8c01b99b1fe61a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
