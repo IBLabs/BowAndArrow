@@ -29,6 +29,18 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         PlayWarCry();
     }
 
+    public void Die(bool playSound)
+    {
+        gameObject.SetActive(false);
+
+        if (playSound)
+        {
+            AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);    
+        }
+
+        onDeath.Invoke(gameObject);
+    }
+
     private void PlayWarCry()
     {
         AudioSource.PlayClipAtPoint(warCryClips[Random.Range(0, warCryClips.Count)], transform.position);
@@ -36,11 +48,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        gameObject.SetActive(false);
-        
-        AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
-        
-        onDeath.Invoke(gameObject);
+        Die(true);
     }
 
     private void Awake()

@@ -7,16 +7,11 @@ using Random = UnityEngine.Random;
 
 public class Ballon : MonoBehaviour, BAAIIDeathable
 {
-    private bool _isBalloonFrozen;
-
-    public bool isBalloonFrozen
+    public bool isBalloonFrozen;
+    
+    private void Start()
     {
-        get { return _isBalloonFrozen; }
-        set
-        {
-            _isBalloonFrozen = value;
-            rb.useGravity = false;
-        }
+        rb.useGravity = !isBalloonFrozen;
     }
 
     [SerializeField] private float buoyancyForce = 10f;
