@@ -15,6 +15,6 @@ public class UpdateScoreOnDeath : MonoBehaviour
 
     public void UpdateScoreboard()
     {
-        Scoreboard.IncreaseScore();
+        Scoreboard.IncreaseScore(1);
     }
 }

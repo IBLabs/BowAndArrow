@@ -27,9 +27,11 @@ public class HealthBar : MonoBehaviour
         Destroy(lastSquare);
     }
 
-    private void SetupHealthBar()
+    public void SetupHealthBar()
     {
-        for (int i = 0; i < hittable.health; i++)
+        int numOfExistSquares = squares.Count;
+        
+        for (int i = numOfExistSquares; i < hittable.health; i++)
         {
             GameObject newSquare = Instantiate(healthSquare, transform);
             squares.Add(newSquare);

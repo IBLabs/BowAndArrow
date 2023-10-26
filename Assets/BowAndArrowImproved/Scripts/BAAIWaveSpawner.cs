@@ -35,6 +35,11 @@ public class BAAIWaveSpawner : MonoBehaviour
         }
     }
 
+    public void ResetWave()
+    {
+        _currentWave = 1;
+    }
+    
     public void Generate()
     {
         List<GameObject> enemiesToSpawn = GenerateEnemies(_currentWave * enemyToken);

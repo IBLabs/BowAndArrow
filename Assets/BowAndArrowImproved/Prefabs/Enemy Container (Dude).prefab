@@ -115,6 +115,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2560688743166888971}
+        m_TargetAssemblyTypeName: SpawnObjectOnDeath, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   breakClips:
   - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
   - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}

@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public State CurrentState { get; private set; } = State.PreWave;
     
+    public UnityEvent gameDidReset;
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
-    
+
     public UnityEvent<State> stateChanged;
 
     private void Awake()
@@ -29,12 +30,24 @@ public class GameManager : MonoBehaviour
         stateChanged.Invoke(CurrentState);
     }
 
+    public void Reset()
+    {
+        gameDidReset?.Invoke();
+        ChangeState(State.PreWave);
+    }
+    
+    public void Lose()
+    {
+        ChangeState(State.Lose);
+        waveDidEnd?.Invoke();
+    }
+    
     public void StartWave()
     {
         ChangeState(State.Wave);
         waveDidStart?.Invoke();
     }
-    
+
     public void EndWave()
     {
         ChangeState(State.PreWave);
@@ -54,6 +67,12 @@ public class GameManager : MonoBehaviour
                 break;
             
             case State.Wave:
+                if (newState != State.PreWave && newState != State.Lose) break;
+                CurrentState = newState;
+                didChange = true;
+                break;
+            
+            case State.Lose:
                 if (newState != State.PreWave) break;
                 CurrentState = newState;
                 didChange = true;
