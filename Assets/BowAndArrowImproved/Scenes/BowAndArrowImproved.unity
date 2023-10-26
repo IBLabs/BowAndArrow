@@ -843,6 +843,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fbf7bb59c13e244841e401d029639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDidReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 158145453}
+        m_TargetAssemblyTypeName: BAAIWaveSpawner, Assembly-CSharp
+        m_MethodName: ResetWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1023150002}
+        m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
+        m_MethodName: ResetWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2051524504}
+        m_TargetAssemblyTypeName: Scoreboard, Assembly-CSharp
+        m_MethodName: ResetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 995713902}
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: SetupHealthBar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 703819253}
+        m_TargetAssemblyTypeName: HitCountHittable, Assembly-CSharp
+        m_MethodName: ResetCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   waveDidStart:
     m_PersistentCalls:
       m_Calls:
@@ -2074,7 +2137,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 652174799}
+      objectReference: {fileID: 306818893}
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -2083,12 +2146,12 @@ PrefabInstance:
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ReloadScene
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: GeneralUtilities, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
@@ -2100,20 +2163,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Restart Balloon
       objectReference: {fileID: 0}
+    - target: {fileID: 4224335037902254792, guid: d509b6df7581645158eb20eb46bfc290,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.79
+      value: 14.693
       objectReference: {fileID: 0}
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.97
+      value: 4.15
       objectReference: {fileID: 0}
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.18
+      value: 16.21
       objectReference: {fileID: 0}
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
@@ -2392,10 +2460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f632665e1fa646e5b6a988f9c70974c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCount: 5
+  health: 0
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  baseHitCount: 5
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -2410,6 +2479,30 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 652174798}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 306818893}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Lose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   onHit:
     m_PersistentCalls:
@@ -16586,6 +16679,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1023150003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2051524504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7181016879321015756, guid: e7cca4fd7ea0bcf40b77357164d48421,
+    type: 3}
+  m_PrefabInstance: {fileID: 280958361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b871f3da1aab25b41b6010f6809ae3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2059577422
 GameObject:
   m_ObjectHideFlags: 0
