@@ -894,18 +894,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 703819253}
-        m_TargetAssemblyTypeName: HitCountHittable, Assembly-CSharp
-        m_MethodName: ResetCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   waveDidStart:
     m_PersistentCalls:
       m_Calls:
@@ -2110,141 +2098,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1001 &652174797
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: isBalloonFrozen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 306818893}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Reset
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4224335037902254792, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_Name
-      value: Restart Balloon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4224335037902254792, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 14.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 16.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4224335037902254792, guid: d509b6df7581645158eb20eb46bfc290,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 652174799}
-  m_SourcePrefab: {fileID: 100100000, guid: d509b6df7581645158eb20eb46bfc290, type: 3}
---- !u!1 &652174798 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4224335037902254792, guid: d509b6df7581645158eb20eb46bfc290,
-    type: 3}
-  m_PrefabInstance: {fileID: 652174797}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &652174799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652174798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2786ba4f9409249b2a2208c8b676300c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &696478652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2460,11 +2313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f632665e1fa646e5b6a988f9c70974c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  hitCount: 0
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
-  baseHitCount: 1
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -2480,7 +2332,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 652174798}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -8560,6 +8412,7 @@ MonoBehaviour:
   healthSquare: {fileID: 6643052579985095135, guid: 896067891658b44b19bfad188dfc3327,
     type: 3}
   hittable: {fileID: 703819253}
+  health: 5
 --- !u!114 &995713903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10361,7 +10214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startBalloonPrefab: {fileID: 3211712499975738858, guid: dc600714664b7b34b9832a3610aa5348,
     type: 3}
-  restartBalloonPrefab: {fileID: 0}
+  restartBalloonPrefab: {fileID: 5822599624601236251, guid: 2a9a517e2e8504945b493ad5e6bf3b3b,
+    type: 3}
   startWave:
     m_PersistentCalls:
       m_Calls:
@@ -10379,7 +10233,19 @@ MonoBehaviour:
         m_CallState: 2
   resetGame:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 306818893}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1419570480
 Transform:
   m_ObjectHideFlags: 0
@@ -65933,7 +65799,6 @@ SceneRoots:
   - {fileID: 543450653108165717}
   - {fileID: 427143538}
   - {fileID: 1203302504}
-  - {fileID: 652174797}
   - {fileID: 1635283655}
   - {fileID: 2104598219}
   - {fileID: 928221391}
