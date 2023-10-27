@@ -18,6 +18,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
     private List<GameObject> _spawnedEnemies = new();
+    private bool _isLostGame;
 
     public void OnEnemyDeath(GameObject enemyGameObject)
     {
@@ -25,15 +26,23 @@ public class BAAIWaveSpawner : MonoBehaviour
         {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
         }
-
+        
         _enemiesToKill -= 1;
         
-        if (_enemiesToKill <= 0)
+        if (_enemiesToKill <= 0 && !_isLostGame)
         {
             _currentWave++;
             waveFinished.Invoke();
         }
     }
+    public void OnGameManagerStateChanged(GameManager.State newState)
+    {
+        if (newState == GameManager.State.Lose)
+        {
+            _isLostGame = true;
+            // DestroyEnemies();
+        }
+    }   
 
     public void ResetWave()
     {
@@ -92,17 +101,20 @@ public class BAAIWaveSpawner : MonoBehaviour
     }
     public void DestroyEnemies()
     {
-        // foreach (GameObject enemy in _spawnedEnemies)
-        // {
-        //     if (!enemy) continue;
-        //     
-        //     BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
-        //     if (curEnemy != null)
-        //     {
-        //         curEnemy.Die(false);
-        //     }
-        //
-        // }
+        Debug.Log("before for loop");
+        foreach (GameObject enemy in _spawnedEnemies)
+        {
+            Debug.Log("inside for loop");
+            
+            if (!enemy) continue;
+            
+            BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
+            if (curEnemy != null)
+            {
+                curEnemy.Die(false);
+            }
+        
+        }
     }
     
     [Serializable]

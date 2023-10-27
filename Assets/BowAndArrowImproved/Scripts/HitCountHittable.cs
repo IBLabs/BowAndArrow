@@ -26,12 +26,15 @@ public class HitCountHittable : MonoBehaviour
             
             if (hitCount <= 0)
             {
-                onDeath.Invoke();
+                onDeath?.Invoke();
             }
-            BAAIEnemy hitEnemy = other.attachedRigidbody.GetComponent<BAAIEnemy>();
-            if (hitEnemy != null)
+            else
             {
-                hitEnemy.gameObject.SetActive(false);
+                BAAIEnemy hitEnemy = other.attachedRigidbody.GetComponent<BAAIEnemy>();
+                if (hitEnemy != null)
+                {
+                    hitEnemy.Die(false);
+                }
             }
         }
     }
