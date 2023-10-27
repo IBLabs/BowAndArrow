@@ -19,11 +19,6 @@ public class BallonsSpawner : MonoBehaviour
     private float _spawnTimer;
     private IEnumerator _activeGenerateCoroutine;
 
-    public void ResetWave()
-    {
-        _currentWave = 0;
-    }
-    
     public void DestroyBallons()
     {
         StopCoroutine(_activeGenerateCoroutine);

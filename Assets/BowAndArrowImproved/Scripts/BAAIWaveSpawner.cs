@@ -41,14 +41,8 @@ public class BAAIWaveSpawner : MonoBehaviour
             _isLostGame = true;
             DestroyEnemies();
         }
-    }   
-
-    public void ResetWave()
-    {
-        _currentWave = 1;
-        _isLostGame = false;
     }
-    
+
     public void Generate()
     {
         List<GameObject> enemiesToSpawn = GenerateEnemies(_currentWave * enemyToken);

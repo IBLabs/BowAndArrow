@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public State CurrentState { get; private set; } = State.PreWave;
     
-    public UnityEvent gameDidReset;
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
 
@@ -30,12 +30,6 @@ public class GameManager : MonoBehaviour
         stateChanged.Invoke(CurrentState);
     }
 
-    public void Reset()
-    {
-        gameDidReset?.Invoke();
-        ChangeState(State.PreWave);
-    }
-    
     public void Lose()
     {
         waveDidEnd?.Invoke();
