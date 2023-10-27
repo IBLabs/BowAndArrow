@@ -28,7 +28,6 @@ public class BAAIWaveSpawner : MonoBehaviour
         }
         
         _enemiesToKill -= 1;
-        
         if (_enemiesToKill <= 0 && !_isLostGame)
         {
             _currentWave++;
@@ -40,13 +39,14 @@ public class BAAIWaveSpawner : MonoBehaviour
         if (newState == GameManager.State.Lose)
         {
             _isLostGame = true;
-            // DestroyEnemies();
+            DestroyEnemies();
         }
     }   
 
     public void ResetWave()
     {
         _currentWave = 1;
+        _isLostGame = false;
     }
     
     public void Generate()
@@ -101,19 +101,27 @@ public class BAAIWaveSpawner : MonoBehaviour
     }
     public void DestroyEnemies()
     {
-        Debug.Log("before for loop");
+        List<BAAIEnemy> enemiesToDestroy = new List<BAAIEnemy>();
+        
         foreach (GameObject enemy in _spawnedEnemies)
         {
-            Debug.Log("inside for loop");
-            
             if (!enemy) continue;
             
             BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
             if (curEnemy != null)
             {
-                curEnemy.Die(false);
+                enemiesToDestroy.Add(curEnemy);
             }
+        }
         
+        foreach (BAAIEnemy enemyToDestroy in enemiesToDestroy)
+        {
+            enemyToDestroy.Die(false);
+        }
+        
+        foreach (GameObject enemy in _spawnedEnemies)
+        {
+            _spawnedEnemies.Remove(enemy);
         }
     }
     

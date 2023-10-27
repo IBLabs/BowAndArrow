@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
                 didChange = true;
                 break;
         }
-        Debug.Log(CurrentState);
 
         if (didChange) stateChanged.Invoke(CurrentState);
     }
