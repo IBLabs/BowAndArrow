@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class HitCountHittable : MonoBehaviour
 {
@@ -19,7 +15,7 @@ public class HitCountHittable : MonoBehaviour
     {
         hitCount = baseHitCount;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (hitMask.Contains(other.attachedRigidbody.gameObject.layer))
@@ -32,11 +28,10 @@ public class HitCountHittable : MonoBehaviour
             {
                 onDeath.Invoke();
             }
-
             BAAIEnemy hitEnemy = other.attachedRigidbody.GetComponent<BAAIEnemy>();
             if (hitEnemy != null)
             {
-                hitEnemy.Die(false);
+                hitEnemy.gameObject.SetActive(false);
             }
         }
     }

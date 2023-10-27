@@ -90,7 +90,21 @@ public class BAAIWaveSpawner : MonoBehaviour
             }
         }
     }
-
+    public void DestroyEnemies()
+    {
+        // foreach (GameObject enemy in _spawnedEnemies)
+        // {
+        //     if (!enemy) continue;
+        //     
+        //     BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
+        //     if (curEnemy != null)
+        //     {
+        //         curEnemy.Die(false);
+        //     }
+        //
+        // }
+    }
+    
     [Serializable]
     public class EnemyConfiguration
     {

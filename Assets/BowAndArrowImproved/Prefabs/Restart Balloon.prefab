@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1097378230719020353}
   - component: {fileID: 5822599624601236251}
   - component: {fileID: 1085453075649856388}
-  - component: {fileID: 7108349680151100475}
   m_Layer: 11
   m_Name: Restart Balloon
   m_TagString: Balloon
@@ -185,15 +184,3 @@ MonoBehaviour:
   particleSystemPrefab: {fileID: 4598296024494745535, guid: 5ada37c67e4284c0f8ce2ed5ce15e3f0,
     type: 3}
   offset: {x: 0, y: 0, z: 0}
---- !u!114 &7108349680151100475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4101517610365167356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2786ba4f9409249b2a2208c8b676300c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
