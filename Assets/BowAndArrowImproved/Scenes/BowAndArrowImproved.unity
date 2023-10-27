@@ -2126,7 +2126,7 @@ PrefabInstance:
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: _onDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3211712499975738858, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
@@ -2171,7 +2171,7 @@ PrefabInstance:
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.693
+      value: 14.84
       objectReference: {fileID: 0}
     - target: {fileID: 8213571242728228566, guid: d509b6df7581645158eb20eb46bfc290,
         type: 3}
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
-  baseHitCount: 5
+  baseHitCount: 1
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -10359,8 +10359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2995c25d76750b44aa86bdfdd8d214b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balloonPrefab: {fileID: 3211712499975738858, guid: dc600714664b7b34b9832a3610aa5348,
+  startBalloonPrefab: {fileID: 3211712499975738858, guid: dc600714664b7b34b9832a3610aa5348,
     type: 3}
+  restartBalloonPrefab: {fileID: 0}
   startWave:
     m_PersistentCalls:
       m_Calls:
@@ -10376,6 +10377,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  resetGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1419570480
 Transform:
   m_ObjectHideFlags: 0

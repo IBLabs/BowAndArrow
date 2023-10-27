@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     
     public void Lose()
     {
-        ChangeState(State.Lose);
         waveDidEnd?.Invoke();
+        ChangeState(State.Lose);
     }
     
     public void StartWave()
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
                 didChange = true;
                 break;
         }
-        
+
         if (didChange) stateChanged.Invoke(CurrentState);
     }
 

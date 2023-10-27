@@ -1,30 +1,48 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class WaveStartHandler : MonoBehaviour
 {
-    [SerializeField] private Ballon balloonPrefab;
+    [SerializeField] private Ballon startBalloonPrefab;
+    [SerializeField] private Ballon restartBalloonPrefab;
     
     public UnityEvent startWave;
+    public UnityEvent resetGame;
+
+    private bool _isStartBalloon;
 
     public void OnGameManagerStateChanged(GameManager.State newState)
     {
         if (newState == GameManager.State.PreWave)
         {
-            ShowShotToStartObject();
+            _isStartBalloon = true;
+            ShowShotToStartObject(startBalloonPrefab);
+        } else if (newState == GameManager.State.Lose)
+        {
+            _isStartBalloon = false;
+            ShowShotToStartObject(restartBalloonPrefab);
         }
-    }
+    }   
 
-    public void ShowShotToStartObject()
+    public void ShowShotToStartObject(Ballon shotToStartPrefab)
     {
-        Ballon newBalloon = Instantiate(balloonPrefab, transform.position, Quaternion.identity);
+        Ballon newBalloon = Instantiate(shotToStartPrefab, transform.position, Quaternion.identity);
         newBalloon.isBalloonFrozen = true;
         newBalloon.onDeath.AddListener(OnShotToStartObjectPopped);
     }
 
     public void OnShotToStartObjectPopped(GameObject died)
     {
-        startWave?.Invoke();
+        if (_isStartBalloon)
+        {
+            startWave?.Invoke();
+        }
+        else
+        {
+            resetGame?.Invoke();
+        }
     }
+    
 }

@@ -50,6 +50,8 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        Die(0);
+        if (other.gameObject.CompareTag("Arrow")){
+            Die(0);
+        }
     }
 }

@@ -9,7 +9,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private GameObject healthSquare;
     
     [SerializeField] private HitCountHittable hittable;
-
+    [SerializeField] private int health;
+    
     private List<GameObject> squares = new();
 
     private void Start()
@@ -29,9 +30,10 @@ public class HealthBar : MonoBehaviour
 
     public void SetupHealthBar()
     {
+        hittable.SetCount(health);
         int numOfExistSquares = squares.Count;
         
-        for (int i = numOfExistSquares; i < hittable.health; i++)
+        for (int i = numOfExistSquares; i < health; i++)
         {
             GameObject newSquare = Instantiate(healthSquare, transform);
             squares.Add(newSquare);

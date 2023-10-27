@@ -8,34 +8,27 @@ using UnityEngine.Serialization;
 
 public class HitCountHittable : MonoBehaviour
 {
-    public int health;
     
-    private int _curHitCount;
+    [SerializeField] private int hitCount;
     [SerializeField] private LayerMask hitMask;
-    [SerializeField] private int baseHitCount;
+    
     public UnityEvent onDeath;
     public UnityEvent onHit;
 
-    private void Awake()
+    public void SetCount(int baseHitCount)
     {
-        ResetCount();
-    }
-
-    public void ResetCount()
-    {
-        _curHitCount = baseHitCount;
-        health = baseHitCount;
+        hitCount = baseHitCount;
     }
     
     private void OnTriggerEnter(Collider other)
     {
         if (hitMask.Contains(other.attachedRigidbody.gameObject.layer))
         {
-            _curHitCount--;
+            hitCount--;
             
             onHit.Invoke();
             
-            if (_curHitCount <= 0)
+            if (hitCount <= 0)
             {
                 onDeath.Invoke();
             }

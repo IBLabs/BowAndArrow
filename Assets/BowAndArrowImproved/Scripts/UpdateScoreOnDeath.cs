@@ -13,7 +13,7 @@ public class UpdateScoreOnDeath : MonoBehaviour
         }
     }
 
-    public void UpdateScoreboard()
+    public void UpdateScoreboard(GameObject arg0)
     {
         Scoreboard.IncreaseScore(1);
     }

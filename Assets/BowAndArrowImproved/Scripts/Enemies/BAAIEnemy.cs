@@ -18,7 +18,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     public Animator animator;
 
     public UnityEvent<GameObject> onDeath => _onDeath;
-
+    
     private IDamageable target;
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
 
@@ -29,15 +29,20 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         PlayWarCry();
     }
 
-    public void Die(bool playSound)
+    public void Die(bool deathByArrow)
     {
         gameObject.SetActive(false);
 
-        if (playSound)
+        if (deathByArrow)
         {
-            AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);    
+            AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
+            UpdateScoreOnDeath scriptComponent = gameObject.GetComponent<UpdateScoreOnDeath>();
+            if (scriptComponent != null)
+            {
+                onDeath.AddListener( scriptComponent.UpdateScoreboard);
+            }
         }
-
+        
         onDeath.Invoke(gameObject);
     }
 
@@ -48,7 +53,9 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        Die(true);
+        if (other.gameObject.CompareTag("Arrow")){
+            Die(true);
+        }
     }
 
     private void Awake()
