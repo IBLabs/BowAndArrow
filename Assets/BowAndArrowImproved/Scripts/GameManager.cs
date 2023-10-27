@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
-        waveDidEnd?.Invoke();
         ChangeState(State.Lose);
+        waveDidEnd?.Invoke();
     }
     
     public void StartWave()

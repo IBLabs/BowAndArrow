@@ -34,6 +34,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             waveFinished.Invoke();
         }
     }
+    
     public void OnGameManagerStateChanged(GameManager.State newState)
     {
         if (newState == GameManager.State.Lose)
@@ -93,6 +94,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             }
         }
     }
+    
     public void DestroyEnemies()
     {
         List<BAAIEnemy> enemiesToDestroy = new List<BAAIEnemy>();
@@ -111,11 +113,6 @@ public class BAAIWaveSpawner : MonoBehaviour
         foreach (BAAIEnemy enemyToDestroy in enemiesToDestroy)
         {
             enemyToDestroy.Die(false);
-        }
-        
-        foreach (GameObject enemy in _spawnedEnemies)
-        {
-            _spawnedEnemies.Remove(enemy);
         }
     }
     

@@ -19,7 +19,8 @@ public class WaveStartHandler : MonoBehaviour
         {
             _isStartBalloon = true;
             ShowShotToStartObject(startBalloonPrefab);
-        } else if (newState == GameManager.State.Lose)
+        } 
+        else if (newState == GameManager.State.Lose)
         {
             _isStartBalloon = false;
             ShowShotToStartObject(restartBalloonPrefab);
