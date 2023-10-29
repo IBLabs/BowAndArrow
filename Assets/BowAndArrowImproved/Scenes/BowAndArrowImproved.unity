@@ -321,7 +321,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_ConstantMin: 1
-    m_ConstantMax: 3
+    m_ConstantMax: 2
+  spawnIntervalDecreaseFactor: 0.15
   waveFinished:
     m_PersistentCalls:
       m_Calls:
@@ -2206,7 +2207,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

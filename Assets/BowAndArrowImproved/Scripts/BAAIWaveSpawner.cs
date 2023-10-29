@@ -12,7 +12,8 @@ public class BAAIWaveSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
-
+    [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
+    private int _prevSpawnLocationIndex = -1;
     public UnityEvent waveFinished;
 
     private int _currentWave = 1;
@@ -28,11 +29,23 @@ public class BAAIWaveSpawner : MonoBehaviour
 
         _enemiesToKill -= 1;
         
-        if (_enemiesToKill <= 0)
+        if (_enemiesToKill <= 0) EndWave();
+    }
+
+    private void EndWave()
+    {
+        if (spawnInterval.constantMin > 0.1f)
         {
-            _currentWave++;
-            waveFinished.Invoke();
+            spawnInterval.constantMin -= spawnIntervalDecreaseFactor;
         }
+            
+        if (spawnInterval.constantMax > 0.3f)
+        {
+            spawnInterval.constantMax -= spawnIntervalDecreaseFactor;
+        }
+
+        _currentWave++;
+        waveFinished.Invoke();
     }
 
     public void Generate()
@@ -67,7 +80,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             float waitTime = spawnInterval.Evaluate(Random.value);
             yield return new WaitForSeconds(waitTime);
 
-            Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
+            Transform spawnLocation = spawnLocations[GetSpawnLocation()];
             GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
 
             _spawnedEnemies.Add(newEnemy);
@@ -84,6 +97,18 @@ public class BAAIWaveSpawner : MonoBehaviour
                 navMeshComponent.SetTargetTransform(targetTransform);
             }
         }
+    }
+
+    private int GetSpawnLocation()
+    {
+        int newSpawnLocationIndex;
+        do
+        {
+            newSpawnLocationIndex = Random.Range(0, spawnLocations.Count);
+        } while (newSpawnLocationIndex == _prevSpawnLocationIndex);
+
+        _prevSpawnLocationIndex = newSpawnLocationIndex;
+        return newSpawnLocationIndex;
     }
 
     [Serializable]
