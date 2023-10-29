@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7717338036581850961}
   - component: {fileID: 4201972979043455145}
   - component: {fileID: 1417549546555777907}
-  - component: {fileID: 5619817672630175683}
   - component: {fileID: 2560688743166888971}
   - component: {fileID: 136107396372342603}
   - component: {fileID: 8901190839604841851}
@@ -178,20 +177,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5619817672630175683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f450535de00742bdbfb4da681b1160c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreboard: {fileID: 0}
-  scoreToIncrease: 1
 --- !u!114 &2560688743166888971
 MonoBehaviour:
   m_ObjectHideFlags: 0
