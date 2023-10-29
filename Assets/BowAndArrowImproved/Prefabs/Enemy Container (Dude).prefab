@@ -10,16 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 244758363132881465}
   - component: {fileID: 5179329415778061150}
+  - component: {fileID: 8901190839604841851}
+  - component: {fileID: 1417549546555777907}
+  - component: {fileID: 8051728620034893139}
+  - component: {fileID: 2560688743166888971}
   - component: {fileID: 6985741244156336626}
   - component: {fileID: 6068225554785357774}
-  - component: {fileID: 7717338036581850961}
   - component: {fileID: 4201972979043455145}
-  - component: {fileID: 1417549546555777907}
-  - component: {fileID: 5619817672630175683}
-  - component: {fileID: 2560688743166888971}
-  - component: {fileID: 136107396372342603}
-  - component: {fileID: 8901190839604841851}
-  - component: {fileID: 8051728620034893139}
   m_Layer: 10
   m_Name: Enemy Container (Dude)
   m_TagString: Enemy
@@ -66,111 +63,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6985741244156336626
-MonoBehaviour:
+--- !u!54 &8901190839604841851
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340ab586cfd0c429ea4f81292fe429aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4201972979043455145}
-        m_TargetAssemblyTypeName: BAAISpawnParticleSystemOnDeath, Assembly-CSharp
-        m_MethodName: SpawnParticleSystem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5619817672630175683}
-        m_TargetAssemblyTypeName: UpdateScoreOnDeath, Assembly-CSharp
-        m_MethodName: UpdateScoreboard
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2560688743166888971}
-        m_TargetAssemblyTypeName: SpawnObjectOnDeath, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  breakClips:
-  - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
-  - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
-  - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
-  attackRate: 1
-  attackDamage: 2
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  warCryClips:
-  - {fileID: 8300000, guid: 6f4421bbd2742f84a83610829465427b, type: 3}
-  - {fileID: 8300000, guid: 84329be3b3dcee347aa715c3a6ff7f40, type: 3}
---- !u!114 &6068225554785357774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244c765687970492fac6920cedacbb2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 5179329415778061150}
-  target: {fileID: 0}
---- !u!114 &7717338036581850961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226956f40ba1474d9282f1aaed363a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0, z: 0}
-  moveSpeed: 5
---- !u!114 &4201972979043455145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4dede956b69b4028b615cd638bfb22a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleSystemPrefab: {fileID: 5866775785455082453, guid: dc14c2af953644d43845b801600b990d,
-    type: 3}
-  offset: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1417549546555777907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +111,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   parabolaHeight: 2
   parabolaDuration: 1.05
---- !u!114 &5619817672630175683
+--- !u!114 &8051728620034893139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,10 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8340702076327022218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f450535de00742bdbfb4da681b1160c5, type: 3}
+  m_Script: {fileID: 11500000, guid: eccdce74c2027407db909a978ba21125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scoreboard: {fileID: 0}
+  animator: {fileID: 514792811435002549}
+  linkMover: {fileID: 1417549546555777907}
 --- !u!114 &2560688743166888971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,52 +173,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_ConstantMin: 1
     m_ConstantMax: 10
---- !u!114 &136107396372342603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9e3705508bb4059a857a3bd7ad1115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 2283468585697734339}
-  animationNames:
-  - Armature_run_1
-  - Armature_run_2
-  - Armature_run_3
-  - Armature_run_4
---- !u!54 &8901190839604841851
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &8051728620034893139
+--- !u!114 &6985741244156336626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,11 +182,78 @@ MonoBehaviour:
   m_GameObject: {fileID: 8340702076327022218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eccdce74c2027407db909a978ba21125, type: 3}
+  m_Script: {fileID: 11500000, guid: 340ab586cfd0c429ea4f81292fe429aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4201972979043455145}
+        m_TargetAssemblyTypeName: BAAISpawnParticleSystemOnDeath, Assembly-CSharp
+        m_MethodName: SpawnParticleSystem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2560688743166888971}
+        m_TargetAssemblyTypeName: SpawnObjectOnDeath, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  warCryClips:
+  - {fileID: 8300000, guid: 6f4421bbd2742f84a83610829465427b, type: 3}
+  - {fileID: 8300000, guid: 84329be3b3dcee347aa715c3a6ff7f40, type: 3}
+  breakClips:
+  - {fileID: 8300000, guid: f87d91a48d25344e18bb6d67bfff2133, type: 3}
+  - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
+  - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
+  attackRate: 1
+  attackDamage: 2
+  agent: {fileID: 5179329415778061150}
   animator: {fileID: 514792811435002549}
-  linkMover: {fileID: 1417549546555777907}
+  scoreValue: 1
+  weaponHitTag: Arrow
+--- !u!114 &6068225554785357774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340702076327022218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244c765687970492fac6920cedacbb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 5179329415778061150}
+  target: {fileID: 0}
+--- !u!114 &4201972979043455145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340702076327022218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dede956b69b4028b615cd638bfb22a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystemPrefab: {fileID: 5866775785455082453, guid: dc14c2af953644d43845b801600b990d,
+    type: 3}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1648323905111957906
 PrefabInstance:
   m_ObjectHideFlags: 0
