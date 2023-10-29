@@ -4,18 +4,14 @@ using UnityEngine.Events;
 
 public class HitCountHittable : MonoBehaviour
 {
+    public int health => hitCount;
     
     [SerializeField] private int hitCount;
     [SerializeField] private LayerMask hitMask;
     
     public UnityEvent onDeath;
     public UnityEvent onHit;
-
-    public void SetCount(int baseHitCount)
-    {
-        hitCount = baseHitCount;
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (hitMask.Contains(other.attachedRigidbody.gameObject.layer))

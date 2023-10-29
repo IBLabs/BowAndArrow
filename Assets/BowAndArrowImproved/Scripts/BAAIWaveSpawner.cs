@@ -18,7 +18,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
     private List<GameObject> _spawnedEnemies = new();
-    private bool _isLostGame;
+    private bool _didLoseGame;
 
     public void OnEnemyDeath(GameObject enemyGameObject)
     {
@@ -28,7 +28,7 @@ public class BAAIWaveSpawner : MonoBehaviour
         }
         
         _enemiesToKill -= 1;
-        if (_enemiesToKill <= 0 && !_isLostGame)
+        if (_enemiesToKill <= 0 && !_didLoseGame)
         {
             _currentWave++;
             waveFinished.Invoke();
@@ -39,7 +39,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     {
         if (newState == GameManager.State.Lose)
         {
-            _isLostGame = true;
+            _didLoseGame = true;
             DestroyEnemies();
         }
     }
@@ -97,22 +97,15 @@ public class BAAIWaveSpawner : MonoBehaviour
     
     public void DestroyEnemies()
     {
-        List<BAAIEnemy> enemiesToDestroy = new List<BAAIEnemy>();
-        
-        foreach (GameObject enemy in _spawnedEnemies)
+        for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)
         {
-            if (!enemy) continue;
-            
+            GameObject enemy = _spawnedEnemies[i];
+
             BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
             if (curEnemy != null)
             {
-                enemiesToDestroy.Add(curEnemy);
+                curEnemy.Die(false);
             }
-        }
-        
-        foreach (BAAIEnemy enemyToDestroy in enemiesToDestroy)
-        {
-            enemyToDestroy.Die(false);
         }
     }
     

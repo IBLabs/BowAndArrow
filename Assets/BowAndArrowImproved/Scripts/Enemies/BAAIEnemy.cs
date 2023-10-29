@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
@@ -21,6 +22,8 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     
     private IDamageable target;
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+    [SerializeField] private string weaponHitTag = "Arrow";
+
 
     [SerializeField] private List<AudioClip> warCryClips;
 
@@ -29,17 +32,17 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         PlayWarCry();
     }
 
-    public void Die(bool deathByArrow)
+    public void Die(bool killedByPlayer)
     {
         gameObject.SetActive(false);
 
-        if (deathByArrow)
+        if (killedByPlayer)
         {
             AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
-            UpdateScoreOnDeath scriptComponent = gameObject.GetComponent<UpdateScoreOnDeath>();
-            if (scriptComponent != null)
+            UpdateScoreOnDeath updateScoreOnDeathScript = gameObject.GetComponent<UpdateScoreOnDeath>();
+            if (updateScoreOnDeathScript != null)
             {
-                onDeath.AddListener( scriptComponent.UpdateScoreboard);
+                updateScoreOnDeathScript.isUpdateValid = true;
             }
         }
         
@@ -53,7 +56,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Arrow")){
+        if (other.gameObject.CompareTag(weaponHitTag)){
             Die(true);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Ballon : MonoBehaviour, BAAIIDeathable
@@ -17,6 +18,7 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private float buoyancyForce = 10f;
     [SerializeField] private List<AudioClip> popClips;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private string weaponHitTag = "Arrow";
 
     [SerializeField] private UnityEvent<GameObject> _onDeath;
     public UnityEvent<GameObject> onDeath => _onDeath;
@@ -50,7 +52,7 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Arrow")){
+        if (other.gameObject.CompareTag(weaponHitTag)){
             Die(0);
         }
     }

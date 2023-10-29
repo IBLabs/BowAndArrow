@@ -843,57 +843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fbf7bb59c13e244841e401d029639f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDidReset:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 158145453}
-        m_TargetAssemblyTypeName: BAAIWaveSpawner, Assembly-CSharp
-        m_MethodName: ResetWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1023150002}
-        m_TargetAssemblyTypeName: BallonsSpawner, Assembly-CSharp
-        m_MethodName: ResetWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2051524504}
-        m_TargetAssemblyTypeName: Scoreboard, Assembly-CSharp
-        m_MethodName: ResetScore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 995713902}
-        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
-        m_MethodName: SetupHealthBar
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   waveDidStart:
     m_PersistentCalls:
       m_Calls:
@@ -2325,7 +2274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f632665e1fa646e5b6a988f9c70974c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCount: 0
+  hitCount: 2
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -8424,7 +8373,6 @@ MonoBehaviour:
   healthSquare: {fileID: 6643052579985095135, guid: 896067891658b44b19bfad188dfc3327,
     type: 3}
   hittable: {fileID: 703819253}
-  health: 1
 --- !u!114 &995713903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16561,18 +16509,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1023150003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2051524504 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -7181016879321015756, guid: e7cca4fd7ea0bcf40b77357164d48421,
-    type: 3}
-  m_PrefabInstance: {fileID: 280958361}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b871f3da1aab25b41b6010f6809ae3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2059577422
 GameObject:
   m_ObjectHideFlags: 0

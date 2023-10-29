@@ -3,18 +3,24 @@ using UnityEngine;
 
 public class UpdateScoreOnDeath : MonoBehaviour
 {
-    public Scoreboard Scoreboard;
+    public Scoreboard scoreboard;
+    [SerializeField] private int scoreToIncrease;
+
+    public bool isUpdateValid = false;
+    
     public void Start()
     {
-        Scoreboard = FindObjectOfType<Scoreboard>();
-        if (Scoreboard == null)
+        scoreboard = FindObjectOfType<Scoreboard>();
+        if (scoreboard == null)
         {
             throw new Exception("Couldn't find Scoreboard");
         }
     }
 
-    public void UpdateScoreboard(GameObject arg0)
+    public void UpdateScoreboard()
     {
-        Scoreboard.IncreaseScore(1);
+        if (!isUpdateValid) return;
+        
+        scoreboard.IncreaseScore(scoreToIncrease);
     }
 }
