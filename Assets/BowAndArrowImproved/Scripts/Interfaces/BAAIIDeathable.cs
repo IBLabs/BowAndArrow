@@ -3,5 +3,5 @@ using UnityEngine.Events;
 
 public interface BAAIIDeathable
 {
-    public UnityEvent<GameObject> onDeath { get; }
+    public UnityEvent<GameObject, bool> onDeath { get; }
 }

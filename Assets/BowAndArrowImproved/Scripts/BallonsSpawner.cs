@@ -28,7 +28,7 @@ public class BallonsSpawner : MonoBehaviour
             Ballon targetBalloon = balloonGameObject.GetComponent<Ballon>();
             if (targetBalloon != null)
             {
-                targetBalloon.Die(Random.value);
+                targetBalloon.Die(Random.value, false);
             }
         }
     }
@@ -59,7 +59,7 @@ public class BallonsSpawner : MonoBehaviour
         }
     }
 
-    private void OnBalloonPop(GameObject destroyedBalloon)
+    private void OnBalloonPop(GameObject destroyedBalloon, bool killedByPlayer)
     {
         if (!_spawnedBallons.Remove(destroyedBalloon))
         {

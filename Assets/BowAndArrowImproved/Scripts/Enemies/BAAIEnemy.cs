@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 {
-    [SerializeField] private UnityEvent<GameObject> _onDeath;
+    [SerializeField] private UnityEvent<GameObject, bool> _onDeath;
     [SerializeField] private List<AudioClip> breakClips;
 
     [Header("Attack Settings")]
@@ -18,7 +18,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     public NavMeshAgent agent;
     public Animator animator;
 
-    public UnityEvent<GameObject> onDeath => _onDeath;
+    public UnityEvent<GameObject, bool> onDeath => _onDeath;
     
     private IDamageable target;
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
@@ -39,14 +39,9 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         if (killedByPlayer)
         {
             AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
-            UpdateScoreOnDeath updateScoreOnDeathScript = gameObject.GetComponent<UpdateScoreOnDeath>();
-            if (updateScoreOnDeathScript != null)
-            {
-                updateScoreOnDeathScript.isUpdateValid = true;
-            }
         }
         
-        onDeath.Invoke(gameObject);
+        onDeath.Invoke(gameObject, killedByPlayer);
     }
 
     private void PlayWarCry()

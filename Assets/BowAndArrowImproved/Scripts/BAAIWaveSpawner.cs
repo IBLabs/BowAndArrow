@@ -20,15 +20,19 @@ public class BAAIWaveSpawner : MonoBehaviour
     private List<GameObject> _spawnedEnemies = new();
     private bool _didLoseGame;
 
-    public void OnEnemyDeath(GameObject enemyGameObject)
+    public void OnEnemyDeath(GameObject enemyGameObject, bool killedByPlayer)
     {
         if (!_spawnedEnemies.Remove(enemyGameObject))
         {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
         }
-        
-        _enemiesToKill -= 1;
-        if (_enemiesToKill <= 0 && !_didLoseGame)
+
+        if (killedByPlayer)
+        {
+            _enemiesToKill -= 1;
+        }
+
+        if (_enemiesToKill <= 0)
         {
             _currentWave++;
             waveFinished.Invoke();

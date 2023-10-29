@@ -20,8 +20,8 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private Rigidbody rb;
     [SerializeField] private string weaponHitTag = "Arrow";
 
-    [SerializeField] private UnityEvent<GameObject> _onDeath;
-    public UnityEvent<GameObject> onDeath => _onDeath;
+    [SerializeField] private UnityEvent<GameObject, bool> _onDeath;
+    public UnityEvent<GameObject, bool> onDeath => _onDeath;
 
     void FixedUpdate()
     {
@@ -31,12 +31,12 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         rb.AddForce(buoyancyDirection, ForceMode.Force);
     }
 
-    public void Die(float delay)
+    public void Die(float delay, bool killedByPlayer)
     {
-        StartCoroutine(DieCoroutine(delay));
+        StartCoroutine(DieCoroutine(delay, killedByPlayer));
     }
 
-    private IEnumerator DieCoroutine(float delay)
+    private IEnumerator DieCoroutine(float delay, bool killedByPlayer)
     {
         if (delay > 0)
         {
@@ -45,15 +45,14 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         
         gameObject.SetActive(false);
         AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
-        _onDeath?.Invoke(this.gameObject);
+        _onDeath?.Invoke(this.gameObject, killedByPlayer);
         
         Destroy(gameObject, 1f);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag(weaponHitTag)){
-            Die(0);
-        }
+        bool killedByPlayer = other.gameObject.CompareTag(weaponHitTag); 
+        Die(0, killedByPlayer);
     }
 }

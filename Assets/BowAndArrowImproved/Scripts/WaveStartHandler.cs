@@ -22,7 +22,7 @@ public class WaveStartHandler : MonoBehaviour
         newBalloon.onDeath.AddListener(OnShotToStartObjectPopped);
     }
 
-    public void OnShotToStartObjectPopped(GameObject died)
+    public void OnShotToStartObjectPopped(GameObject died, bool killedByPlayer)
     {
         startWave?.Invoke();
     }
