@@ -20,8 +20,10 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private Rigidbody rb;
     [SerializeField] private string weaponHitTag = "Arrow";
 
-    [SerializeField] private UnityEvent<GameObject, bool> _onDeath;
-    public UnityEvent<GameObject, bool> onDeath => _onDeath;
+    [SerializeField] private int scoreValue = 0;
+
+    [SerializeField] private UnityEvent<GameObject, int, bool> _onDeath;
+    public UnityEvent<GameObject, int, bool> onDeath => _onDeath;
 
     void FixedUpdate()
     {
@@ -45,7 +47,7 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         
         gameObject.SetActive(false);
         AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
-        _onDeath?.Invoke(this.gameObject, killedByPlayer);
+        _onDeath?.Invoke(this.gameObject, scoreValue, killedByPlayer);
         
         Destroy(gameObject, 1f);
     }

@@ -3,25 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
-    [SerializeField] private Scoreboard scoreboard;
-
+    public UnityEvent<int> updateScoreboard;
+    public UnityEvent waveFinished;
+    
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     
-    public UnityEvent waveFinished;
-
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
+    private bool _didLoseGame;
+
+
     private List<GameObject> _spawnedEnemies = new();
 
-    public void OnEnemyDeath(GameObject enemyGameObject, bool killedByPlayer)
+    public void OnEnemyDeath(GameObject enemyGameObject, int scoreValue,  bool killedByPlayer)
     {
         if (!_spawnedEnemies.Remove(enemyGameObject))
         {
@@ -30,10 +33,13 @@ public class BAAIWaveSpawner : MonoBehaviour
 
         if (killedByPlayer)
         {
-            _enemiesToKill -= 1;
+            updateScoreboard?.Invoke(scoreValue);
         }
+        
+        _enemiesToKill -= 1;
 
-        if (_enemiesToKill <= 0)
+
+        if (_enemiesToKill <= 0 && !_didLoseGame)
         {
             _currentWave++;
             waveFinished.Invoke();
@@ -44,6 +50,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     {
         if (newState == GameManager.State.Lose)
         {
+            _didLoseGame = true;
             DestroyEnemies();
         }
     }
@@ -85,25 +92,14 @@ public class BAAIWaveSpawner : MonoBehaviour
 
             _spawnedEnemies.Add(newEnemy);
 
-            AddListeners(newEnemy);
-
-            BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>();
-            if (navMeshComponent != null)
+            if (newEnemy.TryGetComponent(out BAAIIDeathable deathable))
+            {
+                deathable.onDeath.AddListener(OnEnemyDeath);
+            }
+            
+            if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
             {
                 navMeshComponent.SetTargetTransform(targetTransform);
-            }
-        }
-    }
-
-    private void AddListeners(GameObject newEnemy)
-    {       
-        if (newEnemy.TryGetComponent(out BAAIIDeathable deathable))
-        {
-            deathable.onDeath.AddListener(OnEnemyDeath);
-            
-            if (scoreboard)
-            {
-                deathable.onDeath.AddListener(scoreboard.IncreaseScore);
             }
         }
     }

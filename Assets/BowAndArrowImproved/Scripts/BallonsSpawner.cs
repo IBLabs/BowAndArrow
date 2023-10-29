@@ -59,7 +59,7 @@ public class BallonsSpawner : MonoBehaviour
         }
     }
 
-    private void OnBalloonPop(GameObject destroyedBalloon, bool killedByPlayer)
+    private void OnBalloonPop(GameObject destroyedBalloon, int scoreValue, bool killedByPlayer)
     {
         if (!_spawnedBallons.Remove(destroyedBalloon))
         {

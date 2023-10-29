@@ -7,15 +7,11 @@ public class Scoreboard : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     private int _score = 0;
     
-    public void IncreaseScore(GameObject enemy, bool isIncreaseValid)
+    public void IncreaseScore(int scoreValue)
     {
-        if (!isIncreaseValid) return;
-        
-        if (enemy.TryGetComponent(out BAAIEnemy hitEnemy))
-        {
-            _score += hitEnemy.scoreValue;
-            scoreText.text = "Score\n" + _score;
-        }
+        _score += scoreValue;
+        scoreText.text = "Score\n" + _score;
+
     }
     
     public void ResetScore()
