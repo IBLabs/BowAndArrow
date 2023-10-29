@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
-    public UnityEvent<int> updateScoreboard;
+    public UnityEvent<int> enemyDidDie;
     public UnityEvent waveFinished;
 
     [SerializeField] private int enemyToken = 10;
@@ -32,7 +32,7 @@ public class BAAIWaveSpawner : MonoBehaviour
 
         if (killedByPlayer)
         {
-            updateScoreboard?.Invoke(scoreValue);
+            enemyDidDie?.Invoke(scoreValue);
         }
 
         _enemiesToKill -= 1;
