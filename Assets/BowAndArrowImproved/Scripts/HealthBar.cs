@@ -9,8 +9,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private GameObject healthSquare;
     
     [SerializeField] private HitCountHittable hittable;
-
-    private List<GameObject> squares = new();
+    
+    private List<GameObject> _squares = new();
 
     private void Start()
     {
@@ -19,11 +19,11 @@ public class HealthBar : MonoBehaviour
 
     public void OnTookHit()
     {
-        if (squares.Count <= 0) return;
+        if (_squares.Count <= 0) return;
         
-        GameObject lastSquare = squares[^1];
+        GameObject lastSquare = _squares[^1];
 
-        squares.Remove(lastSquare);
+        _squares.Remove(lastSquare);
         Destroy(lastSquare);
     }
 
@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
         for (int i = 0; i < hittable.health; i++)
         {
             GameObject newSquare = Instantiate(healthSquare, transform);
-            squares.Add(newSquare);
+            _squares.Add(newSquare);
         }
     }
 }
