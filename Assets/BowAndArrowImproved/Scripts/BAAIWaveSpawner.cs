@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
@@ -16,11 +15,12 @@ public class BAAIWaveSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
+    [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
 
+    private int _prevSpawnLocationIndex = -1;
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
     private bool _didLoseGame;
-
     private List<GameObject> _spawnedEnemies = new();
 
     private void OnEnemyDeath(GameObject enemyGameObject, int scoreValue, bool killedByPlayer)
@@ -37,12 +37,27 @@ public class BAAIWaveSpawner : MonoBehaviour
 
         _enemiesToKill -= 1;
 
-
         if (_enemiesToKill <= 0 && !_didLoseGame)
         {
-            _currentWave++;
-            waveFinished.Invoke();
+            EndWave();
         }
+    }
+
+    private void EndWave()
+    {
+        if (spawnInterval.constantMin > 0.1f)
+        {
+            spawnInterval.constantMin -= spawnIntervalDecreaseFactor;
+        }
+
+        if (spawnInterval.constantMax > 0.3f)
+        {
+            spawnInterval.constantMax -= spawnIntervalDecreaseFactor;
+        }
+
+        _currentWave++;
+
+        waveFinished.Invoke();
     }
 
     public void OnGameManagerStateChanged(GameManager.State newState)
@@ -86,7 +101,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             float waitTime = spawnInterval.Evaluate(Random.value);
             yield return new WaitForSeconds(waitTime);
 
-            Transform spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];
+            Transform spawnLocation = spawnLocations[GetSpawnLocation()];
             GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
 
             _spawnedEnemies.Add(newEnemy);
@@ -101,6 +116,20 @@ public class BAAIWaveSpawner : MonoBehaviour
                 navMeshComponent.SetTargetTransform(targetTransform);
             }
         }
+    }
+
+    private int GetSpawnLocation()
+    {
+        int newSpawnLocationIndex;
+        
+        do
+        {
+            newSpawnLocationIndex = Random.Range(0, spawnLocations.Count);
+        } while (newSpawnLocationIndex == _prevSpawnLocationIndex);
+
+        _prevSpawnLocationIndex = newSpawnLocationIndex;
+
+        return newSpawnLocationIndex;
     }
 
     private void DestroyEnemies()

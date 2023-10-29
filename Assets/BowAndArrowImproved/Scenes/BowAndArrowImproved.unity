@@ -310,21 +310,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  waveFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 306818893}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: EndWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   enemyToken: 2
   enemies:
   - enemyPrefab: {fileID: 8340702076327022218, guid: fd8e8b05cd8e240f59e472f118dc7178,
@@ -351,7 +336,23 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_ConstantMin: 1
-    m_ConstantMax: 3
+    m_ConstantMax: 2
+  spawnIntervalDecreaseFactor: 0.15
+  waveFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306818893}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: EndWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &158145454
 Transform:
   m_ObjectHideFlags: 0
@@ -1161,7 +1162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353889841}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,7 +1193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361372212}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1257,7 +1258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478660447}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2115,7 +2116,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3493,7 +3494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 988898035}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5305,7 +5306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326977820}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5336,7 +5337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342218549}
   m_Layer: 0
-  m_Name: --------------------
+  m_Name: '--------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
