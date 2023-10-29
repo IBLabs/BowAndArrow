@@ -7,7 +7,6 @@ public class GameRestartHandler : MonoBehaviour
     
     public void OnGameManagerStateChanged(GameManager.State newState)
     {
-        Debug.Log(newState);
         if (newState == GameManager.State.Lose)
         {
             ShowShotToStartObject();
