@@ -5,8 +5,6 @@ public class UpdateScoreOnDeath : MonoBehaviour
 {
     public Scoreboard scoreboard;
     [SerializeField] private int scoreToIncrease;
-
-    public bool isUpdateValid = false;
     
     public void Start()
     {
@@ -17,10 +15,10 @@ public class UpdateScoreOnDeath : MonoBehaviour
         }
     }
 
-    public void UpdateScoreboard()
+    public void UpdateScoreboard(bool isUpdateValid)
     {
-        if (!isUpdateValid) return;
-        
-        scoreboard.IncreaseScore(scoreToIncrease);
+        // if (!isUpdateValid) return;
+        //
+        // scoreboard.IncreaseScore(scoreToIncrease);
     }
 }
