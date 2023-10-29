@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Ballon : MonoBehaviour, BAAIIDeathable
@@ -17,9 +18,12 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private float buoyancyForce = 10f;
     [SerializeField] private List<AudioClip> popClips;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private string weaponHitTag = "Arrow";
 
-    [SerializeField] private UnityEvent<GameObject> _onDeath;
-    public UnityEvent<GameObject> onDeath => _onDeath;
+    [SerializeField] private int scoreValue = 0;
+
+    [SerializeField] private UnityEvent<GameObject, int, bool> _onDeath;
+    public UnityEvent<GameObject, int, bool> onDeath => _onDeath;
 
     void FixedUpdate()
     {
@@ -29,12 +33,12 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         rb.AddForce(buoyancyDirection, ForceMode.Force);
     }
 
-    public void Die(float delay)
+    public void Die(float delay, bool killedByPlayer)
     {
-        StartCoroutine(DieCoroutine(delay));
+        StartCoroutine(DieCoroutine(delay, killedByPlayer));
     }
 
-    private IEnumerator DieCoroutine(float delay)
+    private IEnumerator DieCoroutine(float delay, bool killedByPlayer)
     {
         if (delay > 0)
         {
@@ -43,13 +47,14 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
         
         gameObject.SetActive(false);
         AudioSource.PlayClipAtPoint(popClips[Random.Range(0, popClips.Count)], transform.position);
-        _onDeath?.Invoke(this.gameObject);
+        _onDeath?.Invoke(this.gameObject, scoreValue, killedByPlayer);
         
         Destroy(gameObject, 1f);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        Die(0);
+        bool killedByPlayer = other.gameObject.CompareTag(weaponHitTag); 
+        Die(0, killedByPlayer);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +8,7 @@ public class GameManager : MonoBehaviour
     
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
-    
+
     public UnityEvent<State> stateChanged;
 
     private void Awake()
@@ -29,12 +28,18 @@ public class GameManager : MonoBehaviour
         stateChanged.Invoke(CurrentState);
     }
 
+    public void Lose()
+    {
+        ChangeState(State.Lose);
+        waveDidEnd?.Invoke();
+    }
+    
     public void StartWave()
     {
         ChangeState(State.Wave);
         waveDidStart?.Invoke();
     }
-    
+
     public void EndWave()
     {
         ChangeState(State.PreWave);
@@ -54,12 +59,18 @@ public class GameManager : MonoBehaviour
                 break;
             
             case State.Wave:
+                if (newState != State.PreWave && newState != State.Lose) break;
+                CurrentState = newState;
+                didChange = true;
+                break;
+            
+            case State.Lose:
                 if (newState != State.PreWave) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
         }
-        
+
         if (didChange) stateChanged.Invoke(CurrentState);
     }
 
