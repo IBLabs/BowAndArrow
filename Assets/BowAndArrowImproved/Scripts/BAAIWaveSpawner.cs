@@ -10,21 +10,20 @@ public class BAAIWaveSpawner : MonoBehaviour
 {
     public UnityEvent<int> updateScoreboard;
     public UnityEvent waveFinished;
-    
+
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
-    
+
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
     private bool _didLoseGame;
 
-
     private List<GameObject> _spawnedEnemies = new();
 
-    public void OnEnemyDeath(GameObject enemyGameObject, int scoreValue,  bool killedByPlayer)
+    private void OnEnemyDeath(GameObject enemyGameObject, int scoreValue, bool killedByPlayer)
     {
         if (!_spawnedEnemies.Remove(enemyGameObject))
         {
@@ -35,7 +34,7 @@ public class BAAIWaveSpawner : MonoBehaviour
         {
             updateScoreboard?.Invoke(scoreValue);
         }
-        
+
         _enemiesToKill -= 1;
 
 
@@ -45,7 +44,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             waveFinished.Invoke();
         }
     }
-    
+
     public void OnGameManagerStateChanged(GameManager.State newState)
     {
         if (newState == GameManager.State.Lose)
@@ -79,7 +78,7 @@ public class BAAIWaveSpawner : MonoBehaviour
 
         return generatedEnemies;
     }
-    
+
     private IEnumerator SpawnEnemiesCoroutine(List<GameObject> enemiesToSpawn)
     {
         foreach (GameObject enemyToSpawn in enemiesToSpawn)
@@ -96,7 +95,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             {
                 deathable.onDeath.AddListener(OnEnemyDeath);
             }
-            
+
             if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
             {
                 navMeshComponent.SetTargetTransform(targetTransform);
@@ -104,20 +103,17 @@ public class BAAIWaveSpawner : MonoBehaviour
         }
     }
 
-    public void DestroyEnemies()
+    private void DestroyEnemies()
     {
         for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)
         {
-            GameObject enemy = _spawnedEnemies[i];
-
-            BAAIEnemy curEnemy = enemy.GetComponent<BAAIEnemy>();
-            if (curEnemy != null)
+            if (_spawnedEnemies[i].TryGetComponent(out BAAIEnemy curEnemy))
             {
                 curEnemy.Die(false);
             }
         }
     }
-    
+
     [Serializable]
     public class EnemyConfiguration
     {

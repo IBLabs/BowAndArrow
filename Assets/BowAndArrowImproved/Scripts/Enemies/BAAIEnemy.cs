@@ -8,28 +8,44 @@ using Random = UnityEngine.Random;
 public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 {
     [SerializeField] private UnityEvent<GameObject, int, bool> _onDeath;
+    public UnityEvent<GameObject, int, bool> onDeath => _onDeath;
+    
+    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+    
+    [SerializeField] private List<AudioClip> warCryClips;
     [SerializeField] private List<AudioClip> breakClips;
 
     [Header("Attack Settings")]
-    public float attackRate = 1f;
-    public float attackDamage = 10f;
+    [SerializeField] private float attackRate = 1f;
+    [SerializeField] private float attackDamage = 10f;
 
     [Header("NavMesh Settings")]
-    public NavMeshAgent agent;
-    public Animator animator;
-
-    public UnityEvent<GameObject, int, bool> onDeath => _onDeath;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator animator;
     
-    private IDamageable target;
-    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+    [SerializeField] private int scoreValue = 1;
     [SerializeField] private string weaponHitTag = "Arrow";
 
-    public int scoreValue = 1;
-    [SerializeField] private List<AudioClip> warCryClips;
+    private IDamageable _target;
+
+    private void Awake()
+    {
+        if (agent == null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+    }
 
     private void OnEnable()
     {
         PlayWarCry();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag(weaponHitTag)){
+            Die(true);
+        }
     }
 
     public void Die(bool killedByPlayer)
@@ -49,24 +65,11 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         AudioSource.PlayClipAtPoint(warCryClips[Random.Range(0, warCryClips.Count)], transform.position);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag(weaponHitTag)){
-            Die(true);
-        }
-    }
-
-    private void Awake()
-    {
-        if (agent == null)
-        {
-            agent = GetComponent<NavMeshAgent>();
-        }
-    }
+    #region Attack
 
     public void StartAttacking(IDamageable attackTarget)
     {
-        target = attackTarget;
+        _target = attackTarget;
         agent.isStopped = true;
 
         if (animator != null)
@@ -80,15 +83,17 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     public void StopAttacking()
     {
         CancelInvoke(nameof(Attack));
-        target = null;
+        _target = null;
         agent.isStopped = false;
     }
 
     private void Attack()
     {
-        if (target != null)
+        if (_target != null)
         {
-            target.TakeDamage(attackDamage);
+            _target.TakeDamage(attackDamage);
         }
     }
+
+    #endregion
 }

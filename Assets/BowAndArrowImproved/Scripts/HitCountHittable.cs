@@ -24,13 +24,10 @@ public class HitCountHittable : MonoBehaviour
             {
                 onDeath?.Invoke();
             }
-            else
+            
+            if (other.attachedRigidbody.TryGetComponent(out BAAIEnemy hitEnemy))
             {
-                BAAIEnemy hitEnemy = other.attachedRigidbody.GetComponent<BAAIEnemy>();
-                if (hitEnemy != null)
-                {
-                    hitEnemy.Die(false);
-                }
+                hitEnemy.Die(false);
             }
         }
     }
