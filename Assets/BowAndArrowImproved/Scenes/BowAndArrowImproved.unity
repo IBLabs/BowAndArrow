@@ -912,6 +912,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 732230268}
+        m_TargetAssemblyTypeName: GameRestartHandler, Assembly-CSharp
+        m_MethodName: OnGameManagerStateChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &313894504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2411,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 158145454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &732230266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732230267}
+  - component: {fileID: 732230268}
+  m_Layer: 0
+  m_Name: Game Restart Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732230267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732230266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.04, y: 4.15, z: 16.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732230268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732230266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72ccb17968bcef4b99e73c65c51255f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartBalloonPrefab: {fileID: 5822599624601236251, guid: 2a9a517e2e8504945b493ad5e6bf3b3b,
+    type: 3}
 --- !u!1 &732896401
 GameObject:
   m_ObjectHideFlags: 0
@@ -10174,29 +10232,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startBalloonPrefab: {fileID: 3211712499975738858, guid: dc600714664b7b34b9832a3610aa5348,
     type: 3}
-  restartBalloonPrefab: {fileID: 5822599624601236251, guid: 2a9a517e2e8504945b493ad5e6bf3b3b,
-    type: 3}
   startWave:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 306818893}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  resetGame:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 306818893}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -65736,6 +65777,7 @@ SceneRoots:
   - {fileID: 1640948219}
   - {fileID: 361372212}
   - {fileID: 306818892}
+  - {fileID: 732230267}
   - {fileID: 1419570480}
   - {fileID: 988898035}
   - {fileID: 280958361}
