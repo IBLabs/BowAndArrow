@@ -7,18 +7,19 @@ using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
+    [SerializeField] private Scoreboard scoreboard;
+
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
     [SerializeField] private List<Transform> spawnLocations;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
-
+    
     public UnityEvent waveFinished;
 
     private int _currentWave = 1;
     private int _enemiesToKill = 0;
     private List<GameObject> _spawnedEnemies = new();
-    private bool _didLoseGame;
 
     public void OnEnemyDeath(GameObject enemyGameObject, bool killedByPlayer)
     {
@@ -43,7 +44,6 @@ public class BAAIWaveSpawner : MonoBehaviour
     {
         if (newState == GameManager.State.Lose)
         {
-            _didLoseGame = true;
             DestroyEnemies();
         }
     }
@@ -85,11 +85,7 @@ public class BAAIWaveSpawner : MonoBehaviour
 
             _spawnedEnemies.Add(newEnemy);
 
-            BAAIIDeathable deathable = newEnemy.GetComponent<BAAIIDeathable>();
-            if (deathable != null)
-            {
-                deathable.onDeath.AddListener(OnEnemyDeath);
-            }
+            AddListeners(newEnemy);
 
             BAAIINavMeshAgentHolder navMeshComponent = newEnemy.GetComponent<BAAIINavMeshAgentHolder>();
             if (navMeshComponent != null)
@@ -98,7 +94,20 @@ public class BAAIWaveSpawner : MonoBehaviour
             }
         }
     }
-    
+
+    private void AddListeners(GameObject newEnemy)
+    {       
+        if (newEnemy.TryGetComponent(out BAAIIDeathable deathable))
+        {
+            deathable.onDeath.AddListener(OnEnemyDeath);
+            
+            if (scoreboard)
+            {
+                deathable.onDeath.AddListener(scoreboard.IncreaseScore);
+            }
+        }
+    }
+
     public void DestroyEnemies()
     {
         for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)

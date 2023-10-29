@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 {
-    [SerializeField] private UnityEvent<GameObject, bool> _onDeath;
+    public UnityEvent<GameObject, bool> _onDeath;
     [SerializeField] private List<AudioClip> breakClips;
 
     [Header("Attack Settings")]
@@ -24,7 +24,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
     [SerializeField] private string weaponHitTag = "Arrow";
 
-
+    public int scoreValue = 1;
     [SerializeField] private List<AudioClip> warCryClips;
 
     private void OnEnable()

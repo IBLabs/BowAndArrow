@@ -10,7 +10,7 @@ public class SpawnObjectOnDeath : MonoBehaviour
     [SerializeField] private ParticleSystem.MinMaxCurve explosionPower;
     [SerializeField] private ParticleSystem.MinMaxCurve spinPower;
 
-    public void OnDeath(GameObject diedObject)
+    public void OnDeath(GameObject diedObject, bool killedByPlayer)
     {
         GameObject deathObject = Instantiate(spawnedObject, transform.position, Quaternion.LookRotation(transform.forward));
 
