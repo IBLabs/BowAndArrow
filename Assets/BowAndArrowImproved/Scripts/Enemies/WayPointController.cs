@@ -12,8 +12,7 @@ public class WayPointController : MonoBehaviour
     {
         if (!other.gameObject.CompareTag(enemyTag) || wayPoints.Length == 0) return;
 
-        NavMeshAgent agent = other.gameObject.GetComponentInParent<NavMeshAgent>();
-        if (agent != null)
+        if (other.attachedRigidbody.TryGetComponent(out NavMeshAgent agent))
         {
             Transform newWayPoint = wayPoints[Random.Range(0, wayPoints.Length)];
             agent.SetDestination(newWayPoint.position);
