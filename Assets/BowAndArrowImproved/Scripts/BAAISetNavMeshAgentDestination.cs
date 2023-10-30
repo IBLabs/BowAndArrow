@@ -7,8 +7,13 @@ public class BAAISetNavMeshAgentDestination : MonoBehaviour, BAAIINavMeshAgentHo
 
     [HideInInspector] public Transform target;
 
+    void Start()
+    {
+        agent.destination = target.position;
+    }
+
     public void SetTargetTransform(Transform target)
     {
-        agent.SetDestination(this.target.position);
+        this.target = target;
     }
 }
