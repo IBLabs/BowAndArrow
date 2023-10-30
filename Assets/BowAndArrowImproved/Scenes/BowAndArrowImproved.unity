@@ -2517,7 +2517,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2638,7 +2638,9 @@ MonoBehaviour:
   wayPoints:
   - {fileID: 1144277686}
   - {fileID: 1310423458}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!65 &718967885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4743,7 +4745,9 @@ MonoBehaviour:
   wayPoints:
   - {fileID: 1310423458}
   - {fileID: 1773325720}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1146394903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829983748520743115, guid: 312df5f32d09443cabfb97e0759aa146,
@@ -4949,74 +4953,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249474449}
   m_Mesh: {fileID: 2534964839176971238, guid: 26a9bf496cab8432dbf33a5b6d6a2f4e, type: 3}
---- !u!1 &1263225285
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1263225286}
-  - component: {fileID: 1263225288}
-  - component: {fileID: 1263225287}
-  m_Layer: 0
-  m_Name: WayPoint 4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1263225286
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263225285}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.696, y: 1.803, z: -18.074}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1428170392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1263225287
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263225285}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1263225288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263225285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c7da7aadc144109661086493b19ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wayPoints: []
-  enemyTag: Enemy
 --- !u!1 &1288525165
 GameObject:
   m_ObjectHideFlags: 0
@@ -5839,7 +5775,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wayPoints:
   - {fileID: 703819255}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1326977819
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,7 +5919,9 @@ MonoBehaviour:
   wayPoints:
   - {fileID: 1144277686}
   - {fileID: 1310423458}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!65 &1348004046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6148,7 +6088,6 @@ Transform:
   - {fileID: 1144277686}
   - {fileID: 1773325720}
   - {fileID: 1310423458}
-  - {fileID: 1263225286}
   m_Father: {fileID: 543450653108165717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450991504
@@ -6160,8 +6099,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450991505}
-  - component: {fileID: 1450991507}
   - component: {fileID: 1450991506}
+  - component: {fileID: 1450991507}
   m_Layer: 0
   m_Name: Spawn Location 3
   m_TagString: Untagged
@@ -6220,7 +6159,9 @@ MonoBehaviour:
   wayPoints:
   - {fileID: 1144277686}
   - {fileID: 1310423458}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1467284052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4146913714594380368, guid: 80c2c54c731534196802a472e07d50fa,
@@ -7110,7 +7051,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wayPoints:
   - {fileID: 703819255}
-  enemyTag: Enemy
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1806620851
 GameObject:
   m_ObjectHideFlags: 0
