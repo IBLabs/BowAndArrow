@@ -12,7 +12,8 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy") 
             || other.gameObject.CompareTag("Balloon")
-            || other.gameObject.CompareTag("Portal"))
+            || other.gameObject.CompareTag("Portal")
+            || other.gameObject.CompareTag("Armor"))
         {
             Destroy(gameObject);
             return;

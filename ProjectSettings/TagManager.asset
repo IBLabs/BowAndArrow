@@ -9,6 +9,7 @@ TagManager:
   - Arrow
   - Portal
   - ObjectRespawner
+  - Armor
   layers:
   - Default
   - TransparentFX

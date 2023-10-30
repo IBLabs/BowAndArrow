@@ -310,11 +310,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  enemyToken: 2
+  waveFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306818893}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: EndWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  enemyToken: 6
   enemies:
   - enemyPrefab: {fileID: 8340702076327022218, guid: fd8e8b05cd8e240f59e472f118dc7178,
       type: 3}
     cost: 1
+  - enemyPrefab: {fileID: 339193064653504473, guid: f1687f195e8754a64920b88bfa3f65db,
+      type: 3}
+    cost: 3
   spawnLocations:
   - {fileID: 718967883}
   - {fileID: 1348004044}
@@ -338,21 +356,6 @@ MonoBehaviour:
     m_ConstantMin: 1
     m_ConstantMax: 2
   spawnIntervalDecreaseFactor: 0.15
-  waveFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 306818893}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: EndWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &158145454
 Transform:
   m_ObjectHideFlags: 0
@@ -1162,7 +1165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353889841}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1193,7 +1196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361372212}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1258,7 +1261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478660447}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3622,7 +3625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 988898035}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5434,7 +5437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326977820}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5465,7 +5468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342218549}
   m_Layer: 0
-  m_Name: '--------------------'
+  m_Name: --------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
