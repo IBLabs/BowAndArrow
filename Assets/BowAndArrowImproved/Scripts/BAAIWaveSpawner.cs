@@ -111,10 +111,10 @@ public class BAAIWaveSpawner : MonoBehaviour
                 deathable.onDeath.AddListener(OnEnemyDeath);
             }
 
-            if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
-            {
-                navMeshComponent.SetTargetTransform(targetTransform);
-            }
+            // if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
+            // {
+            //     navMeshComponent.SetTargetTransform(targetTransform);
+            // }
         }
     }
 
