@@ -13,7 +13,6 @@ public class BAAIWaveSpawner : MonoBehaviour
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
     [SerializeField] private List<Transform> spawnLocations;
-    [SerializeField] private Transform targetTransform;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
 
@@ -110,11 +109,6 @@ public class BAAIWaveSpawner : MonoBehaviour
             {
                 deathable.onDeath.AddListener(OnEnemyDeath);
             }
-
-            // if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
-            // {
-            //     navMeshComponent.SetTargetTransform(targetTransform);
-            // }
         }
     }
 
