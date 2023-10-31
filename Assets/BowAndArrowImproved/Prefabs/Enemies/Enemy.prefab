@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8051728620034893139}
   - component: {fileID: 2560688743166888971}
   - component: {fileID: 6985741244156336626}
-  - component: {fileID: 6068225554785357774}
   - component: {fileID: 4201972979043455145}
   m_Layer: 10
   m_Name: Enemy
@@ -224,20 +223,6 @@ MonoBehaviour:
   animator: {fileID: 514792811435002549}
   scoreValue: 1
   weaponHitTag: Arrow
---- !u!114 &6068225554785357774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340702076327022218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244c765687970492fac6920cedacbb2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 5179329415778061150}
-  target: {fileID: 0}
 --- !u!114 &4201972979043455145
 MonoBehaviour:
   m_ObjectHideFlags: 0

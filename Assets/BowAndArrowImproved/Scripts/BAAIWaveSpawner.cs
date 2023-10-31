@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
@@ -12,48 +13,33 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
-    [SerializeField] private List<Transform> spawnLocations;
-    [SerializeField] private Transform targetTransform;
+    [SerializeField] private List<WayPointController> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
+    private readonly List<GameObject> _spawnedEnemies = new();
+    private int _currentWave = 1;
+    private bool _didLoseGame;
+    private int _enemiesToKill;
 
     private int _prevSpawnLocationIndex = -1;
-    private int _currentWave = 1;
-    private int _enemiesToKill = 0;
-    private bool _didLoseGame;
-    private List<GameObject> _spawnedEnemies = new();
 
     private void OnEnemyDeath(GameObject enemyGameObject, int scoreValue, bool killedByPlayer)
     {
         if (!_spawnedEnemies.Remove(enemyGameObject))
-        {
             Debug.LogError("[ERROR]: failed to remove enemy from spawned enemy list, enemy not found in list");
-        }
 
-        if (killedByPlayer)
-        {
-            enemyDidDie?.Invoke(scoreValue);
-        }
+        if (killedByPlayer) enemyDidDie?.Invoke(scoreValue);
 
         _enemiesToKill -= 1;
 
-        if (_enemiesToKill <= 0 && !_didLoseGame)
-        {
-            EndWave();
-        }
+        if (_enemiesToKill <= 0 && !_didLoseGame) EndWave();
     }
 
     private void EndWave()
     {
-        if (spawnInterval.constantMin > 0.1f)
-        {
-            spawnInterval.constantMin -= spawnIntervalDecreaseFactor;
-        }
+        if (spawnInterval.constantMin > 0.1f) spawnInterval.constantMin -= spawnIntervalDecreaseFactor;
 
-        if (spawnInterval.constantMax > 0.3f)
-        {
-            spawnInterval.constantMax -= spawnIntervalDecreaseFactor;
-        }
+        if (spawnInterval.constantMax > 0.3f) spawnInterval.constantMax -= spawnIntervalDecreaseFactor;
 
         _currentWave++;
 
@@ -71,18 +57,18 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     public void Generate()
     {
-        List<GameObject> enemiesToSpawn = GenerateEnemies(_currentWave * enemyToken);
+        var enemiesToSpawn = GenerateEnemies(_currentWave * enemyToken);
         _enemiesToKill = enemiesToSpawn.Count;
         StartCoroutine(SpawnEnemiesCoroutine(enemiesToSpawn));
     }
 
     private List<GameObject> GenerateEnemies(int waveValue)
     {
-        List<GameObject> generatedEnemies = new List<GameObject>();
+        var generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
         {
-            int randomEnemyId = Random.Range(0, enemies.Count);
-            int randomEnemyCost = enemies[randomEnemyId].cost;
+            var randomEnemyId = Random.Range(0, enemies.Count);
+            var randomEnemyCost = enemies[randomEnemyId].cost;
 
             if (waveValue - randomEnemyCost >= 0)
             {
@@ -96,32 +82,27 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemiesCoroutine(List<GameObject> enemiesToSpawn)
     {
-        foreach (GameObject enemyToSpawn in enemiesToSpawn)
+        foreach (var enemyToSpawn in enemiesToSpawn)
         {
-            float waitTime = spawnInterval.Evaluate(Random.value);
+            var waitTime = spawnInterval.Evaluate(Random.value);
             yield return new WaitForSeconds(waitTime);
 
-            Transform spawnLocation = spawnLocations[GetSpawnLocation()];
-            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
+            var spawnLocation = spawnLocations[GetSpawnLocationIndex()];
+            var newEnemy = Instantiate(enemyToSpawn, spawnLocation.transform.position, Quaternion.identity, transform);
 
             _spawnedEnemies.Add(newEnemy);
 
-            if (newEnemy.TryGetComponent(out BAAIIDeathable deathable))
-            {
-                deathable.onDeath.AddListener(OnEnemyDeath);
-            }
+            if (newEnemy.TryGetComponent(out BAAIIDeathable deathable)) deathable.onDeath.AddListener(OnEnemyDeath);
 
-            if (newEnemy.TryGetComponent(out BAAIINavMeshAgentHolder navMeshComponent))
-            {
-                navMeshComponent.SetTargetTransform(targetTransform);
-            }
+            if (newEnemy.TryGetComponent(out NavMeshAgent agent))
+                agent.SetDestination(spawnLocation.GetRandomNextWayPoint().position);
         }
     }
 
-    private int GetSpawnLocation()
+    private int GetSpawnLocationIndex()
     {
         int newSpawnLocationIndex;
-        
+
         do
         {
             newSpawnLocationIndex = Random.Range(0, spawnLocations.Count);
@@ -134,13 +115,9 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     private void DestroyEnemies()
     {
-        for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)
-        {
+        for (var i = _spawnedEnemies.Count - 1; i >= 0; i--)
             if (_spawnedEnemies[i].TryGetComponent(out BAAIEnemy curEnemy))
-            {
                 curEnemy.Die(false);
-            }
-        }
     }
 
     [Serializable]
