@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
@@ -12,7 +13,7 @@ public class BAAIWaveSpawner : MonoBehaviour
 
     [SerializeField] private int enemyToken = 10;
     [SerializeField] private List<EnemyConfiguration> enemies = new();
-    [SerializeField] private List<Transform> spawnLocations;
+    [SerializeField] private List<WayPointController> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
 
@@ -100,8 +101,8 @@ public class BAAIWaveSpawner : MonoBehaviour
             float waitTime = spawnInterval.Evaluate(Random.value);
             yield return new WaitForSeconds(waitTime);
 
-            Transform spawnLocation = spawnLocations[GetSpawnLocation()];
-            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.identity, transform);
+            WayPointController spawnLocation = spawnLocations[GetSpawnLocationIndex()];
+            GameObject newEnemy = Instantiate(enemyToSpawn, spawnLocation.transform.position, Quaternion.identity, transform);
 
             _spawnedEnemies.Add(newEnemy);
 
@@ -109,10 +110,15 @@ public class BAAIWaveSpawner : MonoBehaviour
             {
                 deathable.onDeath.AddListener(OnEnemyDeath);
             }
+            
+            if (newEnemy.TryGetComponent(out NavMeshAgent agent))
+            {
+                agent.SetDestination(spawnLocation.GetRandomNextWayPoint().transform.position);
+            }
         }
     }
 
-    private int GetSpawnLocation()
+    private int GetSpawnLocationIndex()
     {
         int newSpawnLocationIndex;
         

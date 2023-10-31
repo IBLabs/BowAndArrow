@@ -336,9 +336,9 @@ MonoBehaviour:
       type: 3}
     cost: 3
   spawnLocations:
-  - {fileID: 718967883}
-  - {fileID: 1348004044}
-  - {fileID: 1450991505}
+  - {fileID: 718967884}
+  - {fileID: 1348004045}
+  - {fileID: 1450991507}
   spawnInterval:
     m_Mode: 3
     m_CurveMultiplier: 0
@@ -2386,6 +2386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 703819255}
   - component: {fileID: 703819254}
+  - component: {fileID: 703819256}
   - component: {fileID: 703819253}
   - component: {fileID: 703819252}
   m_Layer: 0
@@ -2597,6 +2598,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703819256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703819251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c7da7aadc144109661086493b19ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wayPoints: []
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  isEndPoint: 1
 --- !u!1 &718967882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,12 +2661,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
-  - {fileID: 1310423458}
-  - {fileID: 1142127681}
+  - {fileID: 1144277688}
+  - {fileID: 1310423460}
+  - {fileID: 1142127683}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!65 &718967885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4856,10 +4875,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 703819255}
+  - {fileID: 703819256}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!1 &1144277685
 GameObject:
   m_ObjectHideFlags: 0
@@ -4927,11 +4947,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1310423458}
-  - {fileID: 1773325720}
+  - {fileID: 1310423460}
+  - {fileID: 1773325722}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!1 &1146394903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829983748520743115, guid: 312df5f32d09443cabfb97e0759aa146,
@@ -6010,10 +6031,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 703819255}
+  - {fileID: 703819256}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!1 &1326977819
 GameObject:
   m_ObjectHideFlags: 0
@@ -6153,11 +6175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
-  - {fileID: 1310423458}
+  - {fileID: 1144277688}
+  - {fileID: 1310423460}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!65 &1348004046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6316,7 +6339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428170391}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6325,7 +6348,7 @@ Transform:
   - {fileID: 1773325720}
   - {fileID: 1310423458}
   - {fileID: 1142127681}
-  m_Father: {fileID: 543450653108165717}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450991504
 GameObject:
@@ -6394,11 +6417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
-  - {fileID: 1310423458}
+  - {fileID: 1144277688}
+  - {fileID: 1310423460}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!1 &1467284052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4146913714594380368, guid: 80c2c54c731534196802a472e07d50fa,
@@ -7287,10 +7311,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 703819255}
+  - {fileID: 703819256}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
+  isEndPoint: 0
 --- !u!1 &1806620851
 GameObject:
   m_ObjectHideFlags: 0
@@ -10572,7 +10597,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1428170392}
   - {fileID: 6255948189612021081}
   - {fileID: 2643026430019006846}
   - {fileID: 814885087558493473}
@@ -52315,6 +52339,7 @@ SceneRoots:
   - {fileID: 2108538976}
   - {fileID: 158145454}
   - {fileID: 1023150003}
+  - {fileID: 1428170392}
   - {fileID: 1326977820}
   - {fileID: 543450653108165717}
   - {fileID: 427143538}
