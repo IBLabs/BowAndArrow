@@ -6,22 +6,20 @@ using Random = UnityEngine.Random;
 
 public class WayPointController : MonoBehaviour
 {
-    [SerializeField] private WayPointController[] wayPoints;
+    [SerializeField] private Transform[] wayPoints;
     [SerializeField] private LayerMask hitMask;
-    [SerializeField] private bool isEndPoint;
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        if (isEndPoint || !hitMask.Contains(other.attachedRigidbody.gameObject.layer)) return;
-        
+        if (!hitMask.Contains(other.attachedRigidbody.gameObject.layer)) return;
+
         UpdateNextWayPointIfPossible(other);
     }
 
-
-    public WayPointController GetRandomNextWayPoint()
+    public Transform GetRandomNextWayPoint()
     {
         if (wayPoints.Length == 0) throw new Exception($"[ERROR]: wayPoints list is empty in : {gameObject.name}");
-        
+
         return wayPoints[Random.Range(0, wayPoints.Length)];
     }
 
@@ -29,10 +27,8 @@ public class WayPointController : MonoBehaviour
     {
         if (other.attachedRigidbody.TryGetComponent(out NavMeshAgent agent))
         {
-            WayPointController newWayPoint = GetRandomNextWayPoint();
+            var newWayPoint = GetRandomNextWayPoint();
             agent.SetDestination(newWayPoint.transform.position);
         }
     }
-
-
 }

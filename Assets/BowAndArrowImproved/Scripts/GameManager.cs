@@ -3,24 +3,28 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public enum State
+    {
+        PreWave,
+        Wave,
+        Win,
+        Lose
+    }
+
     public static GameManager instance;
-    public State CurrentState { get; private set; } = State.PreWave;
-    
+
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
 
     public UnityEvent<State> stateChanged;
+    public State CurrentState { get; private set; } = State.PreWave;
 
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnEnable()
@@ -33,7 +37,7 @@ public class GameManager : MonoBehaviour
         ChangeState(State.Lose);
         waveDidEnd?.Invoke();
     }
-    
+
     public void StartWave()
     {
         ChangeState(State.Wave);
@@ -48,8 +52,8 @@ public class GameManager : MonoBehaviour
 
     private void ChangeState(State newState)
     {
-        bool didChange = false;
-        
+        var didChange = false;
+
         switch (CurrentState)
         {
             case State.PreWave:
@@ -57,28 +61,17 @@ public class GameManager : MonoBehaviour
                 CurrentState = newState;
                 didChange = true;
                 break;
-            
+
             case State.Wave:
                 if (newState != State.PreWave && newState != State.Lose) break;
                 CurrentState = newState;
                 didChange = true;
                 break;
-            
+
             case State.Lose:
-                if (newState != State.PreWave) break;
-                CurrentState = newState;
-                didChange = true;
                 break;
         }
 
         if (didChange) stateChanged.Invoke(CurrentState);
-    }
-
-    public enum State 
-    {
-        PreWave,
-        Wave,
-        Win,
-        Lose
     }
 }
