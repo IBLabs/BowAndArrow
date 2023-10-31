@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 134355053}
   - component: {fileID: 134355054}
   - component: {fileID: 134355055}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Left Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7009,7 +7009,7 @@ PrefabInstance:
     - target: {fileID: -4146913714594380368, guid: 80c2c54c731534196802a472e07d50fa,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4146913714594380368, guid: 80c2c54c731534196802a472e07d50fa,
         type: 3}
@@ -7029,7 +7029,7 @@ PrefabInstance:
     - target: {fileID: -2911733629448088354, guid: 80c2c54c731534196802a472e07d50fa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2865296299167117162, guid: 80c2c54c731534196802a472e07d50fa,
         type: 3}
@@ -7939,7 +7939,7 @@ GameObject:
   - component: {fileID: 2059577423}
   - component: {fileID: 2059577424}
   - component: {fileID: 2059577425}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Right Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
