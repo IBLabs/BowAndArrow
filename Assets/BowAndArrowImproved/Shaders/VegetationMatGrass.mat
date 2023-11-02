@@ -51,14 +51,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Bend_Strength: 4
-    - _Noise_Scale: 20
+    - _Bend_Strength: -33.2
+    - _Noise_Scale: 121.7
     - _Position_Effect_Strength: 3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
     - _Speed: 0.01
     m_Colors:
-    - _Color: {r: 0.37642723, g: 0.42745098, b: 0.27058825, a: 1}
+    - _Color: {r: 0.6125623, g: 0.7169812, b: 0.39569244, a: 1}
     - _Direction: {r: 1, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
