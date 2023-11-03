@@ -3315,6 +3315,7 @@ GameObject:
   - component: {fileID: 732896405}
   - component: {fileID: 732896404}
   - component: {fileID: 732896403}
+  - component: {fileID: 732896407}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3408,6 +3409,61 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732896401}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &732896407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732896401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe75db4f224d244a9565fc3484fd59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableTeleportationAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Enable Teleportation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3f5f6ade-37aa-4deb-a780-2e497093ec40
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1442846514716729915, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  teleportationEnabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309226698}
+        m_TargetAssemblyTypeName: TeleportManager, Assembly-CSharp
+        m_MethodName: EnablePortals
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  teleportationDisabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309226698}
+        m_TargetAssemblyTypeName: TeleportManager, Assembly-CSharp
+        m_MethodName: DisablePortals
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &747397605
 GameObject:
   m_ObjectHideFlags: 0
@@ -6929,6 +6985,7 @@ GameObject:
   - component: {fileID: 1309226697}
   - component: {fileID: 1309226696}
   - component: {fileID: 1309226698}
+  - component: {fileID: 1309226699}
   m_Layer: 0
   m_Name: Teleport Manger
   m_TagString: Portal
@@ -6999,8 +7056,104 @@ MonoBehaviour:
   - {fileID: 1582488436}
   - {fileID: 1523887077}
   curPortal: {fileID: 232266412}
-  offTime: 15
-  onTime: 10
+  audioSource: {fileID: 1309226699}
+  teleportationClip: {fileID: 0}
+--- !u!82 &1309226699
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309226695}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1310423457
 GameObject:
   m_ObjectHideFlags: 0
