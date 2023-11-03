@@ -1365,7 +1365,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SecondaryButtonPress",
+                    "name": "Secondary Button Press",
                     "type": "Button",
                     "id": "5db87997-fd93-45b7-aa6a-46f134b270b1",
                     "expectedControlType": "Button",
@@ -1374,7 +1374,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PrimaryButtonPress",
+                    "name": "Primary Button Press",
                     "type": "Button",
                     "id": "c8738a3b-ee81-4034-a530-1f83be801da0",
                     "expectedControlType": "Button",
@@ -1588,18 +1588,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SecondaryButtonPress",
+                    "action": "Secondary Button Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "fe3a378e-7644-4ead-b0c4-495ee8ccf036",
-                    "path": "<XRController>{RightHand}/primaryButton",
+                    "id": "f94d8d14-ce9f-4bc2-b001-8248ae98ba9d",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryButtonPress",
+                    "action": "Primary Button Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -6,6 +6,7 @@ public class TeleportManager : MonoBehaviour
     [SerializeField] private GameObject playerContainer;
     [SerializeField] private List<GameObject> portalsList;
     [SerializeField] private GameObject curPortal;
+    [SerializeField] private AudioSource audioSource;
     
     [SerializeField] private AudioClip teleportationClip;
     public void EnablePortals()
@@ -31,8 +32,11 @@ public class TeleportManager : MonoBehaviour
     {
         playerContainer.transform.position = portal.transform.position;
         playerContainer.transform.rotation = Quaternion.LookRotation(portal.transform.forward);
-        AudioSource.PlayClipAtPoint(teleportationClip, playerContainer.transform.position);
 
+        if (teleportationClip != null)
+        {
+            audioSource.PlayOneShot(teleportationClip);    
+        }
 
         DisablePortalAtPlayerLocation(portal);
     }
