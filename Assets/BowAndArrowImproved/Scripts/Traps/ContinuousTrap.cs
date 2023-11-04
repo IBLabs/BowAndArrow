@@ -6,8 +6,8 @@ public class ContinuousTrap : MonoBehaviour
     [SerializeField] private bool isActive;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private String myAnimationActivateTrigger;
-    [SerializeField] private String myAnimationDeactivateTrigger;
+    [SerializeField] private string myAnimationActivateTrigger;
+    [SerializeField] private string myAnimationDeactivateTrigger;
 
     [SerializeField] private AudioClip trapClip;
 
