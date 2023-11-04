@@ -7,7 +7,7 @@ public class ContinuousTrap : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private String myAnimationActivateTrigger;
     [SerializeField] private String myAnimationDeactivateTrigger;
-    
+
     public void ToggleTrapActivation(bool didActivated)
     {
         isActive = didActivated;
