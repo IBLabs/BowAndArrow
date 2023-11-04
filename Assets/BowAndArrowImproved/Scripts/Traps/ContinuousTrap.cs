@@ -5,14 +5,14 @@ public class ContinuousTrap : MonoBehaviour
 {
     [SerializeField] private bool isActive;
     [SerializeField] private Animator animator;
-    [SerializeField] private String activateTrigger;
-    [SerializeField] private String deactivateTrigger;
+    [SerializeField] private String myAnimationActivateTrigger;
+    [SerializeField] private String myAnimationDeactivateTrigger;
     
     public void ToggleTrapActivation(bool didActivated)
     {
         isActive = didActivated;
 
-        animator.SetTrigger(isActive ? activateTrigger : deactivateTrigger);
+        animator.SetTrigger(isActive ? myAnimationActivateTrigger : myAnimationDeactivateTrigger);
     }
 
     public void OnTriggerEnter(Collider other)

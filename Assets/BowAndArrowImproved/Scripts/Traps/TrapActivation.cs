@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TrapActivation : MonoBehaviour
 {
     [SerializeField] private float activationTime = 3f;
-    [SerializeField] private ContinuousTrap myTrap;
+    [SerializeField] private List<ContinuousTrap> myTraps;
     [SerializeField] private LayerMask hitMask;
-    [SerializeField] private bool isTrapActive;
+    [SerializeField] private bool areTrapsActive;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!hitMask.Contains(other.attachedRigidbody.gameObject.layer) || isTrapActive) return;
+        if (!hitMask.Contains(other.attachedRigidbody.gameObject.layer) || areTrapsActive) return;
         
-        isTrapActive = true;
-        myTrap.ToggleTrapActivation(true);
-
+        areTrapsActive = true;
+        foreach (ContinuousTrap trap in myTraps)
+        {
+            trap.ToggleTrapActivation(true); 
+        }
+        
         StartCoroutine(CountdownAndDeactivateTrap());
     }
     
@@ -24,7 +29,11 @@ public class TrapActivation : MonoBehaviour
     {
         yield return new WaitForSeconds(activationTime);
 
-        myTrap.ToggleTrapActivation(false);
-        isTrapActive = false;
+        foreach (ContinuousTrap trap in myTraps)
+        {
+            trap.ToggleTrapActivation(false);
+        }
+        
+        areTrapsActive = false;
     }
 }
