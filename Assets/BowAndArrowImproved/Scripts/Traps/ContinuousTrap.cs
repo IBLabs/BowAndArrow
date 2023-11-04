@@ -4,15 +4,26 @@ using UnityEngine;
 public class ContinuousTrap : MonoBehaviour
 {
     [SerializeField] private bool isActive;
+    
     [SerializeField] private Animator animator;
     [SerializeField] private String myAnimationActivateTrigger;
     [SerializeField] private String myAnimationDeactivateTrigger;
+    
+    [SerializeField] private AudioClip trapClip;
 
     public void ToggleTrapActivation(bool didActivated)
     {
         isActive = didActivated;
 
-        animator.SetTrigger(isActive ? myAnimationActivateTrigger : myAnimationDeactivateTrigger);
+        if (isActive)
+        {
+            animator.SetTrigger(myAnimationActivateTrigger);
+            AudioSource.PlayClipAtPoint(trapClip, transform.position);
+        }
+        else
+        {
+            animator.SetTrigger(myAnimationDeactivateTrigger);
+        }
     }
 
     public void OnTriggerEnter(Collider other)
