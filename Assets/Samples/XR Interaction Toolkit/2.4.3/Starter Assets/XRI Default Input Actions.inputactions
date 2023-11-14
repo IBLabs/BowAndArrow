@@ -1365,6 +1365,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Secondary Button Press",
+                    "type": "Button",
+                    "id": "5db87997-fd93-45b7-aa6a-46f134b270b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Primary Button Press",
+                    "type": "Button",
+                    "id": "c8738a3b-ee81-4034-a530-1f83be801da0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Activate Value",
                     "type": "Value",
                     "id": "c3ca6ed7-3d25-44a2-b1d8-5be4eb699370",
@@ -1560,6 +1578,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "UI Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d341022-487e-427d-83de-3919eeeadb1c",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Secondary Button Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f94d8d14-ce9f-4bc2-b001-8248ae98ba9d",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary Button Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
