@@ -25,55 +25,12 @@ public class Leaderboard : MonoBehaviour
         if (newState == GameManager.State.Lose)
         {
             LoadLeaderboardData();
-            
+
             _myScore = scoreboard._score;
             SubmitScore();
 
             GenerateLeaderboardEntries();
             gameObject.SetActive(true);
-        }
-    }
-
-    private int GetMyScoreEntryPosition()
-    {
-        int position;
-
-        for (position = 0; position < _leaderboardEntries.leaderboard.Count; position++)
-        {
-            if (_myScore >= _leaderboardEntries.leaderboard[position].score) break;
-        }
-
-        return position;
-    }
-
-    private void SubmitScore()
-    {
-        _myScoreEntryPosition = GetMyScoreEntryPosition();
-        _leaderboardEntries.leaderboard.Insert(_myScoreEntryPosition, new SingleLeaderboardEntry(_myScore));
-        SaveLeaderboardData();
-    }
-
-    private void GenerateLeaderboardEntries()
-    {
-        for (int i = 0; i < numOfEntries; i++)
-        {
-            string rank = (i + 1).ToString();
-            string score = (i < _leaderboardEntries.leaderboard.Count)
-                ? _leaderboardEntries.leaderboard[i].score.ToString()
-                : "";
-
-            ScoreEntry newEntry = Instantiate(scoreEntryPrefab, scoreEntriesGrid.transform);
-
-            if (_myScoreEntryPosition == i)
-            {
-                newEntry.InitEntryWithHighLight(rank, score);
-            }
-            else
-            {
-                newEntry.InitEntry(rank, score);
-            }
-
-            _scoresEntries.Add(newEntry);
         }
     }
 
@@ -97,8 +54,49 @@ public class Leaderboard : MonoBehaviour
         _leaderboardEntries = _leaderboardLoader.LoadData<LeaderboardEntries>(jsonDataToRead);
     }
 
+    private void SubmitScore()
+    {
+        _myScoreEntryPosition = GetMyScoreEntryPosition();
+        _leaderboardEntries.leaderboard.Insert(_myScoreEntryPosition, new SingleLeaderboardEntry(_myScore));
+        SaveLeaderboardData();
+    }
+
+    private int GetMyScoreEntryPosition()
+    {
+        int position;
+
+        for (position = 0; position < _leaderboardEntries.leaderboard.Count; position++)
+        {
+            if (_myScore > _leaderboardEntries.leaderboard[position].score) break;
+        }
+
+        return position;
+    }
+
     private void SaveLeaderboardData()
     {
         _leaderboardSaver.SaveData(JsonLeaderBoardFileName, _leaderboardEntries);
+    }
+
+    private void GenerateLeaderboardEntries()
+    {
+        for (int i = 0; i < numOfEntries && i < _leaderboardEntries.leaderboard.Count; i++)
+        {
+            string rank = (i + 1).ToString();
+            string score = _leaderboardEntries.leaderboard[i].score.ToString();
+
+            ScoreEntry newEntry = Instantiate(scoreEntryPrefab, scoreEntriesGrid.transform);
+
+            if (_myScoreEntryPosition == i)
+            {
+                newEntry.InitEntryWithHighLight(rank, score);
+            }
+            else
+            {
+                newEntry.InitEntry(rank, score);
+            }
+
+            _scoresEntries.Add(newEntry);
+        }
     }
 }
