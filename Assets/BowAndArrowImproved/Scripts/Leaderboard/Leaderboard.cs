@@ -11,7 +11,7 @@ public class Leaderboard : MonoBehaviour
     private IDataSaver _leaderboardSaver = new JsonDataSaver();
 
     [SerializeField] private Scoreboard scoreboard;
-    [SerializeField] private GameObject scorePanel;
+    [SerializeField] private GameObject scoreEntriesGrid;
     [SerializeField] private ScoreEntry scoreEntryPrefab;
     [SerializeField] private int numOfEntries = 10;
 
@@ -20,15 +20,12 @@ public class Leaderboard : MonoBehaviour
     private int _myScoreEntryPosition = -1;
     private int _myScore = 0;
 
-    private void Awake()
-    {
-        LoadLeaderboardData();
-    }
-
     public void OnGameManagerStateChanged(GameManager.State newState)
     {
         if (newState == GameManager.State.Lose)
         {
+            LoadLeaderboardData();
+            
             _myScore = scoreboard._score;
             SubmitScore();
 
@@ -65,7 +62,7 @@ public class Leaderboard : MonoBehaviour
                 ? _leaderboardEntries.leaderboard[i].score.ToString()
                 : "";
 
-            ScoreEntry newEntry = Instantiate(scoreEntryPrefab, scorePanel.transform);
+            ScoreEntry newEntry = Instantiate(scoreEntryPrefab, scoreEntriesGrid.transform);
 
             if (_myScoreEntryPosition == i)
             {
