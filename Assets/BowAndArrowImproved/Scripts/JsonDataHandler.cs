@@ -17,13 +17,12 @@ public class JsonDataHandler : IDataHandler
         }
     }
     
-    public void SaveData<T>(string fileName, T data)
+    public void SaveData<T>(string filePath, T data)
     {
         string jsonData = JsonUtility.ToJson(data);
-        string path = Path.Combine(Application.persistentDataPath, fileName);
         try
         {
-            File.WriteAllText(path, jsonData);
+            File.WriteAllText(filePath, jsonData);
         }
         catch (Exception e)
         {
