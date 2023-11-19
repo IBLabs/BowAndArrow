@@ -77,7 +77,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ActivateSpikes
+    m_ConditionEvent: ActivateTrap
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2629271784901097175}
@@ -102,13 +102,13 @@ AnimatorController:
   m_Name: Spikes
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: ActivateSpikes
+  - m_Name: ActivateTrap
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: DeactivateSpikes
+  - m_Name: DeactivateTrap
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -165,7 +165,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ActivateSpikes
+    m_ConditionEvent: ActivateTrap
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2629271784901097175}
@@ -190,7 +190,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: DeactivateSpikes
+    m_ConditionEvent: DeactivateTrap
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2106461359801503831}

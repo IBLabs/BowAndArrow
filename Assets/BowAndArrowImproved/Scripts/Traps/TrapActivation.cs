@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrapActivation : MonoBehaviour
 {
     [SerializeField] private float activationTime = 3f;
-    [SerializeField] private List<ContinuousTrap> myTraps;
+    [SerializeField] private List<SimpleTrap> myTraps;
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private bool areTrapsActive;
 
@@ -14,12 +14,13 @@ public class TrapActivation : MonoBehaviour
     {
         if (!hitMask.Contains(other.attachedRigidbody.gameObject.layer) || areTrapsActive) return;
 
-        areTrapsActive = true;
-        foreach (ContinuousTrap trap in myTraps)
+        foreach (SimpleTrap trap in myTraps)
         {
             trap.ToggleTrapActivation(true);
         }
 
+        areTrapsActive = true;
+        
         StartCoroutine(CountdownAndDeactivateTrap());
     }
 
@@ -27,7 +28,7 @@ public class TrapActivation : MonoBehaviour
     {
         yield return new WaitForSeconds(activationTime);
 
-        foreach (ContinuousTrap trap in myTraps)
+        foreach (SimpleTrap trap in myTraps)
         {
             trap.ToggleTrapActivation(false);
         }

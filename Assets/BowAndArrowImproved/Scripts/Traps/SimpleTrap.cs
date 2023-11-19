@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public class ContinuousTrap : MonoBehaviour
+public class SimpleTrap : MonoBehaviour
 {
     [SerializeField] private bool isActive;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private string myAnimationActivateTrigger;
-    [SerializeField] private string myAnimationDeactivateTrigger;
+    private const string ANIMATION_ACTIVATION_TRIGGER = "ActivateTrap";
+    private const string ANIMATION_DEACTIVATION_TRIGGER = "DeactivateTrap";
 
     [SerializeField] private AudioClip trapClip;
 
@@ -17,12 +17,12 @@ public class ContinuousTrap : MonoBehaviour
 
         if (isActive)
         {
-            animator.SetTrigger(myAnimationActivateTrigger);
+            animator.SetTrigger(ANIMATION_ACTIVATION_TRIGGER);
             AudioSource.PlayClipAtPoint(trapClip, transform.position);
         }
         else
         {
-            animator.SetTrigger(myAnimationDeactivateTrigger);
+            animator.SetTrigger(ANIMATION_DEACTIVATION_TRIGGER);
         }
     }
 

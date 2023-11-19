@@ -26262,6 +26262,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 268281331}
     m_Modifications:
+    - target: {fileID: 450157533326995999, guid: 0e5c26d046abf5441864de850ffb7bc2,
+        type: 3}
+      propertyPath: myAnimationActivateTrigger
+      value: ActivateTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 450157533326995999, guid: 0e5c26d046abf5441864de850ffb7bc2,
+        type: 3}
+      propertyPath: myAnimationDeactivateTrigger
+      value: DeactivateTrap
+      objectReference: {fileID: 0}
     - target: {fileID: 1025035649761115327, guid: 0e5c26d046abf5441864de850ffb7bc2,
         type: 3}
       propertyPath: m_Name
