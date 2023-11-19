@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Leaderboard : MonoBehaviour
 {
-    private const string JsonLeaderBoardFileName = "JsonLeaderboardHolder.json";
+    private const string JSON_LEADERBOARD_FILE_NAME = "JsonLeaderboardHolder.json";
     private LeaderboardEntries _leaderboardEntries;
 
-    private IDataLoader _leaderboardLoader = new JsonDataLoader();
-    private IDataSaver _leaderboardSaver = new JsonDataSaver();
+    private IDataHandler _dataHandler = DataHandlerFactory.get();
 
     [SerializeField] private Scoreboard scoreboard;
     [SerializeField] private GameObject scoreEntriesGrid;
@@ -24,34 +23,44 @@ public class Leaderboard : MonoBehaviour
     {
         if (newState == GameManager.State.Lose)
         {
-            LoadLeaderboardData();
-
-            _myScore = scoreboard._score;
-            SubmitScore();
-
-            GenerateLeaderboardEntries();
-            gameObject.SetActive(true);
+            HandleLoseState();
         }
+    }
+
+    private void HandleLoseState()
+    {
+        LoadLeaderboardData();
+
+        _myScore = scoreboard._score;
+        SubmitScore();
+
+        GenerateLeaderboardEntries();
+        gameObject.SetActive(true);
     }
 
     private void LoadLeaderboardData()
     {
-        string filePath = Path.Combine(Application.persistentDataPath, JsonLeaderBoardFileName);
+        string filePath = Path.Combine(Application.persistentDataPath, JSON_LEADERBOARD_FILE_NAME);
 
         if (!File.Exists(filePath))
         {
-            LeaderboardEntries leaderboardData = new LeaderboardEntries
-            {
-                leaderboard = new List<SingleLeaderboardEntry>()
-            };
-
-            string jsonDataToWrite = JsonUtility.ToJson(leaderboardData);
-
-            File.WriteAllText(filePath, jsonDataToWrite);
+            CreateLeaderboardDataFile(filePath);
         }
 
         string jsonDataToRead = File.ReadAllText(filePath);
-        _leaderboardEntries = _leaderboardLoader.LoadData<LeaderboardEntries>(jsonDataToRead);
+        _leaderboardEntries = _dataHandler.LoadData<LeaderboardEntries>(jsonDataToRead);
+    }
+
+    private void CreateLeaderboardDataFile(string filePath)
+    {
+        LeaderboardEntries leaderboardData = new LeaderboardEntries
+        {
+            leaderboard = new List<SingleLeaderboardEntry>()
+        };
+
+        string jsonDataToWrite = JsonUtility.ToJson(leaderboardData);
+
+        File.WriteAllText(filePath, jsonDataToWrite);
     }
 
     private void SubmitScore()
@@ -67,7 +76,7 @@ public class Leaderboard : MonoBehaviour
 
         for (position = 0; position < _leaderboardEntries.leaderboard.Count; position++)
         {
-            if (_myScore > _leaderboardEntries.leaderboard[position].score) break;
+            if (_myScore > _leaderboardEntries.leaderboard[position].score) return position;
         }
 
         return position;
@@ -75,7 +84,7 @@ public class Leaderboard : MonoBehaviour
 
     private void SaveLeaderboardData()
     {
-        _leaderboardSaver.SaveData(JsonLeaderBoardFileName, _leaderboardEntries);
+        _dataHandler.SaveData(JSON_LEADERBOARD_FILE_NAME, _leaderboardEntries);
     }
 
     private void GenerateLeaderboardEntries()
