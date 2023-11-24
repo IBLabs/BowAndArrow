@@ -15,14 +15,26 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent waveDidStart;
     public UnityEvent waveDidEnd;
+    public UnityEvent firstLoad;
 
     public UnityEvent<State> stateChanged;
+
+    private static bool _isFirstLoad = true;
+
     public State CurrentState { get; private set; } = State.PreWave;
 
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+
+            if (_isFirstLoad)
+            {
+                firstLoad?.Invoke();
+                _isFirstLoad = false;
+            }
+        }
         else
             Destroy(gameObject);
     }
