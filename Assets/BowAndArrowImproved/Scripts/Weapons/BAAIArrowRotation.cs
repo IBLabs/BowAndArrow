@@ -9,6 +9,10 @@ public class BAAIArrowRotation : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.forward = Vector3.Slerp(transform.forward, _rigidbody.velocity.normalized, Time.fixedDeltaTime);
+        Vector3 forward = _rigidbody.velocity.normalized;
+        
+        if (forward == Vector3.zero) return;
+        
+        transform.forward = forward;
     }
 }
