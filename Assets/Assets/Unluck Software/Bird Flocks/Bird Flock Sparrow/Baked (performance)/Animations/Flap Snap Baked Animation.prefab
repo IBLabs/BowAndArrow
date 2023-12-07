@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1012922479616478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4269895228385484}
+  - component: {fileID: 114787794477531340}
+  m_Layer: 0
+  m_Name: Flap Snap Baked Animation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4269895228385484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012922479616478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114787794477531340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012922479616478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229169b80e09fa146b34df02da261955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes:
+  - {fileID: 4300000, guid: 661a8e1be138b5b4d88f7634edfde8c4, type: 2}
+  - {fileID: 4300000, guid: 51d1773e8a0bbd24a85d3f7e165e1f47, type: 2}
+  - {fileID: 4300000, guid: 7885b068481ca0240a40e0a162b27144, type: 2}
+  - {fileID: 4300000, guid: 954635474e4d19e44b2dc2533f95a8fa, type: 2}
+  - {fileID: 4300000, guid: d0a1febe46253d64f88f54759ac7efc7, type: 2}
+  - {fileID: 4300000, guid: 7bf618bee3763d74db481d1ef4a614f7, type: 2}
+  - {fileID: 4300000, guid: b702911277567964cb8676551fbda4ca, type: 2}
+  - {fileID: 4300000, guid: 2102178ee477fd64aa6427cccaa1baa2, type: 2}
+  - {fileID: 4300000, guid: 47feda55c40c20a469a2784453ada257, type: 2}
+  - {fileID: 4300000, guid: f63934c8bb4ccc34586994d01dfcbdf8, type: 2}
+  - {fileID: 4300000, guid: 34bb80ac1916fc94a92b67d70b233273, type: 2}
+  - {fileID: 4300000, guid: 12f52d0225c40d1408abe96cb6df1aaa, type: 2}
+  - {fileID: 4300000, guid: bd1e19fca363af147acc78c9af0909d4, type: 2}
+  - {fileID: 4300000, guid: 5d6aada18aa4e414f87048ae53725b74, type: 2}
+  - {fileID: 4300000, guid: 5b185fbc5db218a4e926a680fe36bef1, type: 2}
+  - {fileID: 4300000, guid: 6e7039505e75ce642a3e2dd019e25f48, type: 2}
+  - {fileID: 4300000, guid: 8ef8371460aab5f4586f74c646abe2a5, type: 2}
+  - {fileID: 4300000, guid: 391c470aa8b81e14f87b4690b68b3fcc, type: 2}
+  - {fileID: 4300000, guid: b023ac5833221fa4c930b72c4ee5b669, type: 2}
+  - {fileID: 4300000, guid: 80266dba949928940891134d92712bfd, type: 2}
+  - {fileID: 4300000, guid: d32aeee785e009947b25a55bc38ae624, type: 2}
+  - {fileID: 4300000, guid: 7f08c0622c163f7419be4bd1778c4abd, type: 2}
+  - {fileID: 4300000, guid: 9f4ec3f8e9eacd04fbed940bcb454665, type: 2}
+  - {fileID: 4300000, guid: cf7e3476027e9fb4a8bb96636df82cf5, type: 2}
+  - {fileID: 4300000, guid: fda18fb505618d341a328283c7a72fb5, type: 2}
+  - {fileID: 4300000, guid: f020d64a56117dc43b5fd2c99cd3d412, type: 2}
+  - {fileID: 4300000, guid: 4e4e3ba5162eaf5498c15616c79e420a, type: 2}
+  - {fileID: 4300000, guid: 99aeabad0325a624b8e1907981f95024, type: 2}
+  - {fileID: 4300000, guid: 19c69e4f473728b49b8845ba12dbc684, type: 2}
+  - {fileID: 4300000, guid: e13db2a61471f294fb2b012c8c3bbcbe, type: 2}
+  playSpeed: 125.6
+  rendererComponent: {fileID: 0}
+  randomStartFrame: 1
+  loop: 1
+  pingPong: 1
+  playOnAwake: 1
+  transformCache: {fileID: 0}
+  transitionFrame: 0
+  crossfadeFrame: 0
