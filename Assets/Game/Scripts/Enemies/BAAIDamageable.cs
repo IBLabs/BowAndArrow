@@ -7,7 +7,7 @@ public class BAAIDamageable : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
     [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private TMP_Text healthBarText;
+    [SerializeField] private FloatingHealthBar healthBar;
     private float currentHealth;
 
     [Header("Events")]
@@ -21,13 +21,13 @@ public class BAAIDamageable : MonoBehaviour, IDamageable
     private void Awake()
     {
         currentHealth = maxHealth;
-        healthBarText.text = "Health\n" + currentHealth;
+        healthBar.UpdateHealthBar(currentHealth,maxHealth);
     }
 
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        healthBarText.text = "Health\n" + currentHealth;
+        healthBar.UpdateHealthBar(currentHealth,maxHealth);
         OnTakeDamage?.Invoke();
 
         if (currentHealth <= 0)
