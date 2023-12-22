@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
@@ -16,6 +17,7 @@ public class BAAIWaveSpawner : MonoBehaviour
     [SerializeField] private List<WayPointController> spawnLocations;
     [SerializeField] private ParticleSystem.MinMaxCurve spawnInterval;
     [SerializeField] private float spawnIntervalDecreaseFactor = 0.15f;
+    [SerializeField] private float enemySpawnStartWaveFactor = 1.3f;
     private readonly List<GameObject> _spawnedEnemies = new();
     private int _currentWave = 1;
     private bool _didLoseGame;
@@ -67,7 +69,7 @@ public class BAAIWaveSpawner : MonoBehaviour
         var generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
         {
-            var randomEnemyId = Random.Range(0, enemies.Count);
+            var randomEnemyId = GetRandomEnemyId();
             var randomEnemyCost = enemies[randomEnemyId].cost;
 
             if (waveValue - randomEnemyCost >= 0)
@@ -78,6 +80,18 @@ public class BAAIWaveSpawner : MonoBehaviour
         }
 
         return generatedEnemies;
+    }
+
+    private int GetRandomEnemyId()
+    {
+        int randomEnemyId;
+
+        do
+        {
+            randomEnemyId = Random.Range(0, enemies.Count);
+        } while (enemies[randomEnemyId].cost > 1 && enemies[randomEnemyId].cost * enemySpawnStartWaveFactor > _currentWave);
+        
+        return randomEnemyId;
     }
 
     private IEnumerator SpawnEnemiesCoroutine(List<GameObject> enemiesToSpawn)
