@@ -5,6 +5,7 @@ using Unity.AI.Navigation.Samples;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(AgentLinkMover))]
 public class EnemyAnimationsHandler : MonoBehaviour
@@ -12,8 +13,10 @@ public class EnemyAnimationsHandler : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private AgentLinkMover linkMover;
     
-    private static readonly int Jump = Animator.StringToHash("Jump");
-    private static readonly int Landed = Animator.StringToHash("Landed");
+    private static readonly int HeyJump = Animator.StringToHash("HeyJump");
+    private static readonly int Run = Animator.StringToHash("Run");
+    private static readonly int FrontFlip = Animator.StringToHash("FrontFlip");
+    private static readonly int LookAround = Animator.StringToHash("LookAround");
     
     private void Awake()
     {
@@ -25,11 +28,11 @@ public class EnemyAnimationsHandler : MonoBehaviour
 
     private void HandleLinkStart()
     {
-        animator.SetTrigger(Jump);
+        animator.SetTrigger(FrontFlip);
     }
 
     private void HandleLinkEnd()
     {
-        animator.SetTrigger(Landed);
+        animator.SetTrigger(Run);
     }
 }
