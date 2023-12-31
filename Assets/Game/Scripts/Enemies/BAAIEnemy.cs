@@ -49,7 +49,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         }
     }
 
-    public void FirstMovementActivation()
+    public void DidFinishJumpAnimation()
     {
         agent.isStopped = false;
     }

@@ -3345,11 +3345,11 @@ GameObject:
   - component: {fileID: 7948760605810572546}
   - component: {fileID: 5984344958616605038}
   - component: {fileID: 2071649069051337314}
+  - component: {fileID: 1611434958767326304}
   - component: {fileID: 1907389901200047682}
   - component: {fileID: 441469413659206011}
   - component: {fileID: 7327989412359757137}
   - component: {fileID: 1509670855331059448}
-  - component: {fileID: 1611434958767326304}
   m_Layer: 10
   m_Name: New Enemy
   m_TagString: Enemy
@@ -3367,8 +3367,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9971558, z: -0, w: 0.07536907}
   m_LocalPosition: {x: 15.382255, y: 3.5263846, z: 19.716122}
-  m_LocalScale: {x: 0.5403804, y: 0.54038, z: 0.5403804}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3134371443573527417}
   - {fileID: 8949501738207023648}
@@ -3405,16 +3405,16 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 1.5
-  m_Acceleration: 100
+  m_Speed: 1
+  m_Acceleration: 500
   avoidancePriority: 50
-  m_AngularSpeed: 720
+  m_AngularSpeed: 1440
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0
+  m_BaseOffset: -0.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &2071649069051337314
@@ -3444,6 +3444,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &1611434958767326304
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666598238135490909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.71
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.28, z: 0}
 --- !u!114 &1907389901200047682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3534,29 +3557,6 @@ MonoBehaviour:
   particleSystemPrefab: {fileID: 5866775785455082453, guid: dc14c2af953644d43845b801600b990d,
     type: 3}
   offset: {x: 0, y: 0, z: 0}
---- !u!136 &1611434958767326304
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6666598238135490909}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
-  m_Height: 2.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0.2}
 --- !u!1 &6688044248129764000
 GameObject:
   m_ObjectHideFlags: 0

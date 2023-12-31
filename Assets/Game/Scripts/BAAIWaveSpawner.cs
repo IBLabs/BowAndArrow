@@ -88,7 +88,7 @@ public class BAAIWaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
             var spawnLocation = spawnLocations[GetSpawnLocationIndex()];
-            var newEnemy = Instantiate(enemyToSpawn, spawnLocation.transform.position, Quaternion.identity, transform);
+            var newEnemy = Instantiate(enemyToSpawn, spawnLocation.transform.position, spawnLocation.transform.rotation, transform);
 
             _spawnedEnemies.Add(newEnemy);
 

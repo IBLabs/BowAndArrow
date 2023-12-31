@@ -101931,7 +101931,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.2333333
-    functionName: FirstMovementActivation
+    functionName: DidFinishJumpAnimation
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
