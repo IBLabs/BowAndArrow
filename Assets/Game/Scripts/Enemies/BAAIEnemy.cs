@@ -57,7 +57,8 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     public void Die(bool killedByPlayer)
     {
         gameObject.SetActive(false);
-
+        StopAttacking();
+        
         if (killedByPlayer)
         {
             AudioSource.PlayClipAtPoint(breakClips[Random.Range(0, breakClips.Count)], transform.position);
@@ -90,7 +91,6 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     {
         CancelInvoke(nameof(Attack));
         _target = null;
-        agent.isStopped = false;
     }
 
     private void Attack()
