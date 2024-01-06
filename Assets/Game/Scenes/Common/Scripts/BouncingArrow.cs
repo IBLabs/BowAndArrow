@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using DG.Tweening;
+using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 public class BouncingArrow : MonoBehaviour
@@ -17,19 +20,32 @@ public class BouncingArrow : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
+        if (!layerMask.Contains(other.gameObject.layer)) return;
+        
         float distance = 10f;
         float sphereRadius = 1f;
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
-        
-        bool didHit = Physics.SphereCast(origin, sphereRadius, direction, out var hitInfo, maxDistance, layerMask);
 
-        if (didHit)
+        Collider[] hittedColliders = Physics.OverlapSphere(transform.position, sphereRadius, layerMask);
+
+        if (hittedColliders.Length > 0)
         {
-            Vector3 hitDirection = (hitInfo.transform.position - transform.position).normalized;
+            Predicate<Collider> predicate = (collider) =>
+            {
+                return collider.gameObject != other.gameObject;
+            };
+
+            Collider hittedCollider = Array.Find(hittedColliders, predicate);
+
+            if (hittedCollider == null) return;
+            
+            Debug.Log($"[TEST]: bouncing to {other.gameObject.name}");
+
+            Vector3 hitDirection = (hittedCollider.transform.position - transform.position).normalized;
             
             BouncingArrow newArrow = Instantiate(nextArrow, transform.position, Quaternion.LookRotation(hitDirection));
-            newArrow.ShootToPreTarget(hitInfo.transform);
+            newArrow.ShootToPreTarget(hittedCollider.transform);
             newArrow.bounceCount = bounceCount - 1;
         }
     }
@@ -41,7 +57,13 @@ public class BouncingArrow : MonoBehaviour
             arrowRb.isKinematic = true;
             arrowRb.useGravity = false;
         }
-        
-        transform.DOMove(target.position, duration);
+
+        transform.DOMove(target.position, duration).onComplete += () =>
+        {
+            if (TryGetComponent<BAAIEnemy>(out var enemy))
+            {
+                enemy.Die(true);
+            }
+        };
     }
 }
