@@ -34,6 +34,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         {
             agent = GetComponent<NavMeshAgent>();
         }
+        agent.isStopped = true;
     }
 
     private void OnEnable()
@@ -48,6 +49,11 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         }
     }
 
+    public void DidFinishJumpAnimation()
+    {
+        agent.isStopped = false;
+    }
+    
     public void Die(bool killedByPlayer)
     {
         gameObject.SetActive(false);

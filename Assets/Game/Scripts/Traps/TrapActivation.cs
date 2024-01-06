@@ -9,18 +9,21 @@ public class TrapActivation : MonoBehaviour
     [SerializeField] private List<SimpleTrap> myTraps;
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private bool areTrapsActive;
+    [SerializeField] private AudioClip hitSoundEffect;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (!hitMask.Contains(other.attachedRigidbody.gameObject.layer) || areTrapsActive) return;
+        if (!hitMask.Contains(other.gameObject.layer)) return;
+        AudioSource.PlayClipAtPoint(hitSoundEffect, Camera.main.transform.position);
 
+        if (areTrapsActive) return;
         foreach (SimpleTrap trap in myTraps)
         {
             trap.ToggleTrapActivation(true);
         }
 
         areTrapsActive = true;
-        
+
         StartCoroutine(CountdownAndDeactivateTrap());
     }
 

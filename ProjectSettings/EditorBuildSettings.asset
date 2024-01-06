@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Opening/OpeningScene.unity
     guid: 2408eb996689a440998de613474dde0d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Game/BowAndArrowImproved.unity
     guid: 1e1eb7d55efeb40d693ce8a77ee6e806
+  - enabled: 1
+    path: Assets/Game/Scenes/Testing/TestingScene2/TestingScene2.unity
+    guid: 57d5f958a581346d6b276f1bfd8e63b4
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0fed6da74044e46dabe8e7acf72c7706,
       type: 2}
