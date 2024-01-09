@@ -22,7 +22,7 @@ public class ScrollController : MonoBehaviour
     private static readonly int OpenScroll = Animator.StringToHash("openScroll");
     private static readonly int CloseScroll = Animator.StringToHash("closeScroll");
 
-    private void OnEnable()
+    private void Start()
     {
         Hide(false);
         StartFloating();
@@ -58,14 +58,15 @@ public class ScrollController : MonoBehaviour
         yield return null;
     }
     
-    private IEnumerator HideCoroutine(bool waitForAnimation)
+    private IEnumerator HideCoroutine(bool animated)
     {
-        scrollAnimator.SetTrigger(CloseScroll);
+        if (animated)
+        {
+            scrollAnimator.SetTrigger(CloseScroll);
+            yield return new WaitForSeconds(closeAnimationClip.length);
+            smokeParticleSystem.Play();    
+        }
 
-        yield return new WaitForSeconds(closeAnimationClip.length);
-        
-        smokeParticleSystem.Play();
-        
         scrollContainer.gameObject.SetActive(false);
     }
 
