@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using DG.Tweening;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -11,12 +13,6 @@ public class BouncingArrow : MonoBehaviour
     [SerializeField] private int bounceCount;
     [SerializeField] private GameObject hitEffect;
 
-
-    private void Awake()
-    {
-        DOTween.Init();
-    }
-
     private void OnCollisionEnter(Collision other)
     {
         Vector3 origin = other.gameObject.transform.position;
@@ -29,7 +25,7 @@ public class BouncingArrow : MonoBehaviour
         }
         
         Collider[] hitColliders = Physics.OverlapSphere(origin, radius, layerMask);
-        Collider newTarget = FindNewTarget(other, hitColliders);
+        Collider newTarget = FindClosestEnemy(other, hitColliders);
         
         if (newTarget == null) return;
 
@@ -46,34 +42,53 @@ public class BouncingArrow : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private Collider FindNewTarget(Collision other, Collider[] hitColliders)
+    private Collider FindClosestEnemy(Collision other, Collider[] hitColliders)
     {
+        Collider closestCollider = null;
+        float closestDistance = Mathf.Infinity;
+
         foreach (Collider hitCollider in hitColliders)
         {
-            if (other.collider != hitCollider && layerMask.Contains(other.gameObject.layer))
+            if (other.collider == hitCollider || !layerMask.Contains(other.gameObject.layer)) continue;
+                
+            float distance = Vector3.Distance(other.transform.position, hitCollider.transform.position);
+
+            if (distance < closestDistance)
             {
-                return hitCollider;
+                closestDistance = distance;
+                closestCollider = hitCollider;
             }
         }
 
-        return null;
+        return closestCollider;
     }
 
     private void ShootToPreTarget(Collider target)
     {
         if (TryGetComponent<Rigidbody>(out var arrowRb))
         {
+            Destroy(arrowRb);
             // arrowRb.isKinematic = true;
             // arrowRb.useGravity = false;
         }
+
         Debug.Log("target pos: " + target.transform.position);
         Debug.Log("before lerp: " + transform.position);
-        transform.DOMove(target.transform.position, duration);
-        // StartCoroutine(MoveObject(targetPos));
-        // transform.position = targetPos;
-        // transform.position = Vector3.MoveTowards(transform.position, targetPos, duration * Time.deltaTime);
-        Debug.Log("after lerp: " + transform.position);
 
+        StartCoroutine(MoveTowardsTarget(target));
+    }
+
+    private IEnumerator MoveTowardsTarget(Collider target)
+    {
+        while (transform.position != target.transform.position)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, duration * Time.deltaTime);
+            Debug.Log("after lerp: " + transform.position);
+
+            yield return null;
+        }
+
+        Debug.Log("Reached the target!");
     }
 
     private void SpawnHitEffect()
