@@ -32,16 +32,6 @@ public class BouncingArrow : MonoBehaviour
         HandleNewArrow(newTarget, origin);
     }
 
-    private void HandleNewArrow(Collider newTarget, Vector3 origin)
-    {
-        Vector3 hitDirection = (newTarget.transform.position - origin).normalized;
-        
-        BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(hitDirection));
-        newArrow.ShootToPreTarget(newTarget);
-        newArrow.bounceCount = bounceCount - 1;
-        Destroy(gameObject);
-    }
-
     private Collider FindClosestEnemy(Collision other, Collider[] hitColliders)
     {
         Collider closestCollider = null;
@@ -61,6 +51,16 @@ public class BouncingArrow : MonoBehaviour
         }
 
         return closestCollider;
+    }
+    
+    private void HandleNewArrow(Collider newTarget, Vector3 origin)
+    {
+        Vector3 hitDirection = (newTarget.transform.position - origin).normalized;
+        
+        BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(hitDirection));
+        newArrow.ShootToPreTarget(newTarget);
+        newArrow.bounceCount = bounceCount - 1;
+        Destroy(gameObject);
     }
 
     private void ShootToPreTarget(Collider target)
