@@ -1,69 +1,86 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
 using DG.Tweening;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
 
 public class BouncingArrow : MonoBehaviour
 {
-    [SerializeField] private float radius;
+    [SerializeField] private float radius = 6f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private BouncingArrow nextArrow;
     [SerializeField] private float duration;
     [SerializeField] private int bounceCount;
-    [SerializeField] private float maxDistance = 100f;
-    
-    private void OnCollisionEnter(Collision other)
+    [SerializeField] private GameObject hitEffect;
+
+
+    private void Awake()
     {
-        if (!layerMask.Contains(other.gameObject.layer)) return;
-        
-        float distance = 10f;
-        float sphereRadius = 1f;
-        Vector3 origin = transform.position;
-        Vector3 direction = transform.forward;
-
-        Collider[] hittedColliders = Physics.OverlapSphere(transform.position, sphereRadius, layerMask);
-
-        if (hittedColliders.Length > 0)
-        {
-            Predicate<Collider> predicate = (collider) =>
-            {
-                return collider.gameObject != other.gameObject;
-            };
-
-            Collider hittedCollider = Array.Find(hittedColliders, predicate);
-
-            if (hittedCollider == null) return;
-            
-            Debug.Log($"[TEST]: bouncing to {other.gameObject.name}");
-
-            Vector3 hitDirection = (hittedCollider.transform.position - transform.position).normalized;
-            
-            BouncingArrow newArrow = Instantiate(nextArrow, transform.position, Quaternion.LookRotation(hitDirection));
-            newArrow.ShootToPreTarget(hittedCollider.transform);
-            newArrow.bounceCount = bounceCount - 1;
-        }
+        DOTween.Init();
     }
 
-    private void ShootToPreTarget(Transform target)
+    private void OnCollisionEnter(Collision other)
+    {
+        Vector3 origin = other.gameObject.transform.position;
+        
+        if (!layerMask.Contains(other.gameObject.layer))
+        {
+            SpawnHitEffect();
+            Destroy(gameObject);
+            return;
+        }
+        
+        Collider[] hitColliders = Physics.OverlapSphere(origin, radius, layerMask);
+        Collider newTarget = FindNewTarget(other, hitColliders);
+        
+        if (newTarget == null) return;
+
+        HandleNewArrow(newTarget, origin);
+    }
+
+    private void HandleNewArrow(Collider newTarget, Vector3 origin)
+    {
+        Vector3 hitDirection = (newTarget.transform.position - origin).normalized;
+        
+        BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(hitDirection));
+        newArrow.ShootToPreTarget(newTarget);
+        newArrow.bounceCount = bounceCount - 1;
+        Destroy(gameObject);
+    }
+
+    private Collider FindNewTarget(Collision other, Collider[] hitColliders)
+    {
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (other.collider != hitCollider && layerMask.Contains(other.gameObject.layer))
+            {
+                return hitCollider;
+            }
+        }
+
+        return null;
+    }
+
+    private void ShootToPreTarget(Collider target)
     {
         if (TryGetComponent<Rigidbody>(out var arrowRb))
         {
-            arrowRb.isKinematic = true;
-            arrowRb.useGravity = false;
+            // arrowRb.isKinematic = true;
+            // arrowRb.useGravity = false;
         }
+        Debug.Log("target pos: " + target.transform.position);
+        Debug.Log("before lerp: " + transform.position);
+        transform.DOMove(target.transform.position, duration);
+        // StartCoroutine(MoveObject(targetPos));
+        // transform.position = targetPos;
+        // transform.position = Vector3.MoveTowards(transform.position, targetPos, duration * Time.deltaTime);
+        Debug.Log("after lerp: " + transform.position);
 
-        transform.DOMove(target.position, duration).onComplete += () =>
-        {
-            if (TryGetComponent<BAAIEnemy>(out var enemy))
-            {
-                enemy.Die(true);
-            }
-        };
+    }
+
+    private void SpawnHitEffect()
+    {
+        GameObject effect = Instantiate(hitEffect);
+        effect.transform.position = transform.position;
+        
+        Destroy(effect, 2f);
     }
 }

@@ -73,14 +73,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289b323896174bf4c9277ada3ab8a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 100
+  radius: 6
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
   nextArrow: {fileID: 32488231806176285}
   duration: 1
   bounceCount: 2
-  maxDistance: 100
+  hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
+    type: 3}
 --- !u!1 &4348799826444061877
 GameObject:
   m_ObjectHideFlags: 0
