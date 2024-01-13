@@ -51,6 +51,7 @@ public class BouncingArrow : MonoBehaviour
 
         Vector3 newTargetRaisedPos = closestCollider.transform.position + Vector3.up * hitRaiseFactor;
         
+        if (bounceCount <= 0) return;
         ShootNewArrow(newTargetRaisedPos, hitPoint);
     }
 
@@ -87,14 +88,15 @@ public class BouncingArrow : MonoBehaviour
         Debug.DrawRay(origin, direction * 10f, Color.red, 5f);
 
         BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(direction));
-
+        newArrow.bounceCount = bounceCount - 1;
         if (!newArrow.TryGetComponent<Rigidbody>(out var newArrowRb))
         {
             Debug.Log("[ERROR]: failed to find rigidbody on new arrow, destroying it");
             Destroy(newArrow);
             return;
         }
-        
+
+        newArrowRb.useGravity = false;
         newArrowRb.AddForce(direction * force, ForceMode.Impulse);
     }
 

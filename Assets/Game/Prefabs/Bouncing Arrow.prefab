@@ -73,13 +73,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289b323896174bf4c9277ada3ab8a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 6
+  radius: 4
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
   nextArrow: {fileID: 32488231806176285}
-  force: 20
-  duration: 50
+  force: 4
+  duration: 0.03
   bounceCount: 2
   hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
     type: 3}
