@@ -3350,6 +3350,7 @@ GameObject:
   - component: {fileID: 441469413659206011}
   - component: {fileID: 7327989412359757137}
   - component: {fileID: 1509670855331059448}
+  - component: {fileID: 1311073981289956766}
   m_Layer: 10
   m_Name: New Enemy
   m_TagString: Enemy
@@ -3537,7 +3538,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a7e5cd9ffa3e434ca2a2f91e83c4dc5, type: 3}
   - {fileID: 8300000, guid: bd7c47d5bf3f548e19731268dc283b83, type: 3}
   attackRate: 1
-  attackDamage: 30
+  attackDamage: 1
   agent: {fileID: 5984344958616605038}
   animator: {fileID: 7948760605810572546}
   scoreValue: 1
@@ -3557,6 +3558,18 @@ MonoBehaviour:
   particleSystemPrefab: {fileID: 5866775785455082453, guid: dc14c2af953644d43845b801600b990d,
     type: 3}
   offset: {x: 0, y: 0, z: 0}
+--- !u!114 &1311073981289956766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666598238135490909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4c5d9e7a6844e20a48335520186ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6688044248129764000
 GameObject:
   m_ObjectHideFlags: 0
