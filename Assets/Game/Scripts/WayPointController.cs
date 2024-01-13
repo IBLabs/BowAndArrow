@@ -9,7 +9,7 @@ public class WayPointController : MonoBehaviour
     [SerializeField] private Transform[] wayPoints;
     [SerializeField] private LayerMask hitMask;
 
-    private int prevSelectedWayPointIndex = -1;
+    private int _prevSelectedWayPointIndex = -1;
 
     private void OnDrawGizmosSelected()
     {
@@ -46,8 +46,8 @@ public class WayPointController : MonoBehaviour
         }
 
         var randomIndex = Random.Range(0, wayPoints.Length);
-        while (randomIndex == prevSelectedWayPointIndex) randomIndex = Random.Range(0, wayPoints.Length);
-        prevSelectedWayPointIndex = randomIndex;
+        while (randomIndex == _prevSelectedWayPointIndex) randomIndex = Random.Range(0, wayPoints.Length);
+        _prevSelectedWayPointIndex = randomIndex;
         return wayPoints[randomIndex];
     }
 

@@ -13462,7 +13462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
+  - {fileID: 1142127681}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -13722,7 +13722,7 @@ Transform:
   m_GameObject: {fileID: 1142127680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.851606, y: 1.142374, z: -13.073187}
+  m_LocalPosition: {x: -8.697759, y: 1.0966301, z: -13.144878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13793,7 +13793,7 @@ Transform:
   m_GameObject: {fileID: 1144277685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.779087, y: 1.1533842, z: -16.458937}
+  m_LocalPosition: {x: -9.0875025, y: 1.1086187, z: -20.009958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17758,7 +17758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1392369191
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23617,7 +23617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
+  - {fileID: 1125128378}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -24917,6 +24917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wayPoints:
   - {fileID: 1992142390}
+  - {fileID: 1310423458}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -25113,7 +25114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {fileID: 1144277686}
+  - {fileID: 1142127681}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -27949,6 +27950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wayPoints:
   - {fileID: 950365076}
+  - {fileID: 1781539205}
   hitMask:
     serializedVersion: 2
     m_Bits: 1024
