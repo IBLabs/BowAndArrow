@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using DG.Tweening;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -9,39 +10,65 @@ public class BouncingArrow : MonoBehaviour
     [SerializeField] private float radius = 6f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private BouncingArrow nextArrow;
+    [SerializeField] private float force = 10f;
     [SerializeField] private float duration;
     [SerializeField] private int bounceCount;
     [SerializeField] private GameObject hitEffect;
+    [SerializeField] private float hitRaiseFactor = 0.5f;
 
     private void OnCollisionEnter(Collision other)
     {
-        Vector3 origin = other.gameObject.transform.position;
-        
         if (!layerMask.Contains(other.gameObject.layer))
         {
-            SpawnHitEffect();
-            Destroy(gameObject);
+            HandleNonEnemyHit();
             return;
         }
-        
-        Collider[] hitColliders = Physics.OverlapSphere(origin, radius, layerMask);
-        Collider newTarget = FindClosestEnemy(other, hitColliders);
-        
-        if (newTarget == null) return;
 
-        HandleNewArrow(newTarget, origin);
+        if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
+        {
+            enemy.Die(true);
+        }
+        else
+        {
+            Destroy(other.gameObject);
+        }
+        
+        Destroy(gameObject);
+        
+        if (other.contacts.Length == 0) return;
+
+        Vector3 hitPoint = other.contacts.First().point;
+
+        Collider[] hitColliders = Physics.OverlapSphere(other.transform.position, radius, layerMask)
+            .Except(new[] { other.collider })
+            .ToArray();
+
+        if (!FindClosestEnemy(hitPoint, hitColliders, out var closestCollider))
+        {
+            Debug.Log("[ERROR]: failed to find closest enemy");
+            return;
+        }
+
+        Vector3 newTargetRaisedPos = closestCollider.transform.position + Vector3.up * hitRaiseFactor;
+        
+        ShootNewArrow(newTargetRaisedPos, hitPoint);
     }
 
-    private Collider FindClosestEnemy(Collision other, Collider[] hitColliders)
+    private void HandleNonEnemyHit()
     {
-        Collider closestCollider = null;
+        SpawnHitEffect();
+        Destroy(gameObject);
+    }
+
+    private bool FindClosestEnemy(Vector3 hitPoint, Collider[] hitColliders, out Collider closestCollider)
+    {
+        closestCollider = null;
+
         float closestDistance = Mathf.Infinity;
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (other.collider == hitCollider || !layerMask.Contains(other.gameObject.layer)) continue;
-                
-            float distance = Vector3.Distance(other.transform.position, hitCollider.transform.position);
+            float distance = Vector3.Distance(hitPoint, hitCollider.transform.position);
 
             if (distance < closestDistance)
             {
@@ -50,52 +77,32 @@ public class BouncingArrow : MonoBehaviour
             }
         }
 
-        return closestCollider;
+        return (closestCollider != null);
     }
-    
-    private void HandleNewArrow(Collider newTarget, Vector3 origin)
+
+    private void ShootNewArrow(Vector3 target, Vector3 origin)
     {
-        Vector3 hitDirection = (newTarget.transform.position - origin).normalized;
+        Vector3 direction = (target - origin).normalized;
         
-        BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(hitDirection));
-        newArrow.ShootToPreTarget(newTarget);
-        newArrow.bounceCount = bounceCount - 1;
-        Destroy(gameObject);
-    }
+        Debug.DrawRay(origin, direction * 10f, Color.red, 5f);
 
-    private void ShootToPreTarget(Collider target)
-    {
-        if (TryGetComponent<Rigidbody>(out var arrowRb))
+        BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(direction));
+
+        if (!newArrow.TryGetComponent<Rigidbody>(out var newArrowRb))
         {
-            Destroy(arrowRb);
-            // arrowRb.isKinematic = true;
-            // arrowRb.useGravity = false;
+            Debug.Log("[ERROR]: failed to find rigidbody on new arrow, destroying it");
+            Destroy(newArrow);
+            return;
         }
-
-        Debug.Log("target pos: " + target.transform.position);
-        Debug.Log("before lerp: " + transform.position);
-
-        StartCoroutine(MoveTowardsTarget(target));
-    }
-
-    private IEnumerator MoveTowardsTarget(Collider target)
-    {
-        while (transform.position != target.transform.position)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, duration * Time.deltaTime);
-            Debug.Log("after lerp: " + transform.position);
-
-            yield return null;
-        }
-
-        Debug.Log("Reached the target!");
+        
+        newArrowRb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     private void SpawnHitEffect()
     {
         GameObject effect = Instantiate(hitEffect);
         effect.transform.position = transform.position;
-        
+
         Destroy(effect, 2f);
     }
 }

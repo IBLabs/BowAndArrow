@@ -29,6 +29,8 @@ public class HealthBar : MonoBehaviour
 
     private void SetupHealthBar()
     {
+        if (hittable == null) return; 
+
         for (int i = 0; i < hittable.health; i++)
         {
             GameObject newSquare = Instantiate(healthSquare, transform);

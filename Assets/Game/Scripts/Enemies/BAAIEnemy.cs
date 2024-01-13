@@ -44,9 +44,9 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag(weaponHitTag)){
-            Die(true);
-        }
+        // if (other.gameObject.CompareTag(weaponHitTag)){
+        //     Die(true);
+        // }
     }
 
     public void DidFinishJumpAnimation()
