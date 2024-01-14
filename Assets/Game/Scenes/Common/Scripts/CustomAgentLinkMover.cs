@@ -1,25 +1,19 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
-namespace Samples.AI_Navigation._1._1._4.Build_And_Connect_NavMesh_Surfaces.Scripts
+namespace Game.Scenes.Common.Scripts
 {
-    public enum OffMeshLinkMoveMethod
-    {
-        Teleport,
-        NormalSpeed,
-        Parabola,
-        Curve
-    }
-
     /// <summary>
     /// Move an agent when traversing a OffMeshLink given specific animated methods
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
-    public class AgentLinkMover : MonoBehaviour
+    public class CustomAgentLinkMover : MonoBehaviour
     {
         public OffMeshLinkMoveMethod m_Method = OffMeshLinkMoveMethod.Parabola;
-        public AnimationCurve m_Curve = new AnimationCurve();
+        public AnimationCurve curve;
         
         [SerializeField] private float parabolaHeight = 2.0f;
         [SerializeField] private float parabolaDuration = .5f;
@@ -82,16 +76,26 @@ namespace Samples.AI_Navigation._1._1._4.Build_And_Connect_NavMesh_Surfaces.Scri
         IEnumerator Curve(NavMeshAgent agent, float duration)
         {
             OffMeshLinkData data = agent.currentOffMeshLinkData;
+            
             Vector3 startPos = agent.transform.position;
-            Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+            Vector3 endPos = data.endPos + (Vector3.up * agent.baseOffset);
+            
             float normalizedTime = 0.0f;
             while (normalizedTime < 1.0f)
             {
-                float yOffset = m_Curve.Evaluate(normalizedTime);
+                float yOffset = curve.Evaluate(normalizedTime);
                 agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
                 normalizedTime += Time.deltaTime / duration;
                 yield return null;
             }
+        }
+        
+        public enum OffMeshLinkMoveMethod
+        {
+            Teleport,
+            NormalSpeed,
+            Parabola,
+            Curve
         }
     }
 }
