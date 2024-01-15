@@ -11341,6 +11341,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1259056501584667200, guid: 312df5f32d09443cabfb97e0759aa146,
         type: 3}
+      propertyPath: arrowConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a5a6ef5b843b4841aa7c59f895ff712,
+        type: 2}
+    - target: {fileID: 1259056501584667200, guid: 312df5f32d09443cabfb97e0759aa146,
+        type: 3}
       propertyPath: arrowMaxSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -11432,6 +11438,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &986394625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1259056501584667200, guid: 312df5f32d09443cabfb97e0759aa146,
+    type: 3}
+  m_PrefabInstance: {fileID: 986394615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612b32c99aebb4e0b8e87f0073e83abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &987997430
@@ -31858,9 +31876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc204da6b0d4d43969eb86109052b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 1667743544224951484, guid: 8fb086b51e9444ab9be16886e24c469b,
-    type: 3}
-  strength: 3.5
+  bowController: {fileID: 986394625}
 --- !u!4 &2108538976
 Transform:
   m_ObjectHideFlags: 0
