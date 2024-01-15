@@ -25,7 +25,7 @@ public class BouncingArrow : MonoBehaviour
         {
             HandleEnemyHit(other);
         }
-        
+
         Destroy(gameObject);
     }
 
@@ -33,7 +33,7 @@ public class BouncingArrow : MonoBehaviour
     {
         SpawnHitEffect();
     }
-    
+
     private void HandleEnemyHit(Collision other)
     {
         if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
@@ -44,7 +44,7 @@ public class BouncingArrow : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        
+
         HandleArrowBounce(other);
     }
 
@@ -57,14 +57,12 @@ public class BouncingArrow : MonoBehaviour
             .Except(new[] { other.collider })
             .ToArray();
 
-        if (!FindClosestEnemy(hitPoint, hitColliders, out var closestCollider))
-        {
-            return;
-        }
+        if (!FindClosestEnemy(hitPoint, hitColliders, out var closestCollider)) return;
 
         Vector3 newTargetRaisedPos = closestCollider.transform.position + Vector3.up * hitRaiseFactor;
-        
+
         if (bounceCount <= 0) return;
+
         ShootNewArrow(newTargetRaisedPos, hitPoint);
     }
 
@@ -91,7 +89,7 @@ public class BouncingArrow : MonoBehaviour
     private void ShootNewArrow(Vector3 target, Vector3 origin)
     {
         Vector3 direction = (target - origin).normalized;
-        
+
         BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(direction));
         newArrow.bounceCount = bounceCount - 1;
         if (!newArrow.TryGetComponent<Rigidbody>(out var newArrowRb))
