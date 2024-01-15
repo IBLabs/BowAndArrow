@@ -10,8 +10,8 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 {
     [SerializeField] private UnityEvent<GameObject, int, bool> _onDeath;
     public UnityEvent<GameObject, int, bool> onDeath => _onDeath;
-    
-    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+
+    private static readonly int[] attackAnimationTriggers = { Animator.StringToHash("Attack1"), Animator.StringToHash("Attack2"), Animator.StringToHash("Attack3") };
     
     [SerializeField] private List<AudioClip> warCryClips;
     [SerializeField] private List<AudioClip> breakClips;
@@ -30,6 +30,8 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     [SerializeField] private Transform initialTarget;
 
     private IDamageable _target;
+
+    private int previousAnimTrigger;
 
     private void Awake()
     {
@@ -82,11 +84,6 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         _target = attackTarget;
         agent.isStopped = true;
 
-        if (animator != null)
-        {
-            animator.SetTrigger(AttackTrigger);    
-        }
-
         InvokeRepeating(nameof(Attack), 0f, attackRate);
     }
 
@@ -98,6 +95,24 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
 
     private void Attack()
     {
+        if (animator != null)
+        {
+            int attackAnimIndex;
+            int animTrigger;
+
+            do
+            {
+                attackAnimIndex = Random.Range(0, attackAnimationTriggers.Length);
+                animTrigger = attackAnimationTriggers[attackAnimIndex];
+            } while (animTrigger == previousAnimTrigger);
+            
+            animator.SetTrigger(animTrigger);
+
+            previousAnimTrigger = animTrigger;
+            
+            Debug.Log($"[TEST]: ATTACKING {gameObject.GetInstanceID()}, attack animation {animTrigger}");
+        }
+
         if (_target != null)
         {
             _target.TakeDamage(attackDamage);
