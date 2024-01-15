@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class BAAIStickingArrowToSurface : MonoBehaviour
 {
     [SerializeField] private GameObject stickingArrowPrefab;
     [SerializeField] private GameObject hitEffect;
-    
+    [SerializeField] private LayerMask layerMask;
+
     private List<string> destroyingTags = new List<string>()
     {
         "Enemy",
@@ -16,18 +18,36 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (destroyingTags.Contains(other.gameObject.tag))
+        if (!layerMask.Contains(other.gameObject.layer))
         {
-            Destroy(gameObject);
-            return;
+            HandleNonEnemyHit();
         }
-        
+        else
+        {
+            HandleEnemyHit(other);
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void HandleEnemyHit(Collision other)
+    {
+        if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
+        {
+            enemy.Die(true);
+        }
+        else
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void HandleNonEnemyHit()
+    {
         gameObject.SetActive(false);
 
         SpawnStickingArrow();
         SpawnHitEffect();
-
-        Destroy(gameObject);
     }
     
     private void SpawnStickingArrow()

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7675667003983789906}
   - component: {fileID: 4442403830356067067}
-  - component: {fileID: -4042563289504642812}
+  - component: {fileID: 32488231806176285}
   m_Layer: 6
-  m_Name: Usable Arrow
+  m_Name: Bouncing Arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &-4042563289504642812
+--- !u!114 &32488231806176285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,18 +70,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1667743544224951484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5756ed2653c0474d8ff849e59095f3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 289b323896174bf4c9277ada3ab8a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 4442403830356067067}
-  myCollider: {fileID: 8633867953251145845}
-  stickingArrowPrefab: {fileID: 6962430063040582847, guid: fffbfff5d1d3044bf84327d438e131a8,
-    type: 3}
-  hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
-    type: 3}
+  radius: 4
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  nextArrow: {fileID: 32488231806176285}
+  force: 8
+  bounceCount: 2
+  hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
+    type: 3}
+  hitRaiseFactor: 0.5
 --- !u!1 &4348799826444061877
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +236,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7675667003983789906}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c6f3e443a5da74315b4727ea2795bb84,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c6f3e443a5da74315b4727ea2795bb84,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c6f3e443a5da74315b4727ea2795bb84,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6f3e443a5da74315b4727ea2795bb84,
         type: 3}
       propertyPath: m_LocalPosition.x

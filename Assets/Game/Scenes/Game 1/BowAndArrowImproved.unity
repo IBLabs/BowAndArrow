@@ -11343,7 +11343,7 @@ PrefabInstance:
         type: 3}
       propertyPath: arrowConfig
       value: 
-      objectReference: {fileID: 11400000, guid: 9a5a6ef5b843b4841aa7c59f895ff712,
+      objectReference: {fileID: 11400000, guid: f4fc4540d22b4411dbdf490b7684a867,
         type: 2}
     - target: {fileID: 1259056501584667200, guid: 312df5f32d09443cabfb97e0759aa146,
         type: 3}
