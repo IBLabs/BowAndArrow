@@ -79,6 +79,9 @@ MonoBehaviour:
     type: 3}
   hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
     type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &4348799826444061877
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ public class BouncingArrow : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private BouncingArrow nextArrow;
     [SerializeField] private float force = 10f;
-    [SerializeField] private float duration;
     [SerializeField] private int bounceCount;
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private float hitRaiseFactor = 0.5f;
@@ -21,9 +20,22 @@ public class BouncingArrow : MonoBehaviour
         if (!layerMask.Contains(other.gameObject.layer))
         {
             HandleNonEnemyHit();
-            return;
         }
+        else
+        {
+            HandleEnemyHit(other);
+        }
+        
+        Destroy(gameObject);
+    }
 
+    private void HandleNonEnemyHit()
+    {
+        SpawnHitEffect();
+    }
+    
+    private void HandleEnemyHit(Collision other)
+    {
         if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
         {
             enemy.Die(true);
@@ -33,10 +45,12 @@ public class BouncingArrow : MonoBehaviour
             Destroy(other.gameObject);
         }
         
-        Destroy(gameObject);
-        
-        if (other.contacts.Length == 0) return;
+        HandleArrowBounce(other);
+    }
 
+    private void HandleArrowBounce(Collision other)
+    {
+        if (other.contacts.Length == 0) return;
         Vector3 hitPoint = other.contacts.First().point;
 
         Collider[] hitColliders = Physics.OverlapSphere(other.transform.position, radius, layerMask)
@@ -45,7 +59,6 @@ public class BouncingArrow : MonoBehaviour
 
         if (!FindClosestEnemy(hitPoint, hitColliders, out var closestCollider))
         {
-            Debug.Log("[ERROR]: failed to find closest enemy");
             return;
         }
 
@@ -53,12 +66,6 @@ public class BouncingArrow : MonoBehaviour
         
         if (bounceCount <= 0) return;
         ShootNewArrow(newTargetRaisedPos, hitPoint);
-    }
-
-    private void HandleNonEnemyHit()
-    {
-        SpawnHitEffect();
-        Destroy(gameObject);
     }
 
     private bool FindClosestEnemy(Vector3 hitPoint, Collider[] hitColliders, out Collider closestCollider)
@@ -91,7 +98,6 @@ public class BouncingArrow : MonoBehaviour
         newArrow.bounceCount = bounceCount - 1;
         if (!newArrow.TryGetComponent<Rigidbody>(out var newArrowRb))
         {
-            Debug.Log("[ERROR]: failed to find rigidbody on new arrow, destroying it");
             Destroy(newArrow);
             return;
         }
