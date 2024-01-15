@@ -78,8 +78,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   nextArrow: {fileID: 32488231806176285}
-  force: 4
-  duration: 0.03
+  force: 8
   bounceCount: 2
   hitEffect: {fileID: 7433515015547779798, guid: 38e9879986d8748b18366faf7ea045ce,
     type: 3}
