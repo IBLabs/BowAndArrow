@@ -92,8 +92,6 @@ public class BouncingArrow : MonoBehaviour
     {
         Vector3 direction = (target - origin).normalized;
         
-        Debug.DrawRay(origin, direction * 10f, Color.red, 5f);
-
         BouncingArrow newArrow = Instantiate(nextArrow, origin, Quaternion.LookRotation(direction));
         newArrow.bounceCount = bounceCount - 1;
         if (!newArrow.TryGetComponent<Rigidbody>(out var newArrowRb))
