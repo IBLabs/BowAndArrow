@@ -1,8 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
-namespace Unity.AI.Navigation.Samples
+namespace Samples.AI_Navigation._1._1._4.Build_And_Connect_NavMesh_Surfaces.Scripts
 {
     public enum OffMeshLinkMoveMethod
     {
@@ -43,7 +43,7 @@ namespace Unity.AI.Navigation.Samples
                     else if (m_Method == OffMeshLinkMoveMethod.Parabola)
                         yield return StartCoroutine(Parabola(agent, parabolaHeight, parabolaDuration));
                     else if (m_Method == OffMeshLinkMoveMethod.Curve)
-                        yield return StartCoroutine(Curve(agent, 0.5f));
+                        yield return StartCoroutine(Curve(agent, parabolaDuration));
                     agent.CompleteOffMeshLink();
                     OnLinkEnd?.Invoke();
                 }

@@ -9,12 +9,14 @@ public class WayPointController : MonoBehaviour
     [SerializeField] private Transform[] wayPoints;
     [SerializeField] private LayerMask hitMask;
 
+    private int _prevSelectedWayPointIndex = -1;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        
+
         Gizmos.DrawSphere(transform.position, .3f);
-        
+
         if (wayPoints.Length == 0) return;
 
         Gizmos.color = Color.red;
@@ -33,9 +35,20 @@ public class WayPointController : MonoBehaviour
 
     public Transform GetRandomNextWayPoint()
     {
-        if (wayPoints.Length == 0) throw new Exception($"[ERROR]: wayPoints list is empty in : {gameObject.name}");
+        if (wayPoints.Length == 0)
+        {
+            throw new Exception($"[ERROR]: wayPoints list is empty in : {gameObject.name}");
+        }
 
-        return wayPoints[Random.Range(0, wayPoints.Length)];
+        if (wayPoints.Length == 1)
+        {
+            return wayPoints[0];
+        }
+
+        var randomIndex = Random.Range(0, wayPoints.Length);
+        while (randomIndex == _prevSelectedWayPointIndex) randomIndex = Random.Range(0, wayPoints.Length);
+        _prevSelectedWayPointIndex = randomIndex;
+        return wayPoints[randomIndex];
     }
 
     private void UpdateNextWayPointIfPossible(Collider other)

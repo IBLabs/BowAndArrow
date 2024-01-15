@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class BAAIWaveSpawner : MonoBehaviour
 {
+    public int currentWave => _currentWave;
+    
     public UnityEvent<int> enemyDidDie;
     public UnityEvent waveFinished;
 

@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class WaveStartHandler : MonoBehaviour
 {
+    [SerializeField] private BAAIWaveSpawner waveSpawner;
+    [SerializeField] private ScrollController scrollController;
+    
     [SerializeField] private Ballon startBalloonPrefab;
     
     public UnityEvent startWave;
@@ -24,6 +28,19 @@ public class WaveStartHandler : MonoBehaviour
 
     public void OnShotToStartObjectPopped(GameObject died, int scoreValue, bool killedByPlayer)
     {
+        StartCoroutine(ShowWaveTitleCoroutine());
         startWave?.Invoke();
+    }
+
+    private IEnumerator ShowWaveTitleCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        scrollController.SetText("Wave " + waveSpawner.currentWave);
+        scrollController.Show(true);
+        
+        yield return new WaitForSeconds(2f);
+        
+        scrollController.Hide(true);
     }
 }

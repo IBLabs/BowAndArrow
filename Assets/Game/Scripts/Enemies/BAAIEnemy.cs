@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,6 +27,8 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     [SerializeField] private int scoreValue = 1;
     [SerializeField] private string weaponHitTag = "Arrow";
 
+    [SerializeField] private Transform initialTarget;
+
     private IDamageable _target;
 
     private void Awake()
@@ -53,7 +56,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     {
         agent.isStopped = false;
     }
-    
+
     public void Die(bool killedByPlayer)
     {
         gameObject.SetActive(false);
