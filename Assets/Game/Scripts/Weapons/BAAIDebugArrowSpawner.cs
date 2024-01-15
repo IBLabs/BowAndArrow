@@ -1,12 +1,11 @@
 using System;
+using Game.Scenes.Common.ScriptableObjects;
 using UnityEngine;
 
 public class BAAIDebugArrowSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private BAAIArrowController bowController;
 
-    [SerializeField] private float strength;
-    
     private Camera mainCamera;
 
     private void Start()
@@ -25,12 +24,12 @@ public class BAAIDebugArrowSpawner : MonoBehaviour
     private void SpawnArrow()
     {
         GameObject newArrow = Instantiate(
-            arrowPrefab,
+            bowController.arrowConfig.prefab,
             mainCamera.transform.position,
             Quaternion.LookRotation(mainCamera.transform.forward)
         );
 
         Rigidbody rb = newArrow.GetComponent<Rigidbody>();
-        rb.AddForce(mainCamera.transform.forward * strength, ForceMode.Impulse);
+        rb.AddForce(mainCamera.transform.forward * bowController.arrowConfig.shootForce, ForceMode.Impulse);
     }
 }
