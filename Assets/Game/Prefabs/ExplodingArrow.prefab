@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   hitEffect: {fileID: 0}
   explosionParticleSystem: {fileID: 9007730138798800627, guid: 0d0824c595bdb47bc9680cf9716d186d,
     type: 3}
