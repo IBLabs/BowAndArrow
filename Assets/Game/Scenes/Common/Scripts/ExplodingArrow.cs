@@ -5,22 +5,31 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ExplodingArrow : MonoBehaviour
+public class ExplodingArrow : Arrow
 {
     [SerializeField] private GameObject explosionParticleSystem;
     [SerializeField] private Rigidbody arrowRb;
     [SerializeField] private AudioClip explosionSfx;
 
     [SerializeField] private float hitRadius = 4f;
-    [SerializeField] private LayerMask hitLayerMask;
-
+    
     private void Update()
     {
         Quaternion targetRot = Quaternion.LookRotation(arrowRb.velocity.normalized);
         arrowRb.MoveRotation(targetRot);
     }
+    
+    protected override void HandleNonEnemyHit(Collision other)
+    {
+        HandleHit(other);
+    }
 
-    private void OnCollisionEnter(Collision other)
+    protected override void HandleEnemyHit(Collision other)
+    {
+        HandleHit(other);
+    }
+
+    private void HandleHit(Collision other)
     {
         Vector3 hitPoint = other.contacts.First().point;
 
@@ -29,7 +38,7 @@ public class ExplodingArrow : MonoBehaviour
         Instantiate(explosionParticleSystem, hitPoint, Quaternion.identity);
         Destroy(gameObject);
 
-        Collider[] hitColliders = Physics.OverlapSphere(hitPoint, hitRadius, hitLayerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(hitPoint, hitRadius, layerMask);
         
         foreach (Collider hitCollider in hitColliders)
         {
@@ -39,7 +48,7 @@ public class ExplodingArrow : MonoBehaviour
             }
         }
     }
-
+    
     private void SpawnAudioSource(Vector3 position)
     {
         GameObject audioSourceGameObject = new GameObject("Exploding Arrow Audio Source");

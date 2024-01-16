@@ -2,35 +2,19 @@ using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class BAAIStickingArrowToSurface : MonoBehaviour
+public class BAAIStickingArrowToSurface : Arrow
 {
     [SerializeField] private GameObject stickingArrowPrefab;
-    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private LayerMask layerMask;
 
-    private List<string> destroyingTags = new List<string>()
+    protected override void HandleNonEnemyHit(Collision other)
     {
-        "Enemy",
-        "Balloon",
-        "Portal",
-        "Armor"
-    };
+        gameObject.SetActive(false);
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!layerMask.Contains(other.gameObject.layer))
-        {
-            HandleNonEnemyHit();
-        }
-        else
-        {
-            HandleEnemyHit(other);
-        }
-
-        Destroy(gameObject);
+        SpawnStickingArrow();
+        SpawnHitEffect();
     }
 
-    private void HandleEnemyHit(Collision other)
+    protected override void HandleEnemyHit(Collision other)
     {
         if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
         {
@@ -42,27 +26,11 @@ public class BAAIStickingArrowToSurface : MonoBehaviour
         }
     }
 
-    private void HandleNonEnemyHit()
-    {
-        gameObject.SetActive(false);
-
-        SpawnStickingArrow();
-        SpawnHitEffect();
-    }
-    
     private void SpawnStickingArrow()
     {
         GameObject stickingArrow = Instantiate(stickingArrowPrefab);
         stickingArrow.transform.position = transform.position + transform.forward.normalized * 0.2f;
         stickingArrow.transform.forward = transform.forward;
         stickingArrow.transform.parent = transform;
-    }
-
-    private void SpawnHitEffect()
-    {
-        GameObject effect = Instantiate(hitEffect);
-        effect.transform.position = transform.position;
-        
-        Destroy(effect, 2f);
     }
 }
