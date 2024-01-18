@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Ballon : MonoBehaviour, BAAIIDeathable
@@ -21,6 +19,7 @@ public class Ballon : MonoBehaviour, BAAIIDeathable
     [SerializeField] private string weaponHitTag = "Arrow";
 
     [SerializeField] private int scoreValue = 0;
+    public ArrowType arrowType = ArrowType.Bouncing;
 
     [SerializeField] private UnityEvent<GameObject, int, bool> _onDeath;
     public UnityEvent<GameObject, int, bool> onDeath => _onDeath;

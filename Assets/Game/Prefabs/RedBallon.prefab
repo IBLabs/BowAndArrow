@@ -126,10 +126,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3366b543e3de4001b4f508293d6ca7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBalloonFrozen: 0
   buoyancyForce: 10
   popClips:
   - {fileID: 8300000, guid: d362d095f8bfc4452a775b8868a83bc8, type: 3}
   rb: {fileID: 3318483746525618954}
+  weaponHitTag: Arrow
+  scoreValue: 0
+  arrowType: 1
   _onDeath:
     m_PersistentCalls:
       m_Calls:
