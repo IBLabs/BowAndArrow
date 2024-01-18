@@ -73,14 +73,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc842e5e60114f299dd7137ba0eaf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  hitEffect: {fileID: 0}
   explosionParticleSystem: {fileID: 9007730138798800627, guid: 0d0824c595bdb47bc9680cf9716d186d,
     type: 3}
   arrowRb: {fileID: 4442403830356067067}
   explosionSfx: {fileID: 8300000, guid: 586843198df61480fb40d5d8dfff605b, type: 3}
   hitRadius: 2
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1 &4348799826444061877
 GameObject:
   m_ObjectHideFlags: 0

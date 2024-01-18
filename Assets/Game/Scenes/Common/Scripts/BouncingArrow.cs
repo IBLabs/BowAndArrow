@@ -5,36 +5,20 @@ using DG.Tweening;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class BouncingArrow : MonoBehaviour
+public class BouncingArrow : Arrow
 {
     [SerializeField] private float radius = 6f;
-    [SerializeField] private LayerMask layerMask;
     [SerializeField] private BouncingArrow nextArrow;
     [SerializeField] private float force = 10f;
     [SerializeField] private int bounceCount;
-    [SerializeField] private GameObject hitEffect;
     [SerializeField] private float hitRaiseFactor = 0.5f;
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!layerMask.Contains(other.gameObject.layer))
-        {
-            HandleNonEnemyHit();
-        }
-        else
-        {
-            HandleEnemyHit(other);
-        }
-
-        Destroy(gameObject);
-    }
-
-    private void HandleNonEnemyHit()
+    protected override void HandleNonEnemyHit(Collision other)
     {
         SpawnHitEffect();
     }
 
-    private void HandleEnemyHit(Collision other)
+    protected override void HandleEnemyHit(Collision other)
     {
         if (other.gameObject.TryGetComponent<BAAIEnemy>(out var enemy))
         {
@@ -100,13 +84,5 @@ public class BouncingArrow : MonoBehaviour
 
         newArrowRb.useGravity = false;
         newArrowRb.AddForce(direction * force, ForceMode.Impulse);
-    }
-
-    private void SpawnHitEffect()
-    {
-        GameObject effect = Instantiate(hitEffect);
-        effect.transform.position = transform.position;
-
-        Destroy(effect, 2f);
     }
 }
