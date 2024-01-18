@@ -15,10 +15,12 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     
     [SerializeField] private List<AudioClip> warCryClips;
     [SerializeField] private List<AudioClip> breakClips;
+    [SerializeField] private List<AudioClip> attackClips;
 
     [Header("Attack Settings")]
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private float attackVolumeScale = 30f;
 
     [Header("NavMesh Settings")]
     [SerializeField] private NavMeshAgent agent;
@@ -109,6 +111,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
         if (_target != null)
         {
             _target.TakeDamage(attackDamage);
+            AudioSource.PlayClipAtPoint(attackClips[Random.Range(0, attackClips.Count)], transform.position, attackVolumeScale);
         }
     }
 
