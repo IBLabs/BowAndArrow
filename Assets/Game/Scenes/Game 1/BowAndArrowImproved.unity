@@ -6244,15 +6244,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowConfig: {fileID: 11400000, guid: 661b7a98b0ef64390a6a889a4694ea2e, type: 2}
   arrowsConfigurations:
-    arrowConfigurationList:
-    - type: 0
-      configuration: {fileID: 11400000, guid: 661b7a98b0ef64390a6a889a4694ea2e, type: 2}
-    - type: 1
-      configuration: {fileID: 11400000, guid: f4fc4540d22b4411dbdf490b7684a867, type: 2}
-    - type: 2
-      configuration: {fileID: 11400000, guid: 9a5a6ef5b843b4841aa7c59f895ff712, type: 2}
-    defaultConfiguration: {fileID: 11400000, guid: 661b7a98b0ef64390a6a889a4694ea2e,
-      type: 2}
+    entries:
+    - key: 0
+      value: {fileID: 11400000, guid: 661b7a98b0ef64390a6a889a4694ea2e, type: 2}
+    - key: 1
+      value: {fileID: 11400000, guid: f4fc4540d22b4411dbdf490b7684a867, type: 2}
+    - key: 2
+      value: {fileID: 11400000, guid: 9a5a6ef5b843b4841aa7c59f895ff712, type: 2}
+    defaultValue: {fileID: 11400000, guid: 661b7a98b0ef64390a6a889a4694ea2e, type: 2}
 --- !u!1 &550622515
 GameObject:
   m_ObjectHideFlags: 0
