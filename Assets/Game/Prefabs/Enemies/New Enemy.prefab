@@ -3555,7 +3555,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7717f13cdee0ae3438891a7421b72676, type: 3}
   attackRate: 1
   attackDamage: 1
-  attackVolumeScale: 100
+  attackVolumeScale: 3.5
   agent: {fileID: 5984344958616605038}
   animator: {fileID: 7948760605810572546}
   scoreValue: 1
