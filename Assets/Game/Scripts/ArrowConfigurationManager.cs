@@ -1,10 +1,13 @@
-﻿using Game.Scenes.Common.ScriptableObjects;
+﻿using System;
+using System.Collections.Generic;
+using Game.Scenes.Common.ScriptableObjects;
 using UnityEngine;
 
 public class ArrowConfigurationManager : MonoBehaviour
 {
     public ArrowConfiguration arrowConfig;
-    [SerializeField] private SerializableDictionary<ArrowType, ArrowConfiguration> arrowsConfigurations;
+    [SerializeField] private ArrowConfiguration defaultConfiguration;
+    [SerializeField] List<ArrowDataSet> arrowsConfigurations;
 
     public void OnBalloonDeath(GameObject balloonGameObject, int score, bool killedByPlayer)
     {
@@ -14,6 +17,16 @@ public class ArrowConfigurationManager : MonoBehaviour
 
     public void SwitchArrow(ArrowType arrowType)
     {
-        arrowConfig = arrowsConfigurations.GetByKey(arrowType);
+        arrowConfig = GetArrowConfiguration(arrowType);
+    }
+
+    private ArrowConfiguration GetArrowConfiguration(ArrowType arrowType)
+    {
+        foreach (ArrowDataSet arrowDataSet in arrowsConfigurations)
+        {
+            if (arrowDataSet.Type == arrowType) return arrowDataSet.Configuration;
+        }
+
+        return defaultConfiguration;
     }
 }
