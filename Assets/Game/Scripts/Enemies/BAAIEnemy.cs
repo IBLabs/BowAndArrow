@@ -20,7 +20,7 @@ public class BAAIEnemy : MonoBehaviour, BAAIIDeathable
     [Header("Attack Settings")]
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private float attackDamage = 10f;
-    [SerializeField] private float attackVolumeScale = 30f;
+    [SerializeField] private float attackVolumeScale = 3.5f;
 
     [Header("NavMesh Settings")]
     [SerializeField] private NavMeshAgent agent;
