@@ -17,10 +17,10 @@ public class ArrowConfigurationManager : MonoBehaviour
 
     public void SwitchArrow(ArrowType arrowType)
     {
-        arrowConfig = GetArrowConfiguration(arrowType);
+        arrowConfig = GetArrowConfigurationByType(arrowType);
     }
 
-    private ArrowConfiguration GetArrowConfiguration(ArrowType arrowType)
+    private ArrowConfiguration GetArrowConfigurationByType(ArrowType arrowType)
     {
         foreach (ArrowDataSet arrowDataSet in arrowsConfigurations)
         {
